@@ -73,10 +73,16 @@ def proc(field):
     number2=""
     number3=""
 
+    match = re.search(r'(.+)\s?(IND\/NAME|YES\/NO|YESNO|Y DATE|DATE|DESC|N DESC|Y DESC)\s\(([A-Za-z\-].+)\)', field)
+    if (match):
+        items = match.groups()
+        (number,ftype,name) = items
+        field=field.replace(ftype,"TYPENAME")
+        return emit(field,number,number2,number3, name)
 
 
     # 23-D 3 YESNO (PERFECTED INTEREST?)
-    match = re.match(r'(\d+\-[A-F\d]+\s\d)\s(IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-F\d]+\s\d)\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
@@ -84,59 +90,54 @@ def proc(field):
 
 
     #21-D.1 DESC (Collateral)
-    match = re.match(r'(\d+\-[A-F]\.\d)\s(IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-F]\.\d)\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
 
     #15-A1.YES/NO (Loan Restructured)
-    match = re.match(r'(\d+\-[A-F\d]+)\.?\s*(Y DATE|IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-F\d]+)\.?\s*(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
-
-        # 1-A 
-    match = re.match(r'(\d+\-[A-F])\s(IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)', field)
+    
+    # 1-A 
+    match = re.match(r'(\d+\-[A-F])\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
-
-
 
     #16-D. YESNO (effort made by creditor to collect...
-
-    match = re.match(r'(\d+\-[A-F])\.\s(IND\/NAME|YES\/NO|YESNO|Y DATE|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-F])\.\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
 
-
-    match = re.match(r'(\d+\-[A-F])\.\s(IND\/NAME|YES\/NO|YESNO|Y DATE|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-F])\.\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
 
     #21-11. Y DATE (PLANNED FOR TERMINATION RPT)
-    match = re.match(r'(\d+\-\d+)\.?\s(IND\/NAME|YES\/NO|YESNO|N DESC|Y DESC|Y DATE|DATE|DESC)\s\(([A-Za-z].+)\)', field)
+    match = re.match(r'(\d+\-\d+)\.?\s(TYPENAME)\s\(([A-Za-z].+)\)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
 
-
-    #                     20-11 YESNO (Is the cmte terminating activities)
-    match = re.match(r'(\d+\-\d+)\.?\s(IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)\)', field)
+    # 20-11 YESNO (Is the cmte terminating activities)
+    match = re.match(r'(\d+\-\d+)\.?\s(TYPENAME)\s\(([A-Za-z].+)\)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
         return emit(field,number,number2,number3, name)
 
-    match = re.match(r'(\d+)\-(IND\/NAME|YES\/NO|YESNO|DATE|DESC)\s\(([A-Za-z].+)', field)
+    match = re.match(r'(\d+)\-(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
@@ -374,6 +375,7 @@ def proc(field):
 
 
 for fieldlist in fec_fields:    
+#    print fieldlist
     version = fieldlist.pop(0)
     key     = fieldlist.pop(0)
     #print ("\n\nLine\t%s\t%s\n" % (version , key))
