@@ -7,9 +7,30 @@ seen={}
 def emit(field,number,number2,number3, name):
     #print ("\t\tOUTPUT:input'%s'\tnumber'%s'\tnumber2'%s'\tnumber3'%s'\tname '%s'" % (field,number,number2,number3, name))
 
+    
+    if name == 'LLINOIS':
+        print "bad match  field:'%s' name '%s'"  %(field,name)
+        raise Exception()
+
+    if re.match(r'[I]\)\s',name):
+        print "bad match  field:'%s' name '%s'"  %(field,name)
+        raise Exception()
+
+    if re.match(r'(i|ii|iii)\s',name):
+        print "bad match  field:'%s' name '%s'"  %(field,name)
+        raise Exception()
+  
     if re.match(r'[YN] (if|IF|If)',name):
         seen[name]=1
         return
+
+    if re.match(r'[acb]\)\s',name):
+        print "bad match  field:'%s' name '%s'"  %(field,name)
+        raise Exception()
+
+    if re.match(r'[abc]\.\s',name):
+        print "bad match  field:'%s' name '%s'"  %(field,name)
+        raise Exception()
 
     if re.match(r'[A-Z]\.?\s',name):
         print "bad match  field:'%s' name '%s'"  %(field,name)
@@ -169,8 +190,23 @@ def proc(field):
         (number,number2,name) = items
         return emit(field,number,number2,number3, name)
 
+        #'88-9. a) BANK NAME
+    match = re.match(r'\s*(\d+)\-([\dA-B]+\. [ab])\)\s+([A-Za-z].+)$', field)
+    if (match):
+        items = match.groups()
+        (number,number2,name) = items
+        return emit(field,number,number2,number3, name)
+
     #                     103112-122331   blahs
     match = re.match(r'\s*(\d+)\-([\dA-B]+)\.\s+([A-Za-z].+)$', field)
+    if (match):
+        items = match.groups()
+        (number,number2,name) = items
+        return emit(field,number,number2,number3, name)
+
+        #'14-12a. DATE REACHED 100%
+        #9-1b. Unitemized Receipts From Persons
+    match = re.match(r'(\d+)\-(\d+)[abc]\. ([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,number2,name) = items
@@ -211,12 +247,41 @@ def proc(field):
         (number,number2,name) = items
         return emit(field,number,number2,"", name)
 
-    #                     222222-III             3933
-    match = re.match(r'\s*(\d+)\-([IVX]+)\s*([A-Za-z].+)', field)
+    #7-II) a. IND/NAME (EVENT)
+    match = re.match(r'\s*(\d+)\-([IVX]+\)\s[ab]\.)\s+([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,number2,name) = items
         return emit(field,number,number2,"", name)
+
+                      #13-II) c. IND/NAME (EVENT)
+    match = re.match(r'(\d+)\-([IVX]+\))\sc\.\s(IND\/NAME)\s\(([A-Za-z].+)\)', field)
+    if (match):
+        items = match.groups()
+        (number,number2,typename,name) = items
+        return emit(field,number,number2,"", name)
+
+    #7-II) TOT DIRECT FUNDRAISING AMOUNT
+    match = re.match(r'\s*(\d+)\-([IVX]+\))\s+([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,number2,name) = items
+        return emit(field,number,number2,"", name)
+
+    #                     222222-III             3933
+    match = re.match(r'\s*(\d+)\-([IVX]+)\s([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,number2,name) = items
+        return emit(field,number,number2,"", name)
+
+    # 30-11(a)i Itemized
+    match = re.match(r'\s*(\d+)\-(\d+)(\([\d\w\s\.]+\)(?:i|ii|iii))\s([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,number2,number3,name) = items
+        return emit(field,number,number2,number3, name)
+
 
     #                     122222-1111     (233d222.223).       NNNNN
     match = re.match(r'\s*(\d+)\-(\d+)\s*\(([\d\w\s\.]+)\)\.?\s*([A-Za-z].+)', field)
@@ -289,8 +354,16 @@ def proc(field):
         items = match.groups()
         (number,number2,name) = items
         return emit(field,number,number2,number3, name)
+        
 
-    #                 111111-BLHA
+    #'6-I) ADMIN/VOTER DRIVE
+    match = re.match(r'\s*(\d+\-[I]\)\s)([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,name) = items
+        return emit(field,number,number2,number3, name)
+
+   #                 111111-BLHA
     match = re.match(r'\s*(\d+)\-([A-Za-z].+)', field)
     if (match):
         items = match.groups()
