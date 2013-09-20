@@ -1,0 +1,2679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>FEC ELECTRONIC FILE FORMAT </para>
+  <para>VERSION 1.00 1/3/97</para>
+  <para>FORM TYPE</para>
+  <para>        FORM TYPE  refers to the combination of the FEC form and other important identifying indicators.  For the general forms the format is form type, amendment indicator i.e.:  F3A, F3PN.  The Amendment Y/N check boxes will be “Yes” if  the “A” indicator is included in the Form Type - otherwise they will be assumed to be “No”.  If the Report</para>
+  <para>Type is indicated as a “Termination Report”, a “T” indicator will be included in the Form</para>
+  <para>Type (for quick identification purposes) UNLESS the “A” amendment indicator supersedes the “T” indicator.</para>
+  <para/>
+  <para>        More complicated are form types from the schedules which indicate the schedule (SA) and the line from the core form that the record relates to i.e.,  SA15A.</para>
+  <para/>
+  <para/>
+  <para>FEC ID NUMBER - FEC COMMITTEE ID NUMBER, FEC CANDIDATE ID NUMBER</para>
+  <para>        All references to “FEC ID NUMBER” indicates that the field contains a FEC assigned identification number.  All committee ID numbers begin with a “C” and all candidate ID numbers begin with: S (senate), H (house), P        (presidential).  All FEC id numbers are 9 characters long with no spaces.</para>
+  <para/>
+  <para>This document has been changed to include more detail and to insure consistency.</para>
+  <para>        For example, in Form 1, the line:</para>
+  <para>2.   ID NUMBER        FEC ID NUMBER                (A/N-9)</para>
+  <para>        has been changed to:</para>
+  <para>2.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para> reflect that only committees will file the document.</para>
+  <para/>
+  <para>Please note, certain lines will have identifying words included; these exist only to aid in identifying the type of committee included in the field.  For example:</para>
+  <para>2.  FEC COMMITTEE ID NUMBER (PCC)                (A/N-9)</para>
+  <para>9.  FEC COMMITTEE ID NUMBER (ACCOUNT)                (A/N-9)</para>
+  <para/>
+  <para>COMMITTEE NAME - COMMITTEE NAME</para>
+  <para>All committee names will be a maximum of 90 characters long.</para>
+  <para/>
+  <para>ORGANIZATION TYPE - ORGANIZATION TYPE</para>
+  <para>The FEC interest group codes match the boxes on the form exactly.</para>
+  <para/>
+  <para>CANDIDATE NAME - CANDIDATE NAME</para>
+  <para>All candidate names will be a maximum of 38 characters long.</para>
+  <para/>
+  <para>STREET ADDRESS 1/2 - STREET 1, STREET 2</para>
+  <para>All street addresses will be a maximum of 34 characters long.</para>
+  <para/>
+  <para>CITY - CITY</para>
+  <para>All city indicators will be a maximum of 18 characters long.</para>
+  <para/>
+  <para>STATE CODE - STATE / ELECTION STATE</para>
+  <para>All state indicators will be codes and will be 2 characters long.  State codes referring to addresses will be indicated by STATE, references to the state in which a candidate is running will be referred as ELECTION STATE. </para>
+  <para/>
+  <para>ZIP CODE - ZIP</para>
+  <para>All zip codes will be 9 characters long, four trailing spaces are acceptable.</para>
+  <para/>
+  <para>DATES - DATE</para>
+  <para>All dates will be eight numeric characters.  The dates will be in the format CCYYMMDD .  In this text many dates will be followed by identifiers such as:  DATE (OF CONTRIBUTION).   However, implementation of the “Header Record” will allow for the specification of dates in either CCYYMMDD or MMDDCCYY formats.</para>
+  <para/>
+  <para>AMOUNTS</para>
+  <para>Amount fields are 12 characters maximum.  They must be numeric (with two exceptions).</para>
+  <para>A leading minus (-) sign is used to indicate negative amount values.  An explicit decimal</para>
+  <para>point (.) must be imbedded with 2 numeric decimal positions following the point.</para>
+  <para>However, implementation of the “Header Record” will allow for the specification of amounts with either explicit decimal point (eg. 999.99, 0.05, -100.00) representation,</para>
+  <para>or “implicit” decimal representation (eg. 99999, 005, -10000).  With implicit decimal</para>
+  <para>point representation, the last two (2) digits are interpreted to be cents.</para>
+  <para/>
+  <para>RATES</para>
+  <para>Interest rates are coded as 4-digit percents (ie. 4 decimal places with/without an explicit decimal point. For example:  .0500 or 0865 are  interpreted as 5% or 8.65%.  The maximum field lenght is 5 bytes.</para>
+  <para/>
+  <para/>
+  <para>INDIVIDUAL’S NAMES - IND/NAME</para>
+  <para>Previously in this document individuals names varied between 38 and 34 characters.  I have changed this so that all individual names are now a maximum of 38 characters.  The original logic was that the disclosure database contains 34 character names.</para>
+  <para/>
+  <para>To accomodate the variety of situations, the following has been implemented for the name field. Each name field may contain the following elements:</para>
+  <para/>
+  <para>Lastname (or Business name)</para>
+  <para>Firstname (plus all middle initials and/or middle names)</para>
+  <para>Prefix (such as Dr., Ms. or Mr.)</para>
+  <para>Suffix (such as Jr., Sr.)</para>
+  <para/>
+  <para>Accordingly, the name field will be sub-delimited with a carrot (^) so that a name field record would appear as follows:</para>
+  <para/>
+  <para>“Lastname^Firstname^Prefix^Suffix”</para>
+  <para/>
+  <para>Some examples follow:</para>
+  <para/>
+  <para>Dr. John W. Smith, Jr. would be shown as: “Smith^John W.^Dr.^Jr.”</para>
+  <para>Smith Medical Corporation would be: “Smith Medical Corporation”</para>
+  <para>Jennifer Smith would be “Smith^Jennifer”</para>
+  <para>Ms. Jennifer T. Smith-Reilly would be “Smith-Reilly^Jennifer T.^Ms.”</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>INDIVIDUAL’S EMPLOYER - INDEMP</para>
+  <para>Previously in this document the individual employer field was listed at 34 characters.  I t has been changed  so that all individual employers fields are now a maximum of 38 characters.  The original logic was that the disclosure database contains 35 character names.</para>
+  <para/>
+  <para>INDIVIDUAL’S OCCUPATION - INDOCC</para>
+  <para>Previously in this document the individual occupation field was listed at 34 characters.  It has been changed  so that all individual occupation fields are now a maximum of 38 characters.  The original logic was that the disclosure database contains 35 character names.</para>
+  <para/>
+  <para>CANDIDATE OFFICE - CAN/OFF</para>
+  <para>The candidate office field is a one character alpha code;  ‘H’ represents house, ‘S’ represents senate and ‘P’ represents presidential. </para>
+  <para/>
+  <para>CANDIDATE DISTRICT - CAN/DIST</para>
+  <para>Candidate districts consist of two numeric characters.  The only acceptable responses are</para>
+  <para>blank, and 00 through 99.</para>
+  <para/>
+  <para>PARTY DESIGNATIONS - PTY/CODE</para>
+  <para>Candidates and some committees declare their party affiliations.  This should be a three character code and is optional in all cases.</para>
+  <para/>
+  <para>This implies a lookup table for codes - otherwise, they must be able to enter the full party name.</para>
+  <para/>
+  <para>TITLE - TITLE</para>
+  <para>All titles will be a maximum of 20 characters long.</para>
+  <para/>
+  <para>TELEPHONE NUMBER - TELEPHONE</para>
+  <para>Telephone numbers, when reported contain 10 numeric characters.</para>
+  <para/>
+  <para>REPORT CODE - RPTCODE</para>
+  <para>Report code consists of  three alpha-numeric characters.  The acceptable report codes are included in the FEC codes list.  The FEC may need to add one or two to deal with possible (but never as yet filed) convention reports.</para>
+  <para/>
+  <para>Again, implies a lookup table for codes, or allowance for full name of report.</para>
+  <para/>
+  <para/>
+  <para>ELECTION TYPE (REPORTS) - RPTPGI</para>
+  <para>Election types when referring to the basic reports can only indicate elections within the election cycle that is being reported.  Therefore the only acceptable responses are: ‘ ‘, C, G, P, R, S.</para>
+  <para/>
+  <para>The following is an attempt to make the P/G indicator a 4 character field that will cover all options and be standard vs. maintaining a rambling 20 character description field.</para>
+  <para>THIS IS AN OPTION, THE ITEMIZED RECORD ALLOWS A P/G INDICATION, THERE IS ALSO AN “O” OPTION THAT GIVES A DESCRIPTION FIELD.  SEE THE SA FORM BELOW.</para>
+  <para/>
+  <para>ELECTION TYPE (ITEMIZED) -   ITEM PG OTHER</para>
+  <para>In reference to the individual transactions reported on the various schedules election types may indicate elections within the election cycle that is being reported and past and future elections. Therefore the only acceptable responses are: ‘ ‘, C, G, P, R, S as well as years ranging from 1980 to 200*.</para>
+  <para/>
+  <para>In order to keep the file structure consistent with the existing Schedule A and B forms,</para>
+  <para>and to allow for meaningful Text-on-Graphics reproduction, the following rules are best:</para>
+  <para/>
+  <para>ITEM PG OTHER possible values are “P”, “G”, “O” (and blank if the info is not given)</para>
+  <para/>
+  <para>PG OTHER DESCRIP must be given when ITEM PG OTHER = “O” and must be</para>
+  <para>Convention, Runoff, Special, or a year from 1980+.  At least the first character must be</para>
+  <para>“C”, “R”, “S” or the first 4 characters must be numeric &gt;= 1980.</para>
+  <para/>
+  <para/>
+  <para>CONVENTION COMMITTEE TYPE - CONVENTION TYPE</para>
+  <para>Form 4 gives a selection for type of convention committee.  The choices are; Arrangements, Host and Other.  Included is  a 40 character area for a description of the ‘Other’.</para>
+  <para/>
+  <para>SEQUENCE NUMBER - SEQUENCE NUMBER</para>
+  <para>In the schedules the format calls for a user generated sequence number, this number is to be used to identify transactions especially for amendments.</para>
+  <para/>
+  <para/>
+  <para>COMMUNICATION COSTS SUPPORT/OPPOSE - 24F24N</para>
+  <para>Communication costs may be reported on Schedule SB, and Form 7.   On the Form 7 I identify the support/oppose difference on the Form 7 as 24F24N, these being the only acceptable entries in the field.  Data representation in the records will be “S” or “O”.</para>
+  <para>Data translation when loading the FEC database will be done by equating ‘S’ = ‘24F’ and</para>
+  <para>‘O’ = ‘24N’.</para>
+  <para/>
+  <para>INDEPENDENT EXPENDITURES SUPPORT/OPPOSE - 24A24E</para>
+  <para>Communication costs may be reported on Schedule SB, Schedule E and Form 5.   On the Form 5 and Schedule E  I identify the support/oppose difference as 24A24E, these being the only acceptable entries in the field.  Data representation in the records will be “S” or “O”.  Data translation when loading the FEC database will be done by equating ‘S’ = ‘24E’ and ‘O’ = ‘24A’  (or is it the other way around?).</para>
+  <para/>
+  <para>TYPE OF RECEIPT - RECEIPTCODE</para>
+  <para>Schedule SA’s layout contains both a receipt code field and a transaction description field.  One or the other of the fields are optional however one must be entered.  The transaction may further described in the Memo field.</para>
+  <para/>
+  <para>TYPE OF DISBURSEMENT - DISBURSECODE</para>
+  <para>Schedule SB’s layout contains both a disbursement code field and a transaction description field.  One or the other of the fields are optional however one must be entered.  The transaction may further described in the Memo field.</para>
+  <para/>
+  <para>PLEASE NOTE:  ADDITIONAL TRANSACTION CODE FIELDS WILL BE ADDED TO THE RECORD LAYOUTS.  IT IS SAFE TO ASSUME THAT MOST ‘DESCRIPTION’ FIELDS WILL BE GIVEN A CORRESPONDING THREE CHARACTER CODE FIELD. </para>
+  <para/>
+  <para>PURPOSE OF TRANSACTION - TRANSDESC</para>
+  <para>A description of  itemized transactions maximum 40 characters.</para>
+  <para/>
+  <para>DESCRIPTION FIELD - DESC</para>
+  <para>There are many general text fields that will be required throughout these forms and Schedules.  Many are in response to the YESNO (below) questions on the forms.  The DESC fields range from 20 to 300 maximum characters.</para>
+  <para/>
+  <para/>
+  <para>MEMO ENTRY        EXPLANATION - MEMO</para>
+  <para>Many  itemized transactions will have a Memo entry to allow the filers to provide a more complete description of the activity.  Maximum 100 characters.  Memo Text will</para>
+  <para>be available on itemized amounts on Schedules A and B - amounts which are totaled and</para>
+  <para>carried back to the Summary Page of the filing.  In addition a Memo Code indicates that</para>
+  <para>the amount is NOT to be included in the itemization total.</para>
+  <para/>
+  <para>YES/NO BOXES - YESNO</para>
+  <para>Several Forms and Schedules contain yes/no boxes, the questions are generally different for each form and can determine the need for further response in another field.</para>
+  <para/>
+  <para>Unless otherwise noted, Check Boxes are evaluated to be “checked” or “empty” based on the data content of the related field in the Comma-Separated-Value (CSV) file.</para>
+  <para/>
+  <para>Box = “Checked” when CSV value is “X”, “Y”, “1” or “T”  (value “X” is preferred)</para>
+  <para>Box = “Empty” when CSV value is blank, “N”, “0” or “F”    (space or null is preferred)</para>
+  <para/>
+  <para>AMENDED RECORD - AMENDED</para>
+  <para>Each applicable schedule contains an “Amended” field. This field is to be used to indicate which records constitute “amended” records.</para>
+  <para>Values:        “A” = New (Added) Record</para>
+  <para>        “C” = Changed Record</para>
+  <para>        “D” = Deleted Record</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 1 - Statement of Organization</para>
+  <para/>
+  <para/>
+  <para>1.   FORM TYPE                                (A/N-4)                REQUIRED    value = F1 plus ‘N’ , A or S. The S is used to indicate secondary record information such as another bank account. There is no limit on the number of 'S' type records, which should always be positioned after a 'N' or 'A' Type </para>
+  <para/>
+  <para>2.   FEC COMMITTEE ID NUMBER        (A/N-9)                REQUIRED</para>
+  <para>3.   COMMITTEE NAME                        (A/N-90)        If a ‘N’ (NEW) - REQUIRED</para>
+  <para>4.   STREET 1                                (A/N-34)         If a ‘N’ (NEW) - REQUIRED</para>
+  <para>5.   STREET 2                                (A/N-34)         If a ‘N’ (NEW) - REQUIRED</para>
+  <para>6.   CITY                                (A/N-18)         If a ‘N’ (NEW) - REQUIRED</para>
+  <para>7.   STATE                                (A-2)                 If a ‘N’ (NEW) - REQUIRED</para>
+  <para>8.   ZIP                                        (A/N-9)                 If a ‘N’ (NEW) - REQUIRED</para>
+  <para>9.   DATE    (SUBMITTED)                (NUM-8)</para>
+  <para/>
+  <para>10.   CHG OF COMMITTEE NAME        (A-1)                blank, ‘X’</para>
+  <para>11.   CHG OF ADDRESS                        (A-1)                blank, ‘X’</para>
+  <para/>
+  <para>12.   COMMITTEE TYPE                        (A-1)                REQ.  Value: ‘A’ through ‘F’   ???</para>
+  <para/>
+  <para>           Fields 13 - 19 depend on COMMITTEE TYPE values A - F    FORM 1  SPECIFIC (A-F)</para>
+  <para/>
+  <para>13.  FEC CANDIDATE ID NUMBER        (A/N-9)</para>
+  <para>14.  CANDIDATE NAME                (A/N-38)</para>
+  <para>15.  CAND / OFFICE SOUGHT                (A-1)</para>
+  <para>16.  CAND / STATE  (of Election)                (A-2)</para>
+  <para>17.  CAND / DISTRICT                        (NUM-2)</para>
+  <para>18.  PARTY CODE                        (A-3)</para>
+  <para>Party committees only</para>
+  <para>19.  PARTY TYPE                        (A/N-3 )        Value: ‘ ‘, NAT , STA  or</para>
+  <para>                                                                 SUB </para>
+  <para/>
+  <para/>
+  <para>Affiliated committee or connected organization</para>
+  <para>20.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para>21.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>22.   STREET 1                                        (A/N-34)</para>
+  <para>23.   STREET 2                                        (A/N-34)</para>
+  <para>24.   CITY                                        (A/N-18)</para>
+  <para>25.   STATE                                        (A-2)</para>
+  <para>26.   ZIP                                                (A/N-9)  </para>
+  <para>27.   RELATIONSHIP WITH ABOVE CMTE        (A/N-38)</para>
+  <para>28    ORGANIZATION TYPE                        (A/N-1)                Value:  ‘ ‘, C, T, L, M, V, W</para>
+  <para/>
+  <para>Custodian of records</para>
+  <para>29.   IND/NAME   (CUSTODIAN NAME)                (A/N-38)</para>
+  <para>30.   STREET 1                                        (A/N-34)</para>
+  <para>31.   STREET 2                                        (A/N-34)</para>
+  <para>32.   CITY                                        (A/N-18)</para>
+  <para>33.   STATE                                        (A-2)</para>
+  <para>34.   ZIP                                                (A/N-9)</para>
+  <para>35.   TITLE                                        (A/N-20)</para>
+  <para>36.   TELEPHONE                                (NUM-10)</para>
+  <para/>
+  <para/>
+  <para>Treasurer</para>
+  <para>37   IND/NAME    (TREASURER)                        (A/N-38)</para>
+  <para>38   STREET 1                                        (A/N-34)</para>
+  <para>39   STREET 2                                        (A/N-34)</para>
+  <para>40   CITY                                        (A/N-18)</para>
+  <para>41   STATE                                        (A-2)</para>
+  <para>42   ZIP                                                (A/N-9)</para>
+  <para>43   TITLE                                        (A/N-20)</para>
+  <para>44   TELEPHONE                                (NUM-10)</para>
+  <para/>
+  <para>Designated Agent</para>
+  <para>45   IND/NAME   (DESIGNATED AGENT))        (A/N-38)</para>
+  <para>46   STREET 1                                        (A/N-34)</para>
+  <para>47   STREET 2                                        (A/N-34)</para>
+  <para>48   CITY                                        (A/N-18)</para>
+  <para>49   STATE                                        (A-2)</para>
+  <para>50   ZIP                                                (NUM-9)</para>
+  <para>51   TITLE                                        (A/N-20)</para>
+  <para>52   TELEPHONE                                (NUM-10)</para>
+  <para/>
+  <para>Bank or Other</para>
+  <para>53.   IND/NAME (BANK/OTHER)                        (A/N-38)</para>
+  <para>54.  STREET 1                                        (A/N-34)</para>
+  <para>55.  STREET 2                                        (A/N-34)</para>
+  <para>56.  CITY                                        (A/N-18)</para>
+  <para>57.  STATE                                        (A-2)</para>
+  <para>58.  ZIP                                                (A/N-9)</para>
+  <para>       </para>
+  <para>59.  IND/NAME   (TREASURER)                        (A/N-38)        REQUIRED</para>
+  <para>60.  DATE    (SIGNED)                                (NUM-8)         REQUIRED</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Notes:</para>
+  <para/>
+  <para>** 12   COMMITTEE TYPE          SEE TEXT ABOVE</para>
+  <para>        Codes A-F correspond to the actual printed Form 1 and drive</para>
+  <para>        responses to candidate and Party committee questions.</para>
+  <para/>
+  <para>                A       Principal Campaign Committee</para>
+  <para>                B       Authorized Committee</para>
+  <para>                C       Unauthorized Committee</para>
+  <para>                D       Party Committee</para>
+  <para>                E       Separate Segregated Fund</para>
+  <para>                F       Non-Party Committee</para>
+  <para/>
+  <para>   REQUIRED CHECKS:</para>
+  <para>      If response in field 12 is A,B,C and AI = "N" fields 13 -18  must be </para>
+  <para>        completed.  However, if field 13  contains a valid FEC CANDIDATE ID number,</para>
+  <para>        then fields 14 - 18  are optional.</para>
+  <para/>
+  <para>      If response to field 12 is D and AI = "N" fields 18 - 19  must be completed.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Form 1</para>
+  <para/>
+  <para/>
+  <para>Form 1M  Qualification as Multicandidate Committee</para>
+  <para/>
+  <para/>
+  <para>   1.   Combines Form (F1M)                (A/N-4)                REQUIRED    value = F1M  plus ‘N’ or ‘A’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                (A/N-90)</para>
+  <para>   4.   STREET  1                                (A/N-34)</para>
+  <para>   5.   STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                (A/N-18)</para>
+  <para>   7.   STATE                                (A-2)</para>
+  <para>   8.   ZIP                                (A/N-9)</para>
+  <para>   9.   COMMITTEE TYPE                (A-1)                Value:  (X, N,’ ‘)</para>
+  <para/>
+  <para>Mulitcandidate status by Affiliation </para>
+  <para>  10.   DATE   ( OF AFFILIATION)                (NUM-8)</para>
+  <para>  11.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para>  12.   COMMITTEE NAME                        (A/N-90)</para>
+  <para/>
+  <para>Status by qualification        (if one is entered five (5) must be entered</para>
+  <para>  13.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  14.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  15.   CAN/OFF                                        (A/N-1)</para>
+  <para>  16.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  17.   CAN/DIST                                (NUM-2)</para>
+  <para>  18.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para>  </para>
+  <para>  19.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  20.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  21.   CAN/OFF                                        (A/N-1)</para>
+  <para>  22.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  23.   CAN/DIST                                (NUM-2)</para>
+  <para>  24.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para/>
+  <para>  25.   FEC CANDIDATE ID NUMBER                (A/N-9) </para>
+  <para>  26.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  27.   CAN/OFF                                        (A/N-1)</para>
+  <para>  28.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  29.   CAN/DIST                                (NUM-2)</para>
+  <para>  30.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para/>
+  <para>  31.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  32.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  33.   CAN/OFF                                        (A/N-1)</para>
+  <para>  34.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  35.   CAN/DIST                                (NUM-2)</para>
+  <para>  36.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para/>
+  <para/>
+  <para>  37.   FEC CANDIDATE ID NUMBER                        (A/N-9)</para>
+  <para>  38.   CANDIDATE NAME                                (A/N-38)</para>
+  <para>  39.   CAN/OFF                                                (A-1)</para>
+  <para>  40.   STATE    (OF ELECTION)                                (A/N-2)</para>
+  <para>  41.   CAN/DIST                                        (NUM-2)</para>
+  <para>  42.   DATE   (OF CONTRIBUTION)                        (NUM-8)</para>
+  <para/>
+  <para>  43.   DATE  (OF 51ST CONTRIBUTOR)                        (NUM-8)</para>
+  <para>  44.   DATE  (OF ORIGINAL REGISTRATION)                (NUM-8)</para>
+  <para>  45.   DATE  (COMMITTEE MET REQUIREMENTS)        (NUM-8)</para>
+  <para>  46.   IND/NAME    (TREASURER)                        (A/N-38)         REQUIRED</para>
+  <para>        SIGNATURE OF TREAS                </para>
+  <para>  47.   DATE   (SIGNED)                                        (NUM-8)         REQUIRED</para>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        REQUIRED FIELDS:  Are as noted, however if items 10-12 or items</para>
+  <para>        13 - 45  are blank there is no reason for the filer to file the report.</para>
+  <para/>
+  <para>        If the filer reports Mulitcandidate status by Affiliation and</para>
+  <para>        reports field 10 and 11 (or 10 and 12).  Fields 13 through</para>
+  <para>        45 should be blank.</para>
+  <para/>
+  <para>        If the filer does not report fields 10-12 ALL 5 candidate </para>
+  <para>        information fields (with automatic options for FEC ID's) must</para>
+  <para>        be filled in as well as fields 43 through 45.</para>
+  <para>        </para>
+  <para>End of Form 1M</para>
+  <para/>
+  <para/>
+  <para>Form 2 - Statement of Candidacy</para>
+  <para/>
+  <para>NOTE: All Form 2’s are NEW.  There is nowhere on the form to indicate an amendment.</para>
+  <para/>
+  <para>1.    FORM TYPE                                (A/N-4)                REQUIRED    value = F2</para>
+  <para>2.    FEC CANDIDATE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>3.    CANDIDATE NAME                        (A/N-38)         REQUIRED</para>
+  <para>4.    STREET 1                                        (A/N-34)         REQUIRED</para>
+  <para>5.    STREET 2                                        (A/N-34)         REQUIRED</para>
+  <para>6.    CITY                                        (A/N-18)         REQUIRED</para>
+  <para>7.    STATE                                        (A-2)                 REQUIRED</para>
+  <para>8.    ZIP                                                (A/N-9)                 REQUIRED</para>
+  <para>9.    PTY/CODE                                        (A-3)</para>
+  <para>10.  CAN/OFF                                        (A-1)                 REQUIRED</para>
+  <para>11.  STATE    (OF ELECTION)                        (A-2)                 REQUIRED</para>
+  <para>12.  CAN/DIST                                        (NUM-2)         REQUIRED</para>
+  <para>13.  YEAR OF ELECTION 1900-2999                (NUM-4)</para>
+  <para>14.   FEC COMMITTEE ID NUMBER (PCC)        (A/N-9)</para>
+  <para>15.   COMMITTEE NAME (PCC)                        (A/N-90)</para>
+  <para>16.   STREET 1                                        (A/N-34)</para>
+  <para>17.   STREET 2                                        (A/N-34)</para>
+  <para>18.   CITY                                        (A/N-18)</para>
+  <para>19.   STATE                                        (A-2)</para>
+  <para>20.   ZIP                                                (A/N-9)</para>
+  <para>21.    FEC COMMITTEE ID NUMBER (AUTH)        (A/N-9)</para>
+  <para>22.    COMMITTEE NAME  (AUTH)                (A/N-90)</para>
+  <para>23.    STREET 1                                        (A/N-34)</para>
+  <para>24.    STREET 2                                        (A/N-34)</para>
+  <para>25.    CITY                                        (A/N-18)</para>
+  <para>26.    STATE                                        (A-2)</para>
+  <para>27.    ZIP                                        (A/N-9)</para>
+  <para/>
+  <para>28.   DATE    (SIGNED)                                (NUM-8)         REQUIRED</para>
+  <para/>
+  <para>End of Form 2</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 3 - Report of Receipts and Disbursements for an Authorized Committee</para>
+  <para/>
+  <para/>
+  <para>                                                        </para>
+  <para>   1.   FORM TYPE                        (A/N-4)                 REQUIRED    value = F3</para>
+  <para>                                                         plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                (A/N-90)</para>
+  <para>   4.   STREET  1                                (A/N-34)</para>
+  <para>   5.   STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                (A/N-18)</para>
+  <para>   7.   STATE                                (A-2)</para>
+  <para>   8.   ZIP                                (A/N-9)</para>
+  <para/>
+  <para>   9   CHG OF ADDRESS                        (A-1)                blank, ‘X’</para>
+  <para>  10.  ELECTION STATE                        (A-2)</para>
+  <para>  11.  ELECTION DISTRICT                (NUM-2)</para>
+  <para/>
+  <para>*  12.  RPTCODE                        (A-3)                 REQUIRED</para>
+  <para>*  13.  RPTPGI                                (A-1)                values = ‘P’ ‘G’ ‘S’ ‘R’</para>
+  <para>*  14.  DATE  (OF ELECTION)                (NUM-8)</para>
+  <para>*  15.  STATE (OF ELECTION)                (A-2)</para>
+  <para/>
+  <para/>
+  <para>  16.   ACTIVITY PRIMARY                (A-1)                blank, ‘X’</para>
+  <para>  17.   ACTIVITY GENERAL                (A-1)                blank, ‘X’</para>
+  <para>  18.   ACTIVITY SPECIAL                (A-1)                blank, ‘X’</para>
+  <para>  19.   ACTIVITY RUNOFF                (A-1)                blank, ‘X’</para>
+  <para/>
+  <para>  20.  DATE    (COVERAGE FROM)        (NUM-8)</para>
+  <para>  21.  DATE    (COVERAGE TO)                (NUM-8)         REQUIRED</para>
+  <para/>
+  <para>     COLUMN A THIS PERIOD </para>
+  <para>(The number following the field number is the line number appearing on the printed FEC Form 3, and information derived from other places in the record are shown with both the field number and line number of the original information.  All amount fields are AMT-12 format.)</para>
+  <para/>
+  <para>        6. Net Contributions (other than loans)</para>
+  <para>  22.     (6a) Total Contributions (NO Loans)</para>
+  <para>                37. (line 11(e))</para>
+  <para>  23.     (6b) Total Contribution Refunds</para>
+  <para>                53. (line 20(d))</para>
+  <para>  24.     (6c) Net Contributions</para>
+  <para>                22.-23. (6a-6b)</para>
+  <para>        7. Net Operating Expenditures</para>
+  <para>  25.     (7a) Total Operating Expenditures</para>
+  <para>                45. (line 17)</para>
+  <para>  26.     (7b) Total Offset to Operating Expenditures</para>
+  <para>                42. (line 14)</para>
+  <para>  27.     (7c) NET Operating Expenditures.</para>
+  <para>                25.-26. (7a-7b)</para>
+  <para/>
+  <para/>
+  <para>  28.   8. Cash on Hand Close of reporting period</para>
+  <para>                60. (line 27)</para>
+  <para>  29.   9. DEBTS TO    ( Totals from SCH C and/or D)</para>
+  <para>  30.   10. DEBTS BY  (Totals from SCH C and/or D)</para>
+  <para/>
+  <para>        11. CONTRIBUTIONS (other than loans) FROM:</para>
+  <para/>
+  <para>  31.     11(a.i) Individuals Itemized</para>
+  <para>                Schedule A</para>
+  <para>  32.     11(a.ii) Individuals UnItemized</para>
+  <para>  33.     11(a.iii) Individual Contribution Total</para>
+  <para>                31+32 (11(a.i)+11(a.ii))</para>
+  <para>  34.     11(b) Political Party Committees</para>
+  <para>  35.     11(c) Other Political Committees</para>
+  <para>  36.     11(d) The Candidate</para>
+  <para>  37.     11(e) Total Contributions</para>
+  <para>                33.+34.+35.+36. (11(a.iii)+11(b)+11(c)+11(d)</para>
+  <para/>
+  <para>  38.   12. Transfers from Other Authorized Committees</para>
+  <para/>
+  <para>        13. LOANS</para>
+  <para>  39.        13(a) Loans made or guarn. by the Candidate</para>
+  <para>  40.        13(b) All Other Loans</para>
+  <para>  41.         13(c) Total Loans</para>
+  <para>                39.+40. (13(a)+13(b))</para>
+  <para>  42.   14. Offsets to Operating Expenditures</para>
+  <para>  4337.   15. Other Receipts</para>
+  <para>  4438.        16. Total Receipts</para>
+  <para>                37.+38.+41.+42.+43. (11(e)+12+13(c)+14+15)</para>
+  <para/>
+  <para>                Disbursements                        </para>
+  <para/>
+  <para>  45.   17. Operating Expenditures</para>
+  <para>  46.   18. Transfers to Other Authorized Committees</para>
+  <para/>
+  <para>        19. LOAN REPAYMENTS</para>
+  <para>  47.     19(a) Of Loans made or guar. by the Candidate</para>
+  <para>  48.     19(b) Loan Repayments, All Other Loans</para>
+  <para>  49.     19(c) Total Loan Repayments</para>
+  <para>                47.+48. (19(a)+19(b))</para>
+  <para/>
+  <para>        20. REFUNDS OF CONTRIBUTIONS TO:</para>
+  <para>  50.     20(a) Refund/Individuals Other than Pol. Cmtes</para>
+  <para>  51.     20(b) Refund Political Party Committees</para>
+  <para>  52.     20(c) Refund Other Political Committees</para>
+  <para>  53.     20(d) Total Contributions Refunds</para>
+  <para>                50.+51.+52. (20(a)+20(b)+20(c))</para>
+  <para>  54.   21. Other Disbursements</para>
+  <para>  55.   22. Total Disbursements</para>
+  <para>                45.+46.+49.+53.+54. (17+18+19(c)+20(d)+21)</para>
+  <para/>
+  <para/>
+  <para>                CASH SUMMARY</para>
+  <para/>
+  <para>  56.   23. Cash Beginning Reporting Period        </para>
+  <para>  57.   24. Total Receipts this Period</para>
+  <para>                field 44 (line 16)</para>
+  <para>  58.   25. SubTotal)</para>
+  <para>                56.+57. (23+24)</para>
+  <para>  59.   26. Total Disbursements this Period</para>
+  <para>                field 55 (line 22)</para>
+  <para>  60.   27. Cash on hand at Close Period</para>
+  <para>                58.-59. (25-26)</para>
+  <para/>
+  <para/>
+  <para>                COLUMN B CALENDAR YEAR-TO-DATE</para>
+  <para/>
+  <para/>
+  <para>        6. Net Contributions (other than loans)</para>
+  <para>  61.     (6a) Total Contributions (No Loans)        </para>
+  <para>                73 (line 11(e)</para>
+  <para>  62.     (6b) Total Contribution Refunds</para>
+  <para>                89 (line 20d))</para>
+  <para>  63.     (6c) Net Contributions</para>
+  <para>                61-62 (6a-6b)</para>
+  <para>        </para>
+  <para>        7. Net Operating Expenditures</para>
+  <para>  64.     (7a) Total Operating Expenditures</para>
+  <para>                81. (line 17)</para>
+  <para>  65.     (7b) Total Offsets to Operating Expenditures</para>
+  <para>                78. (line 14)</para>
+  <para>  66.     (7c) NET Operating Expenditures.</para>
+  <para>                64-65 (7a-7b)</para>
+  <para/>
+  <para>        11. CONTRIBUTIONS (other than loans) FROM:</para>
+  <para>  67.     11(a.i) Individuals Itemized</para>
+  <para>  68.     11(a.ii) Individuals UnItemized</para>
+  <para>  69.     11(a.iii) Individuals Total</para>
+  <para>                67+68 (11(a.i)+11(a.ii))</para>
+  <para>  70.     11(b) Political Party Committees</para>
+  <para>  71.     11(c) All Other Political Committees (PACS)</para>
+  <para>  72.     11(d) THE CANDIDATE</para>
+  <para>  73.     11(e) Total Contributions</para>
+  <para>                69+70+71+72 (11(a.iii)+11(b)+11(c)+11(d)</para>
+  <para>  74.   12. Transfers from Other AUTH Committees</para>
+  <para/>
+  <para>        13. LOANS</para>
+  <para>  75.        13(a) Loans made or guarn. by the Candidate</para>
+  <para>  76.     13(b) All Other Loans</para>
+  <para>  77.     13(c) Total Loans</para>
+  <para>                75+76 (13(a)+13(b))</para>
+  <para>  78.   14. Offsets to Operating Expenditures        </para>
+  <para>  79.   15. Other Receipts</para>
+  <para>  80.        16. Total Receipts</para>
+  <para>                73+74+77+78+79 (11(e)+12+13(c)+14+15)</para>
+  <para/>
+  <para>                Disbursements                        </para>
+  <para/>
+  <para>  81.   17 Operating Expenditures</para>
+  <para>  82.   18. Transfers To Other AUTH Committees</para>
+  <para/>
+  <para>        19. LOAN REPAYMENTS</para>
+  <para>  83.     19(a) Loan Repayment to Candidate</para>
+  <para>  84.     19(b) Loan Repayments,  ALL Other Loans</para>
+  <para>  85.     19(c) Total Loan Repayments</para>
+  <para>                83+84 (19(a)+19(b))</para>
+  <para/>
+  <para/>
+  <para>        20. REFUNDS OF CONTRIBUTIONS TO:</para>
+  <para>  86.     20(a) Refund/Individuals Other than Pol. Cmtes</para>
+  <para>  87.     20(b) Refund, Political Party Committees</para>
+  <para>  88.     20(c) Refund, Other Political Committees</para>
+  <para>  89.     20(d) Total Contributions Refunds</para>
+  <para>                86+87+88     (20(a)+20(b)+20(c))</para>
+  <para>  90.   21. Other Disbursements</para>
+  <para>  91.   22. Total Disbursements</para>
+  <para>                81+82+85+89+90    (17+18+19(c)+20(d)+21)</para>
+  <para/>
+  <para>  92.   IND/NAME   (TREASURER)                (A/N-38)</para>
+  <para/>
+  <para>        SIG OF TREAS (see section III of Electronic Filing Specifications Requirements)</para>
+  <para>                </para>
+  <para>  93.   DATE   (SIGNED)                                (NUM-8)</para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para>RULES:</para>
+  <para>        If field 12  (report code) begins with a "12" or a "30" fields 13, 14 &amp; 15 are REQUIRED.</para>
+  <para/>
+  <para>        COLUMN A CHECKS:</para>
+  <para>        FIELD 22  (6a)        = FIELD 37  (line 11(e))</para>
+  <para>        FIELD 23  (6b)        = FIELD 53  (line 20(d))</para>
+  <para>        FIELD 24  (6c)        = FIELD 22-23  (6a-6b)</para>
+  <para>        FIELD 25   (7a)        = FIELD 45   (line 17)</para>
+  <para>        FIELD 26   (7b)        = FIELD 42   (line 14)</para>
+  <para>        FIELD 27   (7c)        = FIELD 25-26   (7a-7b)</para>
+  <para>        FIELD 28   (8)                = FIELD 60   (line 27)</para>
+  <para>        FIELD 29   (9)                = Totals from SCH C and/or D</para>
+  <para>        FIELD 30   (10)        = Totals from SCH C and/or D</para>
+  <para>        FIELD 31   (11(a.i))        = Total from  Schedule A</para>
+  <para>        FIELD 33   (11(a.iii))        = FIELD 31+32   (11(a.i)+11(a.ii))</para>
+  <para>        FIELD 37   (11(e))        = FIELD 33+34+35+36   (11(a.iii)+11(b)+11(c)+11(d)</para>
+  <para>        FIELD 41   (13(c))        = FIELD 39+40   (13(a)+13(b))</para>
+  <para>        FIELD 44   (16)        = FIELD 37+38+41.+42.+43   (11(e)+12+13(c)+14+15)</para>
+  <para>        FIELD 49   (19(c))        = FIELD 47+48   (19(a)+19(b))</para>
+  <para>        FIELD 53   (20(d))        = FIELD 50+51+52   (20(a)+20(b)+20(c))</para>
+  <para>        FIELD 55   (22)        = FIELD 45+46+49+53+54   (17+18+19(c)+20(d)+21)</para>
+  <para>        FIELD 57   (24)        = FIELD 44  (line 16)</para>
+  <para>        FIELD 58   (25)        = FIELD 56+57  (23+24)</para>
+  <para>        FIELD 59   (26)        = FIELD 55  (line 22)</para>
+  <para>        FIELD 60   (27)        = FIELD 58-59  (25-26)</para>
+  <para/>
+  <para>        COLUMN B CHECKS:</para>
+  <para>        FIELD 61    (6a)        = FIELD 73   (line 11(e)</para>
+  <para>        FIELD 62    (6b)        = FIELD 89   (line 20d))</para>
+  <para>        FIELD 63    (6c)        = FIELD 61-62   (6a-6b)        </para>
+  <para>        FIELD 64    (7a)        = FIELD 81   (line 17)</para>
+  <para>        FIELD 65    (7b)        = FIELD 78   (line 14)</para>
+  <para>        FIELD 66    (7c)        = FIELD 64-65   (7a-7b)</para>
+  <para>        FIELD 69    (11(a.iii))        = FIELD 67+68   (11(a.i)+11(a.ii))</para>
+  <para>        FIELD 73    (11(e))        = FIELD 69+70+71+72   (11(a.iii)+11(b)+11(c)+11(d)</para>
+  <para>        FIELD 77    (13(c))        = FIELD 75+76   (13(a)+13(b))</para>
+  <para>        FIELD 80    (16)        = FIELD 73+74+77+78+79   (11(e)+12+13(c)+14+15)</para>
+  <para>        FIELD 85    (19(c))        = FIELD 83+84   (19(a)+19(b))</para>
+  <para>        FIELD 89    (20(d))        = FIELD 86+87+88   (20(a)+20(b)+20(c))</para>
+  <para>        FIELD 91    (22)        = FIELD 81+82+85+89+90   (17+18+19(c)+20(d)+21)</para>
+  <para/>
+  <para>End of Form 3</para>
+  <para/>
+  <para/>
+  <para>Form 3X - Report of Receipts and Disbursements for Other Than An Authorized Committee</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                        (A/N-4)                 REQUIRED    value = F3X</para>
+  <para>                                                                           plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                (A/N-90)</para>
+  <para>   4.   STREET  1                                (A/N-34)</para>
+  <para>   5.   STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                (A/N-18)</para>
+  <para>   7.   STATE                                (A-2)</para>
+  <para>   8.   ZIP                                (A/N-9)</para>
+  <para/>
+  <para>   9.   CHG OF ADDRESS                (A-1)                blank, ‘X’</para>
+  <para>  10.  QUALIFIED CMTE blank or X        (A-1)                 blank, ‘X’</para>
+  <para/>
+  <para> * 11.  RPTCODE                        (A-3)                 REQUIRED</para>
+  <para> * 12.  RPTPGI                                (A-1)                values = ‘P’ ‘G’ ‘S’ ‘R’ ‘C’</para>
+  <para> * 13.  DATE    (OF ELECTION)                (NUM-8)</para>
+  <para> * 14.  STATE  (OF ELECTION)                (A-2)</para>
+  <para/>
+  <para>  15.  DATE    (COVERAGE FROM)        (NUM-8)</para>
+  <para>  16.  DATE    (COVERAGE TO)                (NUM-8)         REQUIRED</para>
+  <para/>
+  <para/>
+  <para>                COLUMN A THIS PERIOD </para>
+  <para>(The number following the field number is the line number appearing on the printed FEC Form 3X, and information derived from other places in the record are shown with both the field number and line number of the original information.  All amount fields are AMT-12 format.)</para>
+  <para/>
+  <para>        6. Net Contributions (other than loans)</para>
+  <para>   17.   6(b) Cash on Hand beginning</para>
+  <para>   18.   6(c) total receipts        </para>
+  <para>                37   (line 19)</para>
+  <para>   19.   6(d) subtotal</para>
+  <para>                17+18   (6b+6c)</para>
+  <para>   20.   7.  total disbursements</para>
+  <para>                54   (line 30)</para>
+  <para>   21.   8.  Cash on Hand at Close</para>
+  <para>                20-21  (6d -7)</para>
+  <para>   22.   9.  Debts to</para>
+  <para>   23.   10. Debts by</para>
+  <para/>
+  <para/>
+  <para>        11. contributions (other that loans)        </para>
+  <para>        11(a)  individuals/PERSONS</para>
+  <para>   24.   11(a)i   itemized</para>
+  <para>   25.   11(a)ii   unitemized</para>
+  <para>   26.        11(a)iii  total</para>
+  <para>                24+25   (11(a)i + 11(a)ii)</para>
+  <para>   27.   11(b) Political party committees</para>
+  <para>   28.   11(c) Other Political Committees (PACs)</para>
+  <para>   29.   11(d) total contributions</para>
+  <para>                26+27+28   (11(a)iii+11b+11c)</para>
+  <para/>
+  <para>   30.   12. Transfers from Affiliated/Other Party Cmtes</para>
+  <para>   31.   13. All loans Received</para>
+  <para>   32.   14. loan repayments received</para>
+  <para>   33.   15. offsets to Operating Expenditures  (refunds ...)</para>
+  <para>   34.   16. Refunds of Federal contributions</para>
+  <para>   35.   17. Other Federal Receipts (dividends)</para>
+  <para>   36.   18. transfers from Nonfederal Account</para>
+  <para>   37.   19. Total Receipts</para>
+  <para>                29+30+31+32+33+34+35+36   (11d+12+13+14+15+16+17+18)</para>
+  <para>   38.   20. Total Federal Receipts</para>
+  <para>                37 -36   (19-18)</para>
+  <para/>
+  <para/>
+  <para>                DISBURSEMENTS                        </para>
+  <para/>
+  <para>        21.  Operating Expenditures                </para>
+  <para>        21a)  shared federal/non-Federal Activity                </para>
+  <para>   39.   21(a)i  Federal Share</para>
+  <para>   40.   21(a)ii  non-federal share</para>
+  <para>   41.   21(b)  other Federal operating expenditures</para>
+  <para>   42.   21(c)  total operating expenditures</para>
+  <para>                39+40+41   (21(a)i+21(a)ii+21(b))</para>
+  <para>   43.   22. Transfers to Affiliated/Other Party Cmtes</para>
+  <para>   44.   23. Contributions to Federal Candidates/Cmtes</para>
+  <para>   45.   24. Independent expenditures</para>
+  <para>   46.   25. Coordinated Expenditures made by party Cmtes</para>
+  <para>   47.   26. Loan repayments</para>
+  <para>   48.   27. Loans Made</para>
+  <para>        28. Refunds of contributions To:                        </para>
+  <para>   49.   28(a)  Individuals/Persons</para>
+  <para>   50.   28(b)  Political Party Committees</para>
+  <para>   51.   28(c)  Other Political Committees</para>
+  <para>   52.   28(d)  Total contributions refunds</para>
+  <para>                49+50+51   (28(a)+28(b)+28(c))</para>
+  <para>   53.   29.  Other disbursements</para>
+  <para>   54.   30.  Total disbursements</para>
+  <para>                   42+43+44+45+46+47+48+52+53</para>
+  <para>                  (21c+22+23+24+25+26+27+28d+29)</para>
+  <para>   55.   31. Total Federal Disbursements</para>
+  <para>                54 -40   (30-21(a)ii)</para>
+  <para/>
+  <para/>
+  <para>                NET CONTRIBUTIONS/OPERATING EXPENDITURES                        </para>
+  <para>  </para>
+  <para>   56.   32.  Total contributions</para>
+  <para>                29  (11d)</para>
+  <para>   57.   33.  Total Contribution Refunds</para>
+  <para>                52  (28d)</para>
+  <para>   58.   34.  Net Contributions</para>
+  <para>                56 - 57   (11d-28d)</para>
+  <para>   59.   35.  Total Federal Operating Expenditures</para>
+  <para>                39+41   (21(a.ii)+21(b))</para>
+  <para>   60.   36.  Offsets to operating Expenditures</para>
+  <para>                33   (15)</para>
+  <para>   61.   37.  Net operating Expenditures</para>
+  <para>                36+37   ((21(a)i)+21(b) -15)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>                COLUMN B CALENDAR YEAR-TO-DATE</para>
+  <para/>
+  <para>        6. Net Contributions (other than loans)</para>
+  <para>   62.      6(a) cash on hand Jan 1, 19                        </para>
+  <para>   63.              Year for above                                (NUM-4 )  (eg. 1998, 2002)</para>
+  <para>   64.      6(c) total receipts                                </para>
+  <para>                81. (line 19)</para>
+  <para>   65.       6(d) subtotal                                        </para>
+  <para>                62+64 (6a+6c)</para>
+  <para>   66.   7. Total disbursements</para>
+  <para>                98 (line 30)</para>
+  <para>   67.   8.  Cash on Hand Close</para>
+  <para>                65 -66   (6d -7)</para>
+  <para>        11. contributions (other that loans)        From</para>
+  <para>        11(a)  individuals/PERSONS</para>
+  <para>   68.   11(a)i itemized</para>
+  <para>   69.   11(a)ii unitemized        </para>
+  <para>   70.   11(a)iii Total</para>
+  <para>                68+69   (11(a)i + 11(a)ii)</para>
+  <para>   71.   11(b) Politial Party committees</para>
+  <para>   72.   11(c) Other Political Committees  (PACs)</para>
+  <para>   73.   11(d) Total contributions</para>
+  <para>                70+71+72   (11(a)iii+11b+11c)</para>
+  <para>   74.   12. Transfers from Affiliated/Other Party Cmtes</para>
+  <para>   75.   13. All loans Received</para>
+  <para>   76.   14. loan repayments received</para>
+  <para>   77.   15. offsets to Operating Expenditures (refunds)</para>
+  <para>   78.   16. Refunds of Federal contributions        </para>
+  <para>   79.   17. Other Federal Receipts (dividends)</para>
+  <para>   80.   18. transfers from Nonfederal Account</para>
+  <para>   81.   19. Total receipts</para>
+  <para>                   73+74+75+76+77+78+79+80</para>
+  <para>                 (11d+12+13+14+15+16+17+18)</para>
+  <para>   82.   20 Total federal receipts</para>
+  <para>                81 -80  (19-18)</para>
+  <para/>
+  <para/>
+  <para>        DISBURSEMENTS                        </para>
+  <para/>
+  <para>        21. Operating Expenditures                </para>
+  <para>        21(a)  shared federal/non-Federal Activity                </para>
+  <para>   83.   21(a)i Federal Share</para>
+  <para>   84.   21(a)ii non-federal share</para>
+  <para>   85.   21(b) other Federal operating expenditures</para>
+  <para>   86.   21(c) Total operating Expenditures</para>
+  <para>                83+84+85   (21(a)i+21(a)ii+21(b))</para>
+  <para>   87.   22. Transfers to Affiliated/Other Party Cmtes</para>
+  <para>   88.   23. Contributions to Federal Candidates/Cmtes</para>
+  <para>   89.   24. Independent Expenditures</para>
+  <para>   90.   25. Coordinated Expenditures made by party Cmtes</para>
+  <para>   91.   26. Loan repayments Made</para>
+  <para>   92.   27. Loans Made</para>
+  <para>        28. refunds of contributions                        </para>
+  <para>   93.   28(a)  individuals/Persons</para>
+  <para>   94.   28(b) Political Party Committees</para>
+  <para>   95.   28(c) Other Political  Committees</para>
+  <para>   96.   28(d) Total contributions refunds</para>
+  <para>                93+94+95   (28(a)+28(b)+28(c))</para>
+  <para>   97.   29. Other Disbursements</para>
+  <para>   98.   30. Total Disbursements</para>
+  <para>                   86+87+88+89+90+91+92+96+97</para>
+  <para>                   (21c+22+23+24+25+26+27+28d+29)</para>
+  <para>   99.   31. Total Federal Disbursements</para>
+  <para>                98 - 84   (30 - 21(a)ii)</para>
+  <para/>
+  <para/>
+  <para>                NET CONTRIBUTIONS/OPERATING EXPENDITURES                        </para>
+  <para>  100  .    32.  Total Contributions</para>
+  <para>                73   (11d)</para>
+  <para>  101 .   33.  Total Contribution Refunds</para>
+  <para>                96   (28d)</para>
+  <para>  102 .   34.  Net contributions</para>
+  <para>                73 -96   (11d -28d)</para>
+  <para>  103 .   35.  Total Federal Operating Expenditures</para>
+  <para>                83+85   ((21(a)i+21(b))</para>
+  <para>  104 .   36.  Offsets to Operating Expenditures</para>
+  <para>                77   (15)</para>
+  <para>  105 .   37.  Net Operating Expenditures</para>
+  <para>                103 -104   (35 -36)</para>
+  <para/>
+  <para/>
+  <para>  106.   IND/NAME    (TREASURER)                (A/N-38)         REQUIRED</para>
+  <para/>
+  <para>            Signature</para>
+  <para/>
+  <para>  107 .  DATE   (SIGNED)                        (NUM-8)         REQUIRED</para>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para>RULES:</para>
+  <para>        If field 11 (report code) begins with "12" or "30" fields 12, 13 &amp; 14 are REQUIRED.</para>
+  <para/>
+  <para>        COLUMN A CHECKS:</para>
+  <para/>
+  <para>        FIELD 18 . (6(c))        = FIELD 37  (line 19)</para>
+  <para>        FIELD 19 . (6(d))        = FIELDS 17+18   (6b+6c)</para>
+  <para>        FIELD 20 . (7)                = FIELD 54    (line 30)</para>
+  <para>        FIELD 21 . (8)                = FIELD 19 - 20   (6d -7)</para>
+  <para>        FIELD 22 . (9)                = TOTALS ON SCH C AND/OR D</para>
+  <para>        FIELD 23 . (10)        = TOTALS ON SCH C AND/OR D</para>
+  <para>        FIELD 24 . (11(a)i)           SCHEDULE A</para>
+  <para>        FIELD 26 . (11(a)iii)        = FIELD 24+25    (11(a)i+11(a)ii)</para>
+  <para>        FIELD 29 . (11(d))        = FIELDS   26+27+28   (11(a)iii+11b+11c)</para>
+  <para>        FIELD 36 . (17)           SCHEDULE H3</para>
+  <para>        FIELD 37 . (19)        = FIELDS   29+30+31+32+33+34+35+36                                                                (11d+12+13+14+15+16+17+18)</para>
+  <para>        FIELD 38 . (20)        = FIELDS 37  - 36    (19 - 18 )</para>
+  <para>        FIELD 44 . (21(c))        = FIELDS 39+40+41      (21(a)i+21(a)ii+21(b)</para>
+  <para>        FIELD 46 . (25)           SCHEDULE F</para>
+  <para>        FIELD 52 . (28(d))        = FIELDS 49+50+51     (28(a)+28(b)+28(c))</para>
+  <para>        FIELD 54 . (30)        = FIELDS   42+43+44+45+46+47+48+52+53   </para>
+  <para>                                        (21c+22+23+24+25+26+27+28d+29)</para>
+  <para>        FIELD 55 . (31)        = FIELDS 54  - 40    (30 - 21(a)ii)</para>
+  <para>        FIELD 56 . (32)        = FIELDS 29    (11d)</para>
+  <para>        FIELD 57 . (33)        = FIELD 52   (28d)</para>
+  <para>        FIELD 58 . (34)        = FIELD 56  - 57    (11d - 28d)</para>
+  <para>        FIELD 59 . (35)        = FIELD 39+41   (21(a.i)+21(b))</para>
+  <para>        FIELD 60 . (36)        = FIELD 33    (15)</para>
+  <para>        FIELD 61 . (37)        = FIELD 59 - 60   (35 - 36) or ((21(a)i +21(b)) - 15)</para>
+  <para/>
+  <para/>
+  <para>        COLUMN B CHECKS:</para>
+  <para/>
+  <para>        FIELD 64 . (6(c))        = FIELD 18    (line 19)</para>
+  <para>        FIELD 65 . (6(d))        = FIELD 62+64    (6a+6c)</para>
+  <para>        FIELD 66 . (7)                = FIELD 98    (line 30)</para>
+  <para>        FIELD 67 . (8)                = FIELD 65 - 66     (6d - 7)</para>
+  <para>        68 </para>
+  <para>        FIELD 70 . (11(a)iii)        = FIELD 68+69     (11(a)i + 11(a)ii)</para>
+  <para>        FIELD 73 . (11(d))        = FIELD 70+71+72    (11(a)ii.+11b+11c)</para>
+  <para>        FIELD 81 . (19)        = FIELD  73+74+75+76+77+78+79+80 </para>
+  <para>                                        (11d+12+13+14+15+16+17+18)</para>
+  <para>        FIELD 82 . (20)        = FIELD 80 - 80     (19 -18)</para>
+  <para>        83 </para>
+  <para>        84 </para>
+  <para>        FIELD 86  . (21(c))        = FIELD 83+84+85     (21(a)i +21(a)ii +21(b))</para>
+  <para>        90 </para>
+  <para>        FIELD 96 . (28(d))        = FIELD 93+94+95    (28(a)+28(b)+28(c))</para>
+  <para>        FIELD 98 . (30)        = FIELD  86+87+88+89+90+91+92+96+97   </para>
+  <para>                                        (21c+22+23+24+25+26+27+28d+29)</para>
+  <para>        FIELD 99 . (31)        = FIELD 98  - 84    (30 - 21(a)ii)</para>
+  <para>        FIELD 100 . (32)        = FIELD 73    (11d)</para>
+  <para>        FIELD 101 . (33)        = FIELD 96    (28d)</para>
+  <para>        FIELD 102 . (34)        = FIELD 73  - 96    (11d - 28d)</para>
+  <para>        FIELD 103 . (35)        = FIELD 83+85     (21(a.i)+21(b))</para>
+  <para>        FIELD 104 . (36)        = FIELD 77    (15)</para>
+  <para>        FIELD 105 . (37)        = FIELD 103 - 104     (35 - 36)</para>
+  <para/>
+  <para/>
+  <para>End of Form 3X</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 3P Report of Receipts and Disbursements by an Authorized Committee of a Candidate for the Office of President or Vice-President</para>
+  <para/>
+  <para/>
+  <para>   1.  FORM TYPE                                (A/N-4)                REQUIRED    value = F3P</para>
+  <para>                                                                 plus ‘N’, ‘A’, ‘T’     </para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>   4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.   STATE                                        (A-2)</para>
+  <para>   8.   ZIP                                        (A/N-9)</para>
+  <para/>
+  <para>   9.   CHG OF ADDRESS                        (A-1)                blank, ‘X’</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>  10.  ACTIVITY PRIMARY                        (A-1)                blank, ‘X’</para>
+  <para>  11.  ACTIVITY GENERAL                        (A-1)                blank, ‘X’</para>
+  <para/>
+  <para>* 12.  RPTCODE                                        (A-3)                 REQUIRED</para>
+  <para>* 13.  RPTPGI                                        (A-1)</para>
+  <para>* 14.  DATE    (OF ELECTION)                        (NUM-8)</para>
+  <para>* 15.  STATE    (OF ELECTION)                        (A-2)</para>
+  <para/>
+  <para>  16.  DATE    (COVERAGE FROM)                (NUM-8)</para>
+  <para>  17.  DATE    (COVERAGE TO)                        (NUM-8)         REQUIRED</para>
+  <para/>
+  <para>   (The number following the field number is the line number appearing on the printed FEC Form 3P, and information derived from Other places in the record are shown with both the field number and line number of the original information.  All amount fields are AMT-12 format.)</para>
+  <para/>
+  <para>  18.     6.  Cash on Hand Beginning Period</para>
+  <para>  19.     7.  Total Receipts</para>
+  <para>                FIELD 43   (LINE 22)</para>
+  <para>  20.     8.  SubTotal</para>
+  <para>                18+19   (6+7)</para>
+  <para>  21.     9.  Total Disbursements</para>
+  <para>                FIELD 56   (LINE 30)</para>
+  <para>  22.   10. Cash on Hand Close of Period</para>
+  <para>                20 -21   (8 - 9)</para>
+  <para>  23.   11. Debts to</para>
+  <para>                (SCH C-P AND/OR D-P)</para>
+  <para>  24.   12. Debts by</para>
+  <para>                (SCH C-P AND/OR D-P)</para>
+  <para>  25.   13. Expenditures Subject to Limits</para>
+  <para>  26.   14. Net Contributions</para>
+  <para>                118 -139   (LINE 17e col B - line 28d col B)</para>
+  <para>  27.   15. Net Operating Expenditures</para>
+  <para>                129 -123   (LINE 23 col B - line 20a col B)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>                COLUMN A TOTAL THIS PERIOD</para>
+  <para/>
+  <para>                        RECEIPTS</para>
+  <para>   28.   16. Federal Funds</para>
+  <para>        17. Contributions (Other than Loans) from</para>
+  <para>   29.     17(a)  Individuals</para>
+  <para>                (Other and Political Committees)        </para>
+  <para>   30.     17(b) Politial Party Committees</para>
+  <para>   31.     17(c) Other Political Committees (PACs)</para>
+  <para>   32.     17(d) the Candidate</para>
+  <para>   33.     17(e) Total Contributions</para>
+  <para>                (Other than Loans) 29+30+31+32      (17(a)+17b+17c+17d)</para>
+  <para>   34.   18. Transfers from aff/Other Party Committees</para>
+  <para>        19. Loans Received</para>
+  <para>   35.     19(a) Received from or Guranteed by Candidate</para>
+  <para>   36.     19(b) Other Loans</para>
+  <para>   37.     19(c) Total Loans        </para>
+  <para>                35+36   (19(a)+19(b))</para>
+  <para>        20. Offsets to Expenditures (refunds/rebates)</para>
+  <para>   38.     20(a) Operating</para>
+  <para>   39.     20(b) Fundraising        </para>
+  <para>   40.     20(c) Legal and Accounting</para>
+  <para>   41.     20(d) Total offsets to Operating Expenditures</para>
+  <para>                38+39+40   (20a+20b+20c)</para>
+  <para>   42.   21. Other Receipts        </para>
+  <para>   43.   22. Total Receipts</para>
+  <para>                28+33+34+37+41+42       (16+17(e)+18+19(c)+20(d)+21)</para>
+  <para/>
+  <para/>
+  <para>                        DISBURSEMENTS</para>
+  <para/>
+  <para>   44.   23. Operating Expenditures</para>
+  <para>   45.   24. Transfers to Other Authorized Committees</para>
+  <para>   46.   25. Fundraising Disbursements</para>
+  <para>   47.   26. Exempt Legal and accounting Disbursements        </para>
+  <para>        </para>
+  <para>        27. Loan Repayments Made                </para>
+  <para>   48.     27(a) Made or guranteed by Candidate</para>
+  <para>   49.     27(b) Other Repayments</para>
+  <para>   50.     27(c) Total Loan Repayments Made</para>
+  <para>                48+49   (27(a)+27(b))</para>
+  <para/>
+  <para>        28. Refunds of Contributions                        </para>
+  <para>   51.     28(a) Individuals        </para>
+  <para>   52.     28(b) Political Party Committees</para>
+  <para>   53.     28(c) Other Political Committees</para>
+  <para>   54.     28(d) Total Contributions Refunds</para>
+  <para>                51+52+53   (28(a)+28(b)+28(c))</para>
+  <para>55.   29. Other Disbursements</para>
+  <para>56.   30. Total Disbursements        </para>
+  <para>        44+45+46+47+50+54+55      (23+24+25+26+27(c)+28(d)+29)</para>
+  <para/>
+  <para/>
+  <para>                III CONTRIBUTED ITEMS (STOCK, ART OBJ. ETC)</para>
+  <para/>
+  <para>57.   31. Items on Hand to be Liquidated        (AMT-12)</para>
+  <para/>
+  <para>        (attatch list)  List item will be carried in one or more F3P31AL records in the following                                   format:   “F3P31AL”,”FEC-ID#”,Seq#,”An item to be liquidated description.”</para>
+  <para/>
+  <para>                ALLOCATION BY STATE THIS PERIOD</para>
+  <para/>
+  <para>  58 .   ALABAMA                (AMT-12)</para>
+  <para>  59 .   ALASKA                        (AMT-12)</para>
+  <para>  60 .   ARIZONA                (AMT-12)</para>
+  <para>  61 .   ARKANSAS                (AMT-12)</para>
+  <para>  62 .   CALIFORNIA                (AMT-12)</para>
+  <para>  63 .   COLORADO                (AMT-12)</para>
+  <para>  64 .   CONNECTICUT                (AMT-12)</para>
+  <para>  65 .   DELAWARE                (AMT-12)</para>
+  <para>  66 .   DIST OF COLUMBIA        (AMT-12)</para>
+  <para>  67 .   FLORIDA                        (AMT-12)</para>
+  <para>  68 .   GEORGIA                (AMT-12)</para>
+  <para>  69 .   HAWAII                        (AMT-12)</para>
+  <para>  70 .   IDAHO                        (AMT-12)</para>
+  <para>  71 .   ILLINOIS                        (AMT-12)</para>
+  <para>  72 .   INDIANA                        (AMT-12)</para>
+  <para>  73 .   IOWA                        (AMT-12)</para>
+  <para>  74 .   KANSAS                        (AMT-12)</para>
+  <para>  75 .   KENTUCKY                (AMT-12)</para>
+  <para>  76 .   LOUISIANA                (AMT-12)</para>
+  <para>  77 .   MAINE                        (AMT-12)</para>
+  <para>  78 .   MARYLAND                (AMT-12)</para>
+  <para>  79 .   MASSACHUSETTS        (AMT-12)</para>
+  <para>  80 .   MICHIGAN                (AMT-12)</para>
+  <para>  81 .   MINNESOTA                (AMT-12)</para>
+  <para>  82 .   MISSISSIPPI                (AMT-12)</para>
+  <para>  83 .   MISSOURI                (AMT-12)</para>
+  <para>  84 .   MONTANA                (AMT-12)</para>
+  <para>  85 .   NEBRASKA                (AMT-12)</para>
+  <para>  86 .   NEVADA                        (AMT-12)</para>
+  <para>  87 .   NEW HAMPSHIRE        (AMT-12)</para>
+  <para>  88 .   NEW JERSEY                (AMT-12)</para>
+  <para>  89 .   NEW MEXICO                (AMT-12)</para>
+  <para>  90 .   NEW YORK                (AMT-12)</para>
+  <para>  91 .   NORTH CAROLINA        (AMT-12)</para>
+  <para>  92 .   NORTH DAKOTA                (AMT-12)</para>
+  <para>  93 .   OHIO                        (AMT-12)</para>
+  <para>  94 .   OKLAHOMA                (AMT-12)</para>
+  <para>  95 .   OREGON                        (AMT-12)</para>
+  <para>  96 .   PENNSYLVANIA                (AMT-12)</para>
+  <para>  97 .   RHODE ISLAND                (AMT-12)</para>
+  <para>  98 .   SOUTH CAROLINA        (AMT-12)</para>
+  <para>  99 .   SOUTH DAKOTA                (AMT-12)</para>
+  <para>  100 .   TENNESSEE                (AMT-12)</para>
+  <para>  101 .   TEXAS                        (AMT-12)</para>
+  <para> 102 .   UTAH                        (AMT-12)</para>
+  <para> 103 .   VERMONT                (AMT-12)</para>
+  <para> 104 .   VIRGINIA                (AMT-12)</para>
+  <para> 105 .   WASHINGTON                (AMT-12)</para>
+  <para> 106 .   WEST VIRGINIA                (AMT-12)</para>
+  <para> 107 .   WISCONSIN                (AMT-12)</para>
+  <para> 108 .   WYOMING                (AMT-12)</para>
+  <para> 109 .   PUERTO RICO                (AMT-12)</para>
+  <para> 110 .   GUAM                        (AMT-12)</para>
+  <para> 111 .   VIRGIN ISLANDS        (AMT-12)</para>
+  <para> 112 .   TOTALS                        (AMT-12)</para>
+  <para>            58+59+60 ... +111     </para>
+  <para/>
+  <para/>
+  <para>                COLUMN B TOTAL THIS YEAR</para>
+  <para/>
+  <para>                        RECEIPTS</para>
+  <para>  113.   16. Federal Funds</para>
+  <para>        17. Contributions (Other than Loans) from</para>
+  <para>  114.   17(a)  Individuals</para>
+  <para>                (Other and PoliticalCommittees)</para>
+  <para>  115.     17(b) Politial Party Committees</para>
+  <para>  116.     17(c) Other Political Committees (PACs)</para>
+  <para>  117.     17(d) the Candidate</para>
+  <para>  118.     17(e) Total contributions  (Other than Loans)</para>
+  <para>                      114+115+116+117       (17(a)+17b+17c+17d)</para>
+  <para>  119.   18. Transfers from Aff/Other Party Committees</para>
+  <para>        19. Loans Received</para>
+  <para>  120.     19(a) Received from or Guranteed  by Candidate</para>
+  <para>  121.     19(b) Other Loans</para>
+  <para>  122.     19(c) Total Loans</para>
+  <para>                120+121   (19(a)+19(b))</para>
+  <para>        20. Offsets to Expenditures (refunds/rebates)</para>
+  <para>  123.     20(a) Operating</para>
+  <para>  124.     20(b) Fundraising</para>
+  <para>  125.     20(c) Legal and Accounting</para>
+  <para>  126.     20(d) Total offsets to Operating Expenditures        </para>
+  <para>                123+124+125   (20a+20b+20c)</para>
+  <para>  127.   21. Other Receipts</para>
+  <para>  128.   22. Total Receipts        </para>
+  <para>                113+118+119+122+126+127                                            (16+17(e)+18+19(c)+20(d)+21)</para>
+  <para/>
+  <para/>
+  <para>                        DISBURSEMENTS</para>
+  <para/>
+  <para>  129.   23. Operating Expenditures        </para>
+  <para>  130.   24. Transfers to Other Authorized Committees</para>
+  <para>  131.   25. Fundraising Dusbursements</para>
+  <para>  132.   26. Exempt Legal and accounting Disbursements        </para>
+  <para>        </para>
+  <para>        27. Loan Repayments Made                </para>
+  <para>  133.     27(a) Made or Guranteed by the Candidate</para>
+  <para>  134.     27(b) Other Repayments</para>
+  <para>  135.     27(c) Total Loan Repayments Made</para>
+  <para>                133+134   (27(a)+27(b))</para>
+  <para/>
+  <para>        28. refunds of contrib.                </para>
+  <para>  136.     28(a)  Individuals</para>
+  <para>  137.     28(b) Political Party Committees</para>
+  <para>  138.     28(c) Other Political Committees</para>
+  <para>  139.     28(d) Total contributions Refunds</para>
+  <para>                136+137+138   (28(a)+28(b)+28(c))</para>
+  <para/>
+  <para>  140.   29. Other Disbursements</para>
+  <para>  141.   30. Total Disbursements</para>
+  <para>        129+130+131+132+135+139+140    </para>
+  <para>        (23+24+25+26+27(c)+28(d)+29)</para>
+  <para/>
+  <para>                III CONTRIBUTED ITEMS (STOCK, ART OBJ. ETC)</para>
+  <para/>
+  <para/>
+  <para>                ALLOCATION BY STATE THIS YEAR</para>
+  <para/>
+  <para> 142 .   ALABAMA                (AMT-12)</para>
+  <para> 143 .   ALASKA                        (AMT-12)</para>
+  <para> 144 .   ARIZONA                (AMT-12)</para>
+  <para> 145 .   ARKANSAS                (AMT-12)</para>
+  <para> 146 .   CALIFORNIA                (AMT-12)</para>
+  <para> 147 .   COLORADO                (AMT-12)</para>
+  <para> 148 .   CONNECTICUT                (AMT-12)</para>
+  <para> 149 .   DELAWARE                (AMT-12)</para>
+  <para> 150 .   DIST OF COLUMBIA        (AMT-12)</para>
+  <para> 151 .   FLORIDA                (AMT-12)</para>
+  <para> 152 .   GEORGIA                (AMT-12)</para>
+  <para> 153 .   HAWAII                        (AMT-12)</para>
+  <para> 154 .   IDAHO                        (AMT-12)</para>
+  <para> 155 .   ILLINOIS                (AMT-12)</para>
+  <para> 156 .   INDIANA                (AMT-12)</para>
+  <para> 157 .   IOWA                        (AMT-12)</para>
+  <para> 158 .   KANSAS                        (AMT-12)</para>
+  <para> 159 .   KENTUCKY                (AMT-12)</para>
+  <para> 160 .   LOUISIANA                (AMT-12)</para>
+  <para> 161 .   MAINE                        (AMT-12)</para>
+  <para> 162 .   MARYLAND                (AMT-12)</para>
+  <para> 163 .   MASSACHUSETTS        (AMT-12)</para>
+  <para> 164 .   MICHIGAN                (AMT-12)</para>
+  <para> 165 .   MINNESOTA                (AMT-12)</para>
+  <para> 166 .   MISSISSIPPI                (AMT-12)</para>
+  <para> 167 .   MISSOURI                (AMT-12)</para>
+  <para> 168 .   MONTANA                (AMT-12)</para>
+  <para> 169 .   NEBRASKA                (AMT-12)</para>
+  <para> 170 .   NEVADA                (AMT-12)</para>
+  <para> 171 .   NEW HAMPSHIRE        (AMT-12)</para>
+  <para> 172 .   NEW JERSEY                (AMT-12)</para>
+  <para> 173 .   NEW MEXICO                (AMT-12)</para>
+  <para> 174 .   NEW YORK                (AMT-12)</para>
+  <para> 175 .   NORTH CAROLINA        (AMT-12)</para>
+  <para> 176 .   NORTH DAKOTA        (AMT-12)</para>
+  <para> 177 .   OHIO                        (AMT-12)</para>
+  <para> 178 .   OKLAHOMA                (AMT-12)</para>
+  <para> 179 .   OREGON                (AMT-12)</para>
+  <para> 180 .   PENNSYLVANIA        (AMT-12)</para>
+  <para> 181 .   RHODE ISLAND                (AMT-12)</para>
+  <para> 182 .   SOUTH CAROLINA        (AMT-12)</para>
+  <para> 183 .   SOUTH DAKOTA        (AMT-12)</para>
+  <para> 184 .   TENNESSEE                (AMT-12)</para>
+  <para> 185 .   TEXAS                        (AMT-12)</para>
+  <para> 186 .   UTAH                        (AMT-12)</para>
+  <para> 187 .   VERMONT                (AMT-12)</para>
+  <para> 188 .   VIRGINIA                (AMT-12)</para>
+  <para> 189 .   WASHINGTON                (AMT-12)</para>
+  <para> 190 .   WEST VIRGINIA                (AMT-12)</para>
+  <para> 191 .   WISCONSIN                (AMT-12)</para>
+  <para> 192 .   WYOMING                (AMT-12)</para>
+  <para> 193 .   PUERTO RICO                (AMT-12)</para>
+  <para> 194 .   GUAM                        (AMT-12)</para>
+  <para> 195 .   VIRGIN ISLANDS        (AMT-12)</para>
+  <para> 196 .   TOTALS                        (AMT-12)</para>
+  <para>        SUM OF 142..195 = 196        </para>
+  <para/>
+  <para> 197 .   IND/NAME    (TREASURER)        (A/N-38)        REQUIRED</para>
+  <para> 198 .   date   (SIGNED)                        (NUM-8)         REQUIRED        </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>RULES:</para>
+  <para/>
+  <para>   57.   31.        Items on Hand to be liquidated.  IF a value is contained in field 57,                   one or more F3P31AL                         (Form F3P,Line 31 Attatched List) records will follow the F3P record.</para>
+  <para>        </para>
+  <para>        If field 12 (report code) begins with a "12" or a "30" fields 13, 14 &amp; 15 are REQUIRED</para>
+  <para>        </para>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para>        CHECKS:</para>
+  <para/>
+  <para>        FIELD 19. (LINE 7)                =  FIELD 43   (LINE 22)</para>
+  <para>        FIELD 20. (LINE 8)                =  FIELDS 18+19   (6+7)</para>
+  <para>        FIELD 21. (LINE 9)                =  FIELD 56   (LINE 30)</para>
+  <para>        FIELD 22. (LINE 10)                =  FIELD 20 - 21   (8-9)</para>
+  <para>        FIELD 23. (LINE 11)                =  SCH C-P AND/OR D-P</para>
+  <para>        FIELD 24. (LINE 12)                =  SCH C-P AND/OR D-P</para>
+  <para>        FIELD 26. (LINE 14)                =  FIELDS 118 - 139    (17e Col B - 28d Col B)</para>
+  <para>        FIELD 27. (LINE 15)                =  FIELDS 129  - 123        (23 Col B - 20a Col B)</para>
+  <para>        FIELD 33. (LINE 17(e))        =  FIELDS 29+30+31+32   (17(a)+17b+17c+17d)</para>
+  <para>        FIELD 37. (LINE 19(c))        =  FIELDS 35+36    (19(a)+19(b))</para>
+  <para>        FIELD 41. (LINE 20(d))        =  FIELDS 38+39+40    (20a+20b+20c)</para>
+  <para>        FIELD 43. (LINE 22))                =  FIELDS 28+33+34+37+41+42                                                                (16+17(e)+18+19(c)+20(d)+21)</para>
+  <para>        FIELD 50. (LINE 27(c))        =  FIELDS 48+49   (27(a)+27(b))</para>
+  <para>        FIELD 54. (LINE 28(d))        =  FIELDS 51+52+53   (28(a)+28(b)+28(c))</para>
+  <para>        FIELD 56. (LINE 30)                =  FIELDS 44+45+46+47+50+54+55                                                                               </para>
+  <para>                                                   (23+24+25+26+27(c)+28(d)+29)</para>
+  <para>        FIELD 112. (STATE TOTALS COL A) = FIELDS  58+59+60 ... + 111   </para>
+  <para>        FIELD 118. (LINE 17(e))        =  FIELDS 114+115+116+117                                                                      (17(a)+17b+17c+17d)</para>
+  <para>        FIELD 122. (LINE 19(c))        =  FIELDS 120+121   (19(a)+19(b))</para>
+  <para>        FIELD 126. (LINE 20(d))        =  FIELDS 123+124+125   (20a+20b+20c)</para>
+  <para>        FIELD 128. (LINE 22)        =  FIELDS  113+118+119+122+126+127                                                                                 </para>
+  <para>                                                    (16+17(e)+18+19(c)+20(d)+21)</para>
+  <para>        FIELD 135. (LINE 27(c))        =  FIELDS 133+134 (27(a)+27(b))</para>
+  <para>        FIELD 139. (LINE 28(d))        =  FIELDS 136+137+138    (28(a)+28(b)+28(c))</para>
+  <para>        FIELD 141. (LINE 30)        =  FIELDS 129+130+131+132+135+139+140                                                                      </para>
+  <para>                                                   (23+24+25+26+27(c)+28(d)+29)</para>
+  <para>        FIELD 196. (STATE TOTALS COL B) = SUM OF FIELDS 142..195 End of Form 3P</para>
+  <para/>
+  <para>FORM  3P, LINE 31 ATTACHMENT - SCHEDULE OF ITEMS TO BE LIQUIDATED </para>
+  <para/>
+  <para/>
+  <para>  1.    FORM TYPE                                 (A/N-8)                 REQUIRED    value = F3P31AL</para>
+  <para>  2.    FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>  3.    IND/NAME    (CONTRIB/LENDER)                (A/N-38)</para>
+  <para>  4.    STREET  1                                        (A/N-34)</para>
+  <para>  5.    STREET  2                                        (A/N-34)</para>
+  <para>  6.    CITY                                        (A/N-18)</para>
+  <para>  7.    STATE                                        (A/N-2)</para>
+  <para>  8.    ZIP                                        (A/N-9)</para>
+  <para>  9.    ITEM-PG                                         (A/N-1)          Values:  ‘P’  ‘G’ </para>
+  <para>  10.   INDEMP                                        (A/N-38)</para>
+  <para>  11.   INDOCC                                         (A/N-38)</para>
+  <para>  12.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para>  13.   FAIR MARKET VALUE OF  ITEM                (AMT-12)</para>
+  <para>  14.   TRANSACTION CODE                        (A/N-3)                REQUIRED IF 15 BLANK</para>
+  <para>  15.   TRANSDESC                                (A/N-40)        REQUIRED IF 14 BLANK</para>
+  <para>  16.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para>  17.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>  18.   STREET  1                                (A/N-34)</para>
+  <para>  19.   STREET  2                                (A/N-34)</para>
+  <para>  20.   CITY                                        (A/N-18)</para>
+  <para>  21.   STATE                                        (A/N-2)</para>
+  <para>  22.   ZIP                                        (A/N-9)</para>
+  <para>  23.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  24.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  25.   CAN/OFF                                        (A/N-1)</para>
+  <para>  26.   STATE    (OF ELECTION)                        (A/N-2)  </para>
+  <para>  27.   CAN/DIST                                (NUM-2)</para>
+  <para>  28.   MEMO CODE                                (A/N-1)                Value:  blank  ‘X’</para>
+  <para>  29.   MEMO-TEXT                                (A/N-100)</para>
+  <para>  30.  AMENDED                                (A/N-1)                Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>Field 14 represents FEC transaction codes.  This field is optional</para>
+  <para>        but if left blank the transaction must be described in field 15</para>
+  <para>        TRANSACTION DESCRIPTION, and in field 29 (MEMO TEXT)</para>
+  <para>        if further description is necessary.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>END OF FORM  3P, LINE 31 ATTACHMENT</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>FORM 3Z                CONSOLIDATION REPORT OR RECEIPTS AND                                        EXPENDITURES</para>
+  <para> </para>
+  <para/>
+  <para>        The 3z is a part of the Form 3 and can be treated as a schedule rather than a separate form.  A separate record must be created for each committee authorized by the candidate.  An additional record must contain totals for each field for all committees within the campaign.</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-4)                REQUIRED    value = F3Z, plus T                                                                                       if it is a “total” record</para>
+  <para>   2.    FEC COMMITTEE ID NUMBER (PCC)        (A/N-9)                 REQUIRED</para>
+  <para>   3.    COMMITTEE NAME (PCC)                (A/N-90)</para>
+  <para>   4.   DATE    (COVERAGE FROM)                (NUM-8)</para>
+  <para>   5.   DATE    (COVERAGE TO)                        (NUM-8)        REQUIRED</para>
+  <para/>
+  <para>   6.   FEC COMMITTEE ID NUMBER (AUTH) (blank for totals record)        (A/N-9)        REQUIRED</para>
+  <para>   7.   COMMITTEE NAME (AUTH)                (A/N-90)</para>
+  <para>   8.   (a) 11(a)iii individuals total                        (AMT-12)</para>
+  <para>   9.   (b) 11(b) Political party committees                (AMT-12)</para>
+  <para>  10.   (c) 11(c) other pol. committees (PACs)        (AMT-12)</para>
+  <para>  11.   (d) 11(d) the candidate                        (AMT-12)</para>
+  <para>  12.   (e) 11(e) total contributions                        (AMT-12)</para>
+  <para>  13.   (f) 12. Transfers from other auth cmtes        (AMT-12)</para>
+  <para>  14.   (g) 13(a) made or guarn. by candidate                (AMT-12)</para>
+  <para>  15.   (h) 13(b) all other loans                        (AMT-12)</para>
+  <para>  16.   (i) 13(c) total loans                                (AMT-12)</para>
+  <para>  17.   (j) 14. offsets to operating expend                (AMT-12)</para>
+  <para>  18.   (k) 15. Other receipts                        (AMT-12)</para>
+  <para>  19.   (l) 16. total receipts                                (AMT-12)</para>
+  <para>  20.   (m) 17. Operating Expenditures                (AMT-12)</para>
+  <para>  21.   (n) 18. Transfers to other auth cmtes                (AMT-12)</para>
+  <para>  22.   (o) 19(a) made or guaranteed by cand                (AMT-12)</para>
+  <para>  23.   (p) 19(b) all other loans                        (AMT-12)</para>
+  <para>  24.   (q) 19(c) total loan repayments                (AMT-12)</para>
+  <para>  25.   (r) 20(a)  total refunds individuals                (AMT-12)</para>
+  <para>  26.   (s) 20(b) Refunds Political Pty cmtes                (AMT-12)</para>
+  <para>  27.   (t) 20(c) Refunds other Polit. cmtes                (AMT-12)</para>
+  <para>  28.   (u) 20(d) total contribution refunds                (AMT-12)</para>
+  <para>  29.   (v) 21. Other disbursements                        (AMT-12)</para>
+  <para>  30.   (w) 22. Total disbursements                        (AMT-12)</para>
+  <para>  31.   (x) 23. COH BEGINNING REPORTING period        (AMT-12)</para>
+  <para>  32.   (y) 27. cash on hand at close period                (AMT-12)</para>
+  <para>  33.   (z)  9. Debts to                                (AMT-12)</para>
+  <para>  34.   (aa) 12. Debts by                                (AMT-12)</para>
+  <para>  35.   (bb) 6(c) net contributions                        (AMT-12)</para>
+  <para>  36.   (cc) 7(c)  net operating expenditures                (AMT-12)</para>
+  <para/>
+  <para/>
+  <para>End of Form 3Z</para>
+  <para/>
+  <para/>
+  <para>FORM 4 Report of Receipts and Disbursements</para>
+  <para>                for a Committee or Organization Supporting a Nominating </para>
+  <para>                Convention</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-4)                REQUIRED    value = F4</para>
+  <para>                                                                 plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>   4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.   STATE                                        (A/N-2)</para>
+  <para>   8.   ZIP                                        (A/N-9)</para>
+  <para>   9.   CONVENTION TYPE                        (A-1)</para>
+  <para>* 10.  DESC  ( IF 9 IS “OTHER”)                        (A/N-40)</para>
+  <para>* 11.  RPTCODE                                        (A-3)                 REQUIRED</para>
+  <para>   12.  DATE    (COVERAGE FROM)                (NUM-8)</para>
+  <para>   13.  DATE    (COVERAGE TO)                        (NUM-8)        REQUIRED</para>
+  <para/>
+  <para>                COLUMN A        THIS PERIOD</para>
+  <para>(The number following the field number is the line number appearing on the printed FEC Form 4, and information derived from other places in the record are shown with both the field number and line number of the original information.)</para>
+  <para>  14.     6.(b) cash on hand beg. report per.                (AMT-12)</para>
+  <para>  15.     6.(c) Total receipts                        (AMT-12)</para>
+  <para>                43   (20)</para>
+  <para>  16.     6.(d) Subtotal                                (AMT-12)</para>
+  <para>                14+15=16 (6b+6c=6d)</para>
+  <para>  17.   7. Total disbursements                        (AMT-12)</para>
+  <para>                54   (25)</para>
+  <para>  18.   8. COH CLOSE                                (AMT-12)</para>
+  <para>                17-16   (7- 6d)</para>
+  <para>  19.   9. Debts to                                        (AMT-12)</para>
+  <para>                19. = TOTALS ON SCH C AND/OR D</para>
+  <para>  20.   10.. Debts by                                (AMT-12)</para>
+  <para>                20. = TOTALS ON SCH C AND/OR D</para>
+  <para>  21.   11. Convention expenditures                        (AMT-12)</para>
+  <para>                46 (21c)</para>
+  <para>  22.   12. refunds/rebates/returns relating</para>
+  <para>                to convention expend.                (AMT-12)</para>
+  <para>                36 (17C)</para>
+  <para>  23.   12(a) Expenditures subject to limits                (AMT-12)</para>
+  <para>                21-22=23   (11-12)</para>
+  <para>  24.   12(b) expend. from prior years subject</para>
+  <para>                to limits                                (AMT-12)</para>
+  <para>  25.   12(c) total expenditures subject </para>
+  <para>                to limits                                (AMT-12)</para>
+  <para>                23+24=25   (12A+12B)</para>
+  <para/>
+  <para/>
+  <para>  26.   13. Federal Funds                                (AMT-12)</para>
+  <para>                SCH A</para>
+  <para>        14. contributions to defray convention expenses                </para>
+  <para>  27.     14(a) Itemized                                (AMT-12)</para>
+  <para>                SCH A</para>
+  <para>  28.     14(b) unitemized                                (AMT-12)</para>
+  <para>  29.     14(c) subtotal                                (AMT-12)</para>
+  <para>                27+28N=29   (14a+14b)</para>
+  <para>  30.   15. Transfers from affiliated cmtes.                (AMT-12)</para>
+  <para>        16. Loans and Loan repayments received        </para>
+  <para>  31.     16(a) loans received                        (AMT-12)</para>
+  <para>  32.     16(b) loan repayments received                (AMT-12)</para>
+  <para>  33.     16(c) subtotal loans/repayments                (AMT-12)</para>
+  <para>                31+32=33   (16a+16b)</para>
+  <para>        17. Refunds, rebates, returns</para>
+  <para>  34.     17(a) Itemized                                (AMT-12)</para>
+  <para>                SCH A</para>
+  <para>  35.     17(b) unitemized                                (AMT-12)</para>
+  <para>  36.     17(c) subtotal                                (AMT-12)</para>
+  <para>                34+35=36   (17a+17b)</para>
+  <para>        18. other refunds rebates returns of deposit</para>
+  <para>  37.     18(a) Itemized                                (AMT-12)</para>
+  <para>  38.     18(b) unitemized                                (AMT-12)</para>
+  <para>  39.     18(c) subtotal                                (AMT-12)</para>
+  <para>                37+38=39   (18a+18b)</para>
+  <para>        19. Other income</para>
+  <para>  40.     19(a) Itemized                                (AMT-12)</para>
+  <para>                SCH A</para>
+  <para>  41.     19(b) unitemized                                (AMT-12)</para>
+  <para>  42.     19(c) subtotal                                (AMT-12)</para>
+  <para>                40+41=42   (19a+19b)</para>
+  <para>  43.   20. total receipts                                (AMT-12)</para>
+  <para>        26+29+30+33+36+39+42=43   (13+14c+15+16c+17c+18c+19c)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>                DISBURSEMENTS</para>
+  <para/>
+  <para>        21. Convention Expenditures</para>
+  <para>  44.     21(a) Itemized                                (AMT-12)</para>
+  <para>  45.     21(b) unitemized                                (AMT-12)</para>
+  <para>  46.     21(c) subtotal                                (AMT-12)</para>
+  <para>                44+45   (21a+21b)</para>
+  <para>  47.   22. Transfers to Affiliated Cmtes                (AMT-12)</para>
+  <para>        23. Loans and Loan repayments made        </para>
+  <para>  48.     23(a) loans made                                (AMT-12)</para>
+  <para>  49.     23(b) loan repayments made                (AMT-12)</para>
+  <para>  50.     23(c) subtotal                                (AMT-12)</para>
+  <para>                48+49=50   (23a+23b)</para>
+  <para>        24. Other disbursements</para>
+  <para>  51.     24(a) Itemized                                (AMT-12)</para>
+  <para>                SCH B</para>
+  <para>  52.     24(b) unitemized                                (AMT-12)</para>
+  <para>  53.     24(c) subtotal                                (AMT-12)</para>
+  <para>                51+52=53   (24a+24b)</para>
+  <para>  54.   25. Total disbursements                        (AMT-12)</para>
+  <para>                46+47+50+53=54   (21c+22+23c+24c)</para>
+  <para/>
+  <para/>
+  <para>                COLUMN B CALENDAR YEAR-TO-DATE</para>
+  <para/>
+  <para>  55.     6.(a)                Cash on Hand                (AMT-12)</para>
+  <para>  56.     6.(a) 19 --        year                        (NUM-4)</para>
+  <para/>
+  <para>  57.     6.(c) Total receipts                        (AMT-12)</para>
+  <para>  58.     6.(d) Subtotal                                (AMT-12)</para>
+  <para>                56+58=59   (6a+6c=6d)</para>
+  <para>  59.   7. Total disbursements                        (AMT-12)</para>
+  <para>                79 (25)</para>
+  <para>  60.   8. COH CLOSE                                (AMT-12)</para>
+  <para>                59 - 60=61   (6d -7)</para>
+  <para>  61.   11. Convention expenditures                        (AMT-12)</para>
+  <para>                75   (21c)</para>
+  <para>  62.   12. refunds/rebates/returns relating</para>
+  <para>                to convention expend.                (AMT-12)</para>
+  <para>                71   (17C)</para>
+  <para>  63.     12(a) Expenditures subject to limits                (AMT-12)</para>
+  <para>                62 - 63=64   (11 - 12)</para>
+  <para>  64.     12(b) expend. from prior years subject</para>
+  <para>                to limits                                (AMT-12)</para>
+  <para>  65.     12(c) total expenditures subject </para>
+  <para>                to limits                                (AMT-12)</para>
+  <para>                64+65=66   (12a+12b)</para>
+  <para>  66.   13. Federal Funds                                (AMT-12)</para>
+  <para>                SCH A</para>
+  <para>        14. contributions to defray convention expenses                </para>
+  <para>  67.     14(c) subtotal                                (AMT-12)</para>
+  <para>  68.   15. Transfers from affiliated cmtes.                (AMT-12)</para>
+  <para>        16. Loans and Loan repayments received        </para>
+  <para>  69.     16(c) subtotal loans/repayments                (AMT-12)</para>
+  <para>        17. Refunds, rebates, returns</para>
+  <para>  70.     17(c) subtotal                                (AMT-12)</para>
+  <para>        18. other refunds rebates returns of deposit</para>
+  <para>  71.     18(c) subtotal                                (AMT-12)</para>
+  <para>        19. Other income</para>
+  <para>  72.     19(c) subtotal                                (AMT-12)</para>
+  <para>  73.   20. total receipts                                (AMT-12)</para>
+  <para>                66+67+68+69+70+71+72 = 20   (13+14c+15+16c+17c+18c+19c)</para>
+  <para/>
+  <para/>
+  <para>                DISBURSEMENTS</para>
+  <para/>
+  <para>        21. Convention Expenditures</para>
+  <para>  74.     21(c) subtotal                                (AMT-12)</para>
+  <para>  75.   22. Transfers to Affiliated Cmtes                (AMT-12)</para>
+  <para>        23. Loans and Loan repayments made        </para>
+  <para>  76.     23(c) subtotal                                (AMT-12)</para>
+  <para>        24. Other disbursements</para>
+  <para>  77.     24(c) subtotal                                (AMT-12)</para>
+  <para>  78.   25. Total disbursements                        (AMT-12)</para>
+  <para>                75+76+77+78=79 (21c+22+23c+24c)</para>
+  <para/>
+  <para>  79.  IND/NAME (TREASURER)                        (A/N-38)</para>
+  <para>  80.  DATE (SIGNED)                                (NUM-8)</para>
+  <para/>
+  <para>  </para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para>* REPORT CODES CAN BE RESTRICTED TO POST CONVENTION, QUARTERLYS AND</para>
+  <para>   TERMINATION.    (Values:  ‘60D’, ‘Q1’, ‘Q2’, ‘Q3’, ‘YE’, and ‘TER’)</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para>        If field 9 is equal to "O" then field 10 must contain data.</para>
+  <para/>
+  <para>        INTERNAL CHECKS:</para>
+  <para/>
+  <para>        Column A checks:</para>
+  <para>        FIELD 15. (6.(c))        = FIELD  43 (20)</para>
+  <para>        FIELD 16. (6.(d))        = FIELDS 14+15  (6b+6c=6d)</para>
+  <para>        FIELD 17. (7.)                = FIELD  54 (25)</para>
+  <para>        FIELD 18. (8.)                = FIELDS 17-16 (7-6d)</para>
+  <para>        FIELD 19. (9.)                = TOTALS ON SCH C AND/OR D</para>
+  <para>        FIELD 20. (12.)                = TOTALS ON SCH C AND/OR D</para>
+  <para>        FIELD 21. (11.)                = FIELD  46 (21c)</para>
+  <para>        FIELD 22. (12.)                = FIELD  36 (17C)</para>
+  <para>        FIELD 23. (12(a))        = FIELDS 21-22  (11-12)</para>
+  <para>        FIELD 25. (12(c))        = FIELDS 23+24  (12A+12B)</para>
+  <para>        FIELD 26. (13.)                = SCH A</para>
+  <para>        FIELD 27. (14(a))        = SCH A</para>
+  <para>        FIELD 29. (14(c))        = FIELDS 27+28  (14a+14b)</para>
+  <para>        FIELD 33. (16(c))        = FIELDS 31+32  (16a+16b)</para>
+  <para>        FIELD 34. (17(a))        = SCH A</para>
+  <para>        FIELD 36. (17(c))        = FIELDS 34+35  (17a+17b)</para>
+  <para>        FIELD 39. (18(c))        = FIELDS 37+38  (18a+18b)</para>
+  <para>        FIELD 40. (19(a))        = SCH A</para>
+  <para>        FIELD 42. (19(c))        = FIELDS 40+41  (19a+19b)</para>
+  <para>        FIELD 43. (20.)                = FIELDS 26+29+30+33+36+39+42 </para>
+  <para>                                        (13+14c+15+16c+17c+18c+19c)</para>
+  <para>        FIELD 44. (21(a))        = SCHEDULE B</para>
+  <para>        FIELD 46. (21(c))        = FIELDS 44+45  (21a+21b)</para>
+  <para>        FIELD 50. (23(c))        = FIELDS 48+49  (23a+23b)</para>
+  <para>        FIELD 51. (24(a))        = SCH B</para>
+  <para>        FIELD 53. (24(c))        = FIELDS 51+52  (24a+24b)</para>
+  <para>        FIELD 54. (25.)                = FIELDS 46+47+50+53  (21c+22+23c+24c)</para>
+  <para/>
+  <para>        Column B checks:</para>
+  <para>        FIELD 58. (6.(d))        = FIELDS 56+57  (6a+6c=6d)</para>
+  <para>        FIELD 59. (7.)                = FIELD  78 (25)</para>
+  <para>        FIELD 6061. (8.)                = FIELDS 58-59  (6d-7)</para>
+  <para>        FIELD 61. (11.)                = FIELD  74 (21c)</para>
+  <para>        FIELD 62. (12.)                = FIELD  70 (17C)</para>
+  <para>        FIELD 63. (12(a))        = FIELDS 61-62  (11-12)</para>
+  <para>        FIELD 64. (12(c))        = FIELDS 63+64  (12a+12b)</para>
+  <para>                FIELD 73. (20.)                = FIELDS 66+67+68+69+70+71+72</para>
+  <para>                                        (13+14c+15+16c+17c+18c+19c)</para>
+  <para>        FIELD 78. (25.)                = FIELDS 74+75+76+77  (21c+22+23c+24c)</para>
+  <para/>
+  <para>End of Form 4</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>FORM 5 Report of Independent Expenditures Made and </para>
+  <para>                        Contributions Received</para>
+  <para/>
+  <para/>
+  <para>   1.    FORM TYPE                        (A/N-4)                 REQUIRED    value = F5</para>
+  <para>                                                         plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                (A/N-90)</para>
+  <para>   4.   STREET  1                                (A/N-34)</para>
+  <para>   5.   STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                (A/N-18)</para>
+  <para>   7.   STATE                                (A-2)</para>
+  <para>   8.   ZIP                                (A/N-9)</para>
+  <para/>
+  <para>   9.   CHG OF ADDRESS                (A-1)                blank, ‘X’</para>
+  <para/>
+  <para>*  10 .   YESNO   (QUAL/NON-Q)        (A-1)                Values:  ‘ ‘  ‘Y’  ‘N’</para>
+  <para>* 11 .   INDEMP                                (A/N-38)</para>
+  <para>* 12 .   INDOCC                                (A/N-38)</para>
+  <para>* 13 .   RPTCODE                        (A-3)                 REQUIRED</para>
+  <para>* 14 .   RPTPGI                                (A-1)                Values:  ‘P’  ‘G’  ‘R’  ‘S’  ‘C’</para>
+  <para>* 15 .   DATE   (OF ELECTION)                (NUM-8)</para>
+  <para>* 16 .   STATE  (OF ELECTION)        (A-2)</para>
+  <para/>
+  <para>   17 .  DATE    (COVERAGE FROM)                        (NUM-8)</para>
+  <para>   18 .  DATE    (COVERAGE TO)        (NUM-8)                REQUIRED</para>
+  <para/>
+  <para>  19 .   TOTAL CONTRIBUTION        total on page 1                (AMT-12)</para>
+  <para>  20 .   TOTAL INDEP. EXPEND        total on page 1                (AMT-12)</para>
+  <para/>
+  <para>  21 .   IND/NAME   (PERSON COMPLETING FORM)        (A/N-38)</para>
+  <para>  22 .   DATE    (SIGNED)                                (NUM-8)</para>
+  <para>  23 .   DATE    (NOTARIZED)                                (NUM-8)</para>
+  <para>  24 .   DATE    (NOTARY COMMISSION EXPIRES)        (NUM-8)</para>
+  <para>  25 .   IND/NAME    (NOTARY)                                (A/N-38)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>        FOR EACH CONTRIBUTOR</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE        FORM TYPE (F56)        (A/N-8)                 REQUIRED    value = F56</para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   SEQUENCE NUMBER                        (NUM-10)        REQUIRED</para>
+  <para>   4    IND/NAME    (CONTRIBUTOR)                (A/N-38)</para>
+  <para>   5.   STREET  1                                        (A/N-34)</para>
+  <para>   6.   STREET  2                                        (A/N-34)</para>
+  <para>   7.   CITY                                        (A/N-18)</para>
+  <para>   8.   STATE                                        (A-2)</para>
+  <para>   9.   ZIP                                        (A/N-9)</para>
+  <para>  10.   INDEMP                                        (A/N-38)</para>
+  <para>  11.   INDOCC                                        (A/N-38)</para>
+  <para>  12.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para>  13.   AMOUNT        CONTRIBUTION AMOUNT        (AMT-12)</para>
+  <para>  14.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        FOR EACH INDEPENDENT EXPENDITURE MADE</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-8)                REQUIRED value = F57</para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   SEQUENCE NUMBER                        (NUM-10)        REQUIRED</para>
+  <para>   4.   IND/NAME    (PAYEE)                        (A/N-38)</para>
+  <para>   5.   STREET  1                                        (A/N-34)</para>
+  <para>   6.   STREET  2                                        (A/N-34)</para>
+  <para>   7.   CITY                                        (A/N-18)</para>
+  <para>   8.    STATE                                        (A/N-2)</para>
+  <para>   9.    ZIP                                        (A/N-9)</para>
+  <para>  10.   TRANSDESC                                (A/N-40)</para>
+  <para>  11.   DATE    (OF EXPENDITURE)                (NUM-8)</para>
+  <para>  12.   AMOUNT        CONTRIBUTION AMOUNT        (AMT-12)</para>
+  <para>  13.   SUPPORT/OPPOSE                   (A/N-3)                 REQUIRED</para>
+  <para>        (SUP=Support=24E  OPP=Oppose=24A)</para>
+  <para>* 14.  FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>* 15.  CANDIDATE NAME                        (A/N-38)</para>
+  <para>* 16.  CAN/OFF                                        (A/N-1)</para>
+  <para>* 17.  STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>* 18.  CAN/DIST                                        (NUM-2)</para>
+  <para>   19.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para>        If field 10 .in the report record is "Y" then fields 11  and 12  must be blank.</para>
+  <para>        If field 10 . in the report record is "N" then fields 11  and 12  must contain data.</para>
+  <para/>
+  <para>        If field 13 . of the report record (REPORT CODE) begins with "12" or "30" the fields 14 ,</para>
+  <para>        15  and 16  must be completed.</para>
+  <para/>
+  <para>        All contributions must be 15's.</para>
+  <para>        </para>
+  <para/>
+  <para>*  15 .   FEC CANDIDATE ID NUMBER:</para>
+  <para>        If field 15  of the expenditure made record(s) (CANDIDATE ID NUMBER) contains a valid         FEC ID number fields 16, 17, 18, 19  are optional.  If field15  does not contain </para>
+  <para>        a valid FEC ID number fields16, 17, 18, 19  are required.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Form 5</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>FORM 6                48 hour notice</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-4)                 REQUIRED    value = F6</para>
+  <para>                                                                 plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>   4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.    STATE                                        (A/N-2)</para>
+  <para>   8.    ZIP                                        (A/N-9)</para>
+  <para>*  9.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  10.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  11.   CAN/OFF                                        (A/N-1)</para>
+  <para>  12.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  13.   CAN/DIST                                (NUM-2)</para>
+  <para>  14.   DATE    (SIGNED)                                (NUM-8)</para>
+  <para/>
+  <para>        </para>
+  <para/>
+  <para>FOR EACH CONTRIBUTOR:</para>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-8)                 REQUIRED    value = F65</para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3    SEQUENCE NUMBER                        (NUM-10)        REQUIRED</para>
+  <para>   4.   IND/NAME    (CONTRIB/LENDER)                (A/N-38)</para>
+  <para>   5.   STREET  1                                        (A/N-34)</para>
+  <para>   6.   STREET  2                                        (A/N-34)</para>
+  <para>   7.    CITY                                        (A/N-18)</para>
+  <para>   8.    STATE                                        (A/N-2)</para>
+  <para>   9.    ZIP                                        (A/N-9)</para>
+  <para>  10.   INDEMP                                        (A/N-38)</para>
+  <para>  11.   INDOCC                                        (A/N-38)</para>
+  <para>  12.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para>  13.   AMOUNT        CONTRIB/LOANED AMT        (AMT-12)</para>
+  <para>  14.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        If valid FEC Candidate ID is received in field 9 of the F6 record, fields 10, 11, 12, </para>
+  <para>        13 are optional.</para>
+  <para/>
+  <para/>
+  <para>End of Form 6</para>
+  <para/>
+  <para/>
+  <para>FORM 7        Communication costs</para>
+  <para/>
+  <para/>
+  <para>        FIELD        </para>
+  <para>   1.   FORM TYPE                        (A/N-4)                REQUIRED    value = F7</para>
+  <para>                                                         plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER        (A/N-9)                REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                (A/N-90)</para>
+  <para>   4.   STREET  1                                (A/N-34)</para>
+  <para>   5.   STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                (A/N-18)</para>
+  <para>   7.   STATE                                (A/N-2)</para>
+  <para>   8.   ZIP                                (A/N-9)</para>
+  <para>   9.   ORGANIZATION TYPE                (A/N-1)                VALUE:  ‘ ‘, C, T, L, M, V, W</para>
+  <para>* 10. RPTCODE                                (A-3)                 REQUIRED</para>
+  <para>                </para>
+  <para>* 11 . DATE   (OF ELECTION)                (NUM-8)</para>
+  <para>* 12 . STATE   (OF ELECTION)                (A/N-2)</para>
+  <para>  13 .  DATE    (COVERAGE FROM)        (NUM-8)</para>
+  <para>  14 .  DATE    (COVERAGE TO)                (NUM-8)        REQUIRED</para>
+  <para>  15 .  TOTAL COSTS                        (AMT-12)</para>
+  <para>  16 .  IND/NAME    (FILER)                (A/N-38)</para>
+  <para>  17 .  DATE    (SIGNED)                        (NUM-8)</para>
+  <para>  18.  TITLE                                (A/N-20)</para>
+  <para/>
+  <para>        FOR EACH COMMUNICATION:</para>
+  <para>   1.   FORM TYPE                        (A/N-8)                 REQUIRED    value = F76</para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   SEQUENCE NUMBER                       (NUM-10)           REQUIRED</para>
+  <para>   4.   COMMUNICATION TYPE                (A/N-2 )         Values: DM, TP, TM, O</para>
+  <para>   5.   TRANSDESC   (COMMUN. SPECIFICATION)        (A/N-40)</para>
+  <para>   6.   COMMUNICATION CLASS        (A/N-1)                Values:  E, S, M</para>
+  <para>        OR CATEGORY </para>
+  <para>   7.   DATE  (OF COMMUNICATION)        (NUM-8)</para>
+  <para>   8.   SUPPORT/OPPOSE                 (A/N-3)                 REQUIRED</para>
+  <para>        (SUP=Support=24F  OPP=Oppose=24N)</para>
+  <para>*  9.   FEC CANDIDATE ID NUMBER        (A/N-9)</para>
+  <para>  10.   CANDIDATE NAME                (A/N-38)</para>
+  <para>  11.   CAN/OFF                                (A/N-1)</para>
+  <para>  12.   STATE    (OF ELECTION)                (A/N-2)</para>
+  <para>  13.   CAN/DIST                        (NUM-2)</para>
+  <para>  14.   RPTPGI                                (A-1)</para>
+  <para>  15.   Cost of communication                (AMT-12)</para>
+  <para>  16.  AMENDED                        (A/N-1)                 Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        IF field 4 . is "O" field 5  must contain data.</para>
+  <para/>
+  <para/>
+  <para>End of Form7</para>
+  <para/>
+  <para/>
+  <para>FORM 8                DEBT SETTLEMENT PLAN</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                        (A/N-4)                 REQUIRED    value = F8</para>
+  <para>                                                                         plus ‘N’, ‘A’, ‘T’</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                        (A/N-9)                 REQUIRED</para>
+  <para>   3.   COMMITTEE NAME                                (A/N-90)</para>
+  <para>   4.   STREET  1                                                (A/N-34)</para>
+  <para>   5.   STREET  2                                                (A/N-34)</para>
+  <para>   6.   CITY                                                (A/N-18)</para>
+  <para>   7.   STATE                                                (A/N-2)</para>
+  <para>   8.   ZIP                                                (A/N-9)</para>
+  <para/>
+  <para>   9.   1. CASH ON HAND                                (AMT-12)</para>
+  <para>  10.   1(a) as of                                                (NUM-8)</para>
+  <para>  11.   2. Total assets to be liquidated                        (AMT-12)</para>
+  <para>  12.        3. Total (assets)                                        (AMT-12)</para>
+  <para>                9+11 (1+2)</para>
+  <para>  13.   4. Year to date receipts                                (AMT-12)</para>
+  <para>  14.   5. Year to date disbursements                        (AMT-12)</para>
+  <para>  15.   6. Total amount of debts owed by cmte                (AMT-12)</para>
+  <para>  16.   7. Total number of creditors owed                        (NUM-8)</para>
+  <para>  17.   8. Number of creditors in part II of this plan                (NUM-8)</para>
+  <para>  18.   9. Total amount of debts owed to </para>
+  <para>        creditors in part II of plan                                (AMT-12)</para>
+  <para>  19.  10. Total amount to be paid to creditors</para>
+  <para>        in part II of this plan                                (AMT-12)</para>
+  <para>  20.  11. YESNO   (Is the cmte terminating activities)        (A/N-1)</para>
+  <para>  21.  11.Y DATE    (PLANNED FOR TERMINATION RPT)        (NUM-8)</para>
+  <para/>
+  <para>  22.  12. YESNO   (If this is an authorized committee are        (A-1)</para>
+  <para>                there other authorized committees.)</para>
+  <para>  23.   12. DESC  (Y IF YES list AUTH CMTE ID/NAMES)        (A/N-300)</para>
+  <para>  24.   13.  YESNO   (have sufficient funds to pay total        (A-1)</para>
+  <para>                amount indicated in this plan)</para>
+  <para>  25.   13. DESC  (N If NO what steps will be taken to obtain </para>
+  <para>                the funds)                                (A/N-100)</para>
+  <para>  26.   14.  YESNO   (Has the committee filed previous debt        (A-1)</para>
+  <para>                settlement plans)</para>
+  <para>  27.   15.  YESNO  (After disposing of all the                (A-1)</para>
+  <para>                committee's debts and obligations;</para>
+  <para>                will there be any residual funds?)</para>
+  <para>  28.   15.  DESC (IF YES how will the funds be disbursed)        (A/N-100)</para>
+  <para>  29 .  PART IIIYESNO  (Does committee have sufficient funds to pay the remaining</para>
+  <para>                     amts to be paid or offered.                        (A-1)</para>
+  <para>  30 .   PART III DESC    (N If no, what steps will be taken to obtain the funds.)        (A/N-100)</para>
+  <para/>
+  <para/>
+  <para>  31.   Treasurer’s NAME                                         (A/N-38)                        </para>
+  <para>  32.   DATE    (SIGNED)                                        (NUM-8)</para>
+  <para/>
+  <para>        RULES:</para>
+  <para>        If the response to field 20 is "Y" field 21 must contain a date.</para>
+  <para>        If the response to field 22 is "Y" field 23 must contain data.</para>
+  <para>        If the response to field 24 is "N" field 25 must contain data.</para>
+  <para>        If the response to field 27 is "N" field 28 must contain data.</para>
+  <para>        If the response to field 29 is "N" field 30 must contain data.        </para>
+  <para/>
+  <para>                                PART II</para>
+  <para>FORM 8                DEBT SETTLEMENT PLAN        </para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                        (A/N-5)                 REQUIRED    value = F8II</para>
+  <para>                                                        </para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER        (A/N-9)                 REQUIRED</para>
+  <para>   3.   SEQUENCE NUMBER                (NUM-10)         REQUIRED</para>
+  <para>  4 .  IND/NAME  (CONTRIB/LENDER)        (A/N-38)</para>
+  <para>  5 .  STREET  1                                (A/N-34)</para>
+  <para>  6 .  STREET  2                                (A/N-34)</para>
+  <para>  7 .  CITY                                (A/N-18)</para>
+  <para>  8 .  STATE                                (A/N-2)</para>
+  <para>  9 .  ZIP                                (A/N-9)</para>
+  <para>  10.  TYPE OF CREDITOR CODE         (A-3)</para>
+  <para>  11.  DATE   (INCURRED)                (NUM-8)</para>
+  <para>  12.  AMOUNT OWED TO                (AMT-12)</para>
+  <para>        CREDITOR</para>
+  <para>  13.  AMOUNT OFFERED IN                (AMT-12)</para>
+  <para>        SETTLEMENT</para>
+  <para>  14.  A. DESC  (INITIAL TERMS AND NATURE OF DEBT)        (A/N-100)</para>
+  <para>  15.  B. DESC  (EFFORTS MADE BY CMTE TO PAY DEBT)        (A/N-100)</para>
+  <para>  16.  C. DESC  (STEPS TAKEN BY CREDITOR TO COLLECT)        (A/N-100)</para>
+  <para/>
+  <para/>
+  <para>CREDITOR SECTION</para>
+  <para>(TEXT/ENTERED COPY OF FORM FILLED OUT BY THE CREDITOR)</para>
+  <para>  </para>
+  <para>  17.   D. YESNO  (WAS THE effort made                         (A-1)</para>
+  <para>                BY creditor to collect similar to </para>
+  <para>                other debt collection efforts </para>
+  <para>  18.   D. DESC  (N IF NO EXPLAIN)                        (A/N-100)</para>
+  <para>  19..   E.  YESNO  (Are the terms of the                        (A-1)</para>
+  <para>                debt settlement comparable to other</para>
+  <para>                settlements</para>
+  <para>  20.   E. DESC  (N IF NO EXPLAIN)                        (A/N-100)</para>
+  <para>  21. NAME of creditor or representative                        (A/N-38)        </para>
+  <para>  22.   DATE   (SIGNED)                                        (NUM-8)</para>
+  <para>  23.  AMENDED                                        (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>RULES:</para>
+  <para/>
+  <para>FIELDS 17  through 22  should be identical to the actual responses made by the creditor.</para>
+  <para>If the response to field 17  is "N" field 18  must contain data.</para>
+  <para>If the response to field 19  is "N" field 20 must contain data.</para>
+  <para/>
+  <para>                                PART III                </para>
+  <para>FORM 8                DEBT SETTLEMENT PLAN        </para>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-6)                   REQUIRED  value = F8III</para>
+  <para>   </para>
+  <para>   2 .   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   SEQUENCE NUMBER                        (NUM-10)         REQUIRED</para>
+  <para>   </para>
+  <para>   </para>
+  <para>   </para>
+  <para>   </para>
+  <para>   </para>
+  <para>   </para>
+  <para>  4 .  IND/NAME  (CONTRIB/LENDER)                (A/N-38)</para>
+  <para>  5 .  STREET  1                                        (A/N-34)</para>
+  <para>  6 .  STREET  2                                        (A/N-34)</para>
+  <para>  7 .  CITY                                        (A/N-18)</para>
+  <para>  8 .  STATE                                        (A/N-2)</para>
+  <para>  9 .  ZIP                                        (A/N-9)</para>
+  <para>  10.  TYPE OF CREDITOR CODE                (A-3)</para>
+  <para>  11.  YESNO  (IS THIS A DISPUTED DEBT)        (A/N-1)</para>
+  <para>  12.  DATE    (INCURRED)                        (NUM-8)</para>
+  <para>  13.  AMOUNT OWED TO CREDITOR                (AMT-12)</para>
+  <para>  14.  AMOUNT EXPECTED TO                        (AMT-12)</para>
+  <para>        PAY/OFFER SETTLEMENT</para>
+  <para>  15.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Form 8</para>
+  <para/>
+  <para/>
+  <para>SCHEDULE A        </para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = SA</para>
+  <para>                                                 plus lines on the detailed summary page for                                                         the various reports of receipts and disbursements.</para>
+  <para>   2.    FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   IND/NAME    (CONTRIB/LENDER)                (A/N-38)</para>
+  <para>4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.    STATE                                        (A/N-2)</para>
+  <para>   8.    ZIP                                        (A/N-9)</para>
+  <para/>
+  <para>   9.    ITEM-PG-OTHER                                 (A/N-1)          Values:  ‘P’  ‘G’  ‘O’</para>
+  <para>  10.   PG-OTHER-DESCRIPTION                        (A/N-20)        REQUIRED if Field 9 = ‘O’</para>
+  <para>                                                                Values: “Special”, “Runof”, 1980+</para>
+  <para/>
+  <para>  11.   INDEMP                                        (A/N-38)</para>
+  <para>  12.   INDOCC                                         (A/N-38)</para>
+  <para>  13.   AGGR. YTD AMOUNT                        (AMT-12)         (TOTAL FOR THE YEAR)</para>
+  <para>  14.   DATE   (OF CONTRIBUTION)                (NUM-8)</para>
+  <para>  15.   AMOUNT RECEIVED                             (AMT-12)</para>
+  <para/>
+  <para/>
+  <para>  16.   RECEIPTCODE                                (A/N-3)                REQUIRED IF 17 BLANK</para>
+  <para>  17.   TRANSDESC                                (A/N-40)        REQUIRED IF 16 BLANK</para>
+  <para>  18.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para>  19.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>  20.   STREET  1                                (A/N-34)</para>
+  <para>  21.   STREET  2                                (A/N-34)</para>
+  <para>  22.   CITY                                        (A/N-18)</para>
+  <para>  23.   STATE                                        (A/N-2)</para>
+  <para>  24.   ZIP                                        (A/N-9)</para>
+  <para>  25.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  26.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  27.   CAN/OFF                                        (A/N-1)</para>
+  <para>  28.   STATE    (OF ELECTION)                        (A/N-2)  </para>
+  <para>  29.   CAN/DIST                                        (NUM-2)</para>
+  <para>  30.   MEMO CODE                                (A/N-1)                Value:  blank  ‘X’</para>
+  <para>  31.   MEMO-TEXT                                (A/N-100)</para>
+  <para>  32.  AMENDED                                (A/N-1)                 Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        The "XXXX" in 1. FORM TYPE above corresponds to lines on the </para>
+  <para>        detailed summary page for the various reports of receipts and</para>
+  <para>        disbursements.</para>
+  <para/>
+  <para>        The first digits of the record will indicate the Schedule and the </para>
+  <para>        summary line number that it supports.  This also avoids any </para>
+  <para>        possible overlaps in line numbers.</para>
+  <para/>
+  <para/>
+  <para>        If field 10 is "O" field 11 must contain data.</para>
+  <para/>
+  <para>        Field 17 represents FEC transaction codes.  This field is optional</para>
+  <para>        but if left blank the transaction must be described in field 18</para>
+  <para>        TRANSACTION DESCRIPTION, and further in field 31 (MEMO TEXT)</para>
+  <para>        if further description is necessary.  However, the AMOUNT RECEIVED</para>
+  <para>        IS STILL included in the Schedule A Column A Summary Total, UNLESS</para>
+  <para>        the MEMO CODE is  also “Checked”. </para>
+  <para>        (Transaction description serves the same purpose as does </para>
+  <para>        "Purpose of Disbursement" on Schedule B.)</para>
+  <para>        </para>
+  <para/>
+  <para>        If another Federal committee is involved in the transaction </para>
+  <para>        the FEC ID number must be entered or all the committee detail</para>
+  <para>        information must be entered.</para>
+  <para/>
+  <para>        If the involved committee is a committee authorized by a candidate</para>
+  <para>        and the FEC ID number is left blank, candidate information must be</para>
+  <para>        entered.  </para>
+  <para/>
+  <para>        If candidate information is required; as in the case described </para>
+  <para>        above, the FEC Candidate ID meets the candidate information requirements.  </para>
+  <para>        If the Candidate ID number is omitted, the candidate detail information </para>
+  <para>        must be entered.</para>
+  <para/>
+  <para>        If  MEMO CODE is “checked”, then the AMOUNT RECEIVED is NOT</para>
+  <para>        counted on the Schedule A total that is carried back to the Summary Page.</para>
+  <para/>
+  <para/>
+  <para>End of Schedule A</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE B        </para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                (A/N-8)                 REQUIRED    value = SB</para>
+  <para>                                                 plus lines on the detailed summary page for                                                         the various reports of receipts and disbursements.</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   IND/NAME    (RECIPIENT)                        (A/N-38)</para>
+  <para/>
+  <para>   4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.   STATE                                        (A/N-2)</para>
+  <para>   8.   ZIP                                        (A/N-9)</para>
+  <para>   9.   DISBURSCODE                                (A/N-3)                REQUIRED IF 10 BLANK</para>
+  <para>  10.   TRANSDESC                                (A/N-40)        REQUIRED IF  9 BLANK</para>
+  <para>  </para>
+  <para>  </para>
+  <para>  11.   ITEM-PG-OTHER                                 (A/N-1)          Values:  ‘P’  ‘G’  ‘O’</para>
+  <para>  12.   PG-OTHER-DESCRIPTION                        (A/N-20)        REQUIRED if Field 9 = ‘O’</para>
+  <para>                                                                Values: “Special”, “Runof”, 1980+</para>
+  <para>  13.   DATE    (OF DISBURSEMENT)                (NUM-8)</para>
+  <para>  14.   AMOUNT DISBURSED CONTRIB/LOAN        (AMT-12)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>  15.   FEC COMMITTEE  ID NUMBER                (A/N-9)</para>
+  <para>  16.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>  17.   STREET  1                                (A/N-34)</para>
+  <para>  18.   STREET  2                                (A/N-34)</para>
+  <para>  19.   CITY                                        (A/N-18)</para>
+  <para>  20.   STATE                                        (A/N-2)</para>
+  <para>  21.   ZIP                                        (A/N-9)</para>
+  <para>  22.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  23.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  24.   CAN/OFF                                        (A/N-1)</para>
+  <para>  25.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  26.   CAN/DIST                                (NUM-2)</para>
+  <para>  27.   MEMO CODE                                (A/N-1)                Value:  blank  ‘X’</para>
+  <para>  28.  MEMO TEXT                                (A/N-100)</para>
+  <para>  29.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para>        The "XXXX" in 1. FORM TYPE above corresponds to lines on the </para>
+  <para>        detailed summary page for the various reports of receipts and</para>
+  <para>        disbursements.</para>
+  <para/>
+  <para>        The first digits of the record will indicate the Schedule and the </para>
+  <para>        summary line number that it supports.  This also avoids any </para>
+  <para>        possible overlaps in line numbers.</para>
+  <para/>
+  <para>        If field 13 is "O" field 14 must contain data.</para>
+  <para/>
+  <para>        Field 10 represents FEC transaction codes.  This field is optional</para>
+  <para>        but if left blank the transaction must be described in field 11</para>
+  <para>        Purpose of Disbursement, and in field 28 (MEMO TEXT) if        </para>
+  <para>        further description is necessary.  However, the AMOUNT DISBURSED</para>
+  <para>        IS STILL included in the Schedule B Column A Summary Total,</para>
+  <para>        UNLESS the MEMO CODE is  also “Checked”. </para>
+  <para/>
+  <para>        If another Federal committee is involved in the transaction </para>
+  <para>        the FEC ID number must be entered or all the committee detail</para>
+  <para>        information must be entered.</para>
+  <para/>
+  <para>        If the involved committee is a committee authorized by a candidate</para>
+  <para>        and the FEC ID number is left blank, candidate information must be</para>
+  <para>        entered.  </para>
+  <para/>
+  <para>        If candidate information is required; as in the case described </para>
+  <para>        above, or if a candidate contribution is involved, the FEC </para>
+  <para>        Candidate ID meets the candidate information requirements.  </para>
+  <para>        Failing the Candidate ID number, the candidate detail information </para>
+  <para>        must be entered.</para>
+  <para/>
+  <para>        If  MEMO CODE is “checked”, then the AMOUNT DISBURSED is NOT</para>
+  <para>        counted on the Schedule B total that is carried back to the Summary Page.</para>
+  <para/>
+  <para>End of Schedule B</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE C - Loans</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = SC/</para>
+  <para>                                                plus lines on the detailed summary page for                                                                 the various reports of receipts and disbursements.</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   REFERENCE ID NUMBER                        (NUM-10)        REQUIRED</para>
+  <para>   4 .   IND/NAME    (LOAN SOURCE)                (A/N-38)</para>
+  <para>   5 .   STREET  1                                (A/N-34)</para>
+  <para>   6 .   STREET  2                                (A/N-34)</para>
+  <para>   7 .   CITY                                        (A/N-18)</para>
+  <para>   8 .   STATE                                        (A-2)</para>
+  <para>   9 .   ZIP                                        (A/N-9)</para>
+  <para>  10.  ELECTION (PGI)        CODE (P,G,R,S,O)        (A/N-1)</para>
+  <para>  11. PGI SPECIFICATION DESCRIPTION        (A/N-20)</para>
+  <para>  12.   ORIG. AMT OF LOAN AMOUNT                (AMT-12)</para>
+  <para>  13.   PAYMENT TO DATE                        (AMT-12)</para>
+  <para>  14.   LOAN BALANCE                                (AMT-12)</para>
+  <para>  15.   DATE   (INCURRED)                        (NUM-8)</para>
+  <para>  16.   DATE   (DUE)                                (NUM-8)</para>
+  <para>  17.   LOAN INTEREST RATE  PERCENTAGE        (NUM-5)  )        (4-decimal places w/wo explicit                                                                         decimal point (eg. .0500 or 0865</para>
+  <para>                                                                 interpreted as 5% or 8.65%) </para>
+  <para>  18.   YESNO        (SECURED LOAN)                (A/N-1)</para>
+  <para>  19.   IND/NAME (ENDORSER/GUARANTOR)        (A/N-38)</para>
+  <para>  20.   STREET  1                                (A/N-34)</para>
+  <para>  21.   STREET  2                                (A/N-34)</para>
+  <para>  22.   CITY                                        (A/N-18)</para>
+  <para>  23.   STATE                                        (A-2)</para>
+  <para>  24    ZIP                                        (A/N-9)</para>
+  <para>  25.   INDEMP                                (A/N-38)</para>
+  <para>  26.   INDOCC                                (A/N-38)</para>
+  <para>  27.   AMT GUARANTEED BAL  AMOUNT        (AMT-12)</para>
+  <para>  28.   IND/NAME (ENDORSER/GUARANTOR)        (A/N-38)</para>
+  <para>  29.   STREET  1                                (A/N-34)</para>
+  <para>  30.   STREET  2                                (A/N-34)</para>
+  <para>  31.   CITY                                        (A/N-18)</para>
+  <para>  32.   STATE                                        (A-2)</para>
+  <para>  33.   ZIP                                        (A/N-9)</para>
+  <para>  34.   INDEMP                                (A/N-38)</para>
+  <para>  35.   INDOCC                                (A/N-38)</para>
+  <para>  36.   AMT GUARANTEED BAL  AMOUNT        (AMT-12)</para>
+  <para>  37.   IND/NAME (ENDORSER/GUARANTOR)        (A/N-38)</para>
+  <para>  38.   STREET  1                                (A/N-34)</para>
+  <para>  39.   STREET  2                                (A/N-34)</para>
+  <para>  40.   CITY                                        (A/N-18)</para>
+  <para>  41   STATE                                        (A-2)</para>
+  <para>  42   ZIP                                        (A/N-9)</para>
+  <para>  43   INDEMP                                (A/N-38)</para>
+  <para>  44   INDOCC                                (A/N-38)</para>
+  <para>  45   AMT GUARANTEED BAL  AMOUNT        (AMT-12)</para>
+  <para>  46.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        The "XXXX" in 1. FORM TYPE above corresponds to lines on the </para>
+  <para>        detailed summary page for the various reports of receipts and</para>
+  <para>        disbursements.</para>
+  <para/>
+  <para>        The first digits of the record will indicate the Schedule and the </para>
+  <para>        summary line number that it supports.  This also avoids any </para>
+  <para>        possible overlaps in line numbers.</para>
+  <para/>
+  <para>        Reference ID Number is REQUIRED and must be a unique number</para>
+  <para>        assigned to each Schedule C record.  It is used to relate Schedule C-1</para>
+  <para>        records (if any) to the appropriate Schedule C record.</para>
+  <para/>
+  <para/>
+  <para>End of Schedule C</para>
+  <para/>
+  <para/>
+  <para>SCHEDULE C1 - Loans and Lines of credit from Lending Institutions</para>
+  <para/>
+  <para>        Supplementary for information found on Schedule C</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = SC1/</para>
+  <para>                                                plus lines on the detailed summary page for                                                                 the various reports of receipts and disbursements.</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   REFERENCE ID NUMBER                        (NUM-10)        REQUIRED  (Same as Ref ID</para>
+  <para>                                                                                 on Schedule C)</para>
+  <para>   4 .   IND/NAME    (LOAN SOURCE)                (A/N-38)</para>
+  <para>   5 .   STREET  1                                (A/N-34)</para>
+  <para>   6 .   STREET  2                                (A/N-34)</para>
+  <para>   7 .   CITY                                        (A/N-18)</para>
+  <para>   8 .   STATE                                        (A/N-2)</para>
+  <para>   9 .   ZIP                                        (A/N-9)</para>
+  <para>  10.   AMT OF LOAN                                (AMT-12)</para>
+  <para>  11.  LOAN INTEREST RATE PERCENT                (NUM-5)  )         (4-decimal places w/wo explicit                                                                         decimal point (eg. .0500 or 0865</para>
+  <para>                                                                 interpreted as 5% or 8.65%) </para>
+  <para>  12.   DATE    (INCURRED)                        (NUM-8)</para>
+  <para>  13.   DATE    (DUE)                                (NUM-8)</para>
+  <para>  14.   A. YESNO  (LOAN RESTRUCTURED)        (A/N-1)</para>
+  <para>  15.   DATE   (OF ORIGINAL LOAN)                (NUM-8)</para>
+  <para>  16.   B.1. CREDIT AMOUNT THIS DRAW        (AMT-12)</para>
+  <para>  17.   B.2. TOTAL BALANCE                        (AMT-12)</para>
+  <para>  18.   C. YESNO   (OTHERS LIABLE?)                (A/N-1)</para>
+  <para>  19.   D. YESNO  (COLLATERAL?)                (A/N-1)</para>
+  <para>  20.   D.1 DESC  (COLLATERAL                        (A/N-100)</para>
+  <para>  21.   D.2 COLLATERAL VALUE/AMOUNT        (AMT-12)</para>
+  <para>  22.   D.3  YESNO  (PERFECTED INTEREST?)        (A/N-1)</para>
+  <para>  23.   E.1  YESNO  (FUTURE INCOME                (A/N-1)</para>
+  <para>             PLEDGED AS COLLATERAL?)        </para>
+  <para>  24.   E.2  DESC  (SPECIFICATION OF THE ABOVE)        (A/N-100)</para>
+  <para>  25.   E.3 ESTIMATED VALUE                                (AMT-12)</para>
+  <para>  26.   E.4 DATE (Depository account established)                (NUM-8)</para>
+  <para>  27.   E.5 IND/NAME    (ACCOUNT LOCATION)                (A/N-38)</para>
+  <para>  28.   E.6 STREET  1                                        (A/N-34)</para>
+  <para>  29.   E.7 STREET  2                                        (A/N-34)</para>
+  <para>  30.   E.8 CITY                                                (A/N-18)</para>
+  <para>  31.   E.9 STATE                                        (A/N-2)</para>
+  <para>  32.   E.10 ZIP                                                (A/N-9)</para>
+  <para>  33.   E.11 DEP ACCT AUTH DATE   (Presidential)        (NUM-8)        (Form C-P-1 only)</para>
+  <para>        Depository account authorization </para>
+  <para>  34.   F. DESC  (IF NECESS. STATE BASIS OF LOAN)        (A/N-100)</para>
+  <para>  35.   G. IND/NAME    (TREASURER)                        (A/N-38)</para>
+  <para>  36.   G. DATE   (SIGNED)                                (NUM-8)</para>
+  <para>  37.   H. AUTH NAME   (Lending Inst Representative)        (A/N-38)</para>
+  <para>  38.   H. AUTH TITLE   (Lending Inst Representative)        (A/N-20)</para>
+  <para>  39.   H. AUTH DATE   (SIGNED)                        (NUM-8)</para>
+  <para>  40.  AMENDED                                        (A/N-1)                Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para>                                </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        If response to field 14 is "Y" field 15 must contain a date.</para>
+  <para/>
+  <para>        If field 16 contains an amount field 17 should also contain an amount.</para>
+  <para>        </para>
+  <para>        If any of fields 19 through 22 are entered all fields should be entered.</para>
+  <para/>
+  <para>        If any of fields 23 through 27 are entered all fields should be entered.</para>
+  <para>        Fields 28 through 32 are optional.</para>
+  <para/>
+  <para>        Reference ID Number is REQUIRED and must be equal to a unique</para>
+  <para>        number that was assigned to the related Schedule C record.  (see above)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Schedule C-1</para>
+  <para/>
+  <para/>
+  <para>SCHEDULE D  Debts and Obligations</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = SD</para>
+  <para>                                                 plus lines on the detailed summary page for                                                         the various reports of receipts and disbursements.</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   IND/NAME    (DEBTOR/CREDITOR)        (A/N-38)</para>
+  <para>   4.   STREET  1                                        (A/N-34)</para>
+  <para>   5.   STREET  2                                        (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.    STATE                                        (A/N-2)</para>
+  <para>   8.    ZIP                                        (A/N-9)</para>
+  <para>   9.    NATURE/PURPOSE DEBT DESCRIPTION        (A/N-40)</para>
+  <para>  10.    BEGINNING BALANCE                        (AMT-12)</para>
+  <para>  11.    INCURRED THIS PERIOD                        (AMT-12)</para>
+  <para>  12.   PAYMENT THIS PERIOD                        (AMT-12)</para>
+  <para>  13.   BALANCE AT CLOSE                        (AMT-12)</para>
+  <para>  14.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>End of Schedule D</para>
+  <para/>
+  <para/>
+  <para>SCHEDULE E Independent Expenditures</para>
+  <para/>
+  <para/>
+  <para>   1.    FORM TYPE                                 (A/N-8)                 REQUIRED    value = SE</para>
+  <para>                                                 plus lines on the detailed summary page for                                                                 the various reports of receipts and disbursements.</para>
+  <para>   2.    FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.    IND/NAME    (PAYEE)                        (A/N-38)</para>
+  <para>   4.    STREET  1                                (A/N-34)</para>
+  <para>   5.    STREET  2                                (A/N-34)</para>
+  <para>   6.   CITY                                        (A/N-18)</para>
+  <para>   7.   STATE                                        (A/N-2)</para>
+  <para>   8.   ZIP                                        (A/N-9)</para>
+  <para>   9.   TRANSDESC                                 (A/N-40)</para>
+  <para>  10.  DATE                                        (NUM-8)</para>
+  <para>  11.  AMOUNT EXPENDED                        (AMT-12)</para>
+  <para>  12.  FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  13.  CANDIDATE NAME                        (A/N-38)</para>
+  <para>  14.  CAN/OFF                                        (A/N-1)</para>
+  <para>  15.  STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  16.  CAN/DIST                                        (NUM-2)</para>
+  <para>  17.   SUPPORT/OPPOSE                           (A/N-3)                 REQUIRED</para>
+  <para>        (SUP=Support=24E  OPP=Oppose=24A   UNI=Unitemized)</para>
+  <para>  18.   IND/NAME   (PERSON COMPLETING FORM)        (A/N-38)</para>
+  <para>  19.   DATE    (SIGNED)                                        (NUM-8)</para>
+  <para>  20.   DATE    (NOTARIZED)                                (NUM-8)</para>
+  <para>  21.   DATE    (NOTARY COMMISSION EXPIRES)        (NUM-8)</para>
+  <para>  22.   IND/NAME    (NOTARY)                                (A/N-38)</para>
+  <para>  23.  AMENDED                                        (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        If Field 17 = “UNI”, this record contains the amount of all Unitemized Independent         Expenditures.  Fields 1, 2, and 11 are required - all others should be blank or null.</para>
+  <para> </para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para>        </para>
+  <para/>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para>        .</para>
+  <para/>
+  <para>        </para>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para>End of Schedule E</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE F - Itemized Coordinated Expenditures Made by Political Party Committees or Designated agent(s) on Behalf of Candidates for Federal Office</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = SF</para>
+  <para>                                                 plus lines on the detailed summary page for                                                         the various reports of receipts and disbursements.</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para>   3.   YESNO  (HAS FILER BEEN DESIG.                (A/N-1)</para>
+  <para>                TO MAKE CORD. EXPEND.)</para>
+  <para>   4.   FEC COMMITTEE ID NUMBER                (A/N-9)</para>
+  <para>        DESIGNATING CMTE</para>
+  <para>   5.   COMMITTEE NAME                        (A/N-90)</para>
+  <para>   6.   STREET  1                                        (A/N-34)</para>
+  <para>   7.   STREET  2                                        (A/N-34)</para>
+  <para>   8.   CITY                                        (A/N-18)</para>
+  <para>   9.   STATE                                        (A/N-2)</para>
+  <para>  10.   ZIP                                        (A/N-9)</para>
+  <para>  11.   IND/NAME    (PAYEE)                        (A/N-38)</para>
+  <para>  12.   STREET  1                                (A/N-34)</para>
+  <para>  13.   STREET  2                                (A/N-34)</para>
+  <para>  14.   CITY                                        (A/N-18)</para>
+  <para>  15.   STATE                                        (A/N-2)</para>
+  <para>  16.   ZIP                                        (A/N-9)</para>
+  <para>  17.   FEC CANDIDATE ID NUMBER                (A/N-9)</para>
+  <para>  18.   CANDIDATE NAME                        (A/N-38)</para>
+  <para>  19.   CAN/OFF                                        (A/N-1)</para>
+  <para>  20.   STATE    (OF ELECTION)                        (A/N-2)</para>
+  <para>  21.   CAN/DIST                                (NUM-2)</para>
+  <para>  22.   AGG. GEN. ELE. AMOUNT EXPENDED        (AMT-12)</para>
+  <para>  23.   TRANSDESC                                 (A/N-40)</para>
+  <para>  24.   DATE                                        (NUM-8)</para>
+  <para>  25.   AMOUNT        EXPENDED                        (AMT-12)</para>
+  <para>  26.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para>End of Schedule F</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE H1  -  Method of Allocation for Shared Federal and Non-Federal Administrative Expenses and Generic Voter Drive Costs</para>
+  <para/>
+  <para/>
+  <para>  1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = H1</para>
+  <para>  2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para/>
+  <para>            </para>
+  <para>  3 .   NAT PARTY CMTES %                        (NUM-5 )         Blank or 65 or 60</para>
+  <para>                                                                (up to 4-decimal places w/wo                                                                         explicit decimal point (eg. .60 or                                                                         6500 interpreted as 60% or 65%) </para>
+  <para>  4 .   HSE/SEN PTY CMTES        Blank or 65        (NUM-5 )</para>
+  <para>        MINIMUM FED %</para>
+  <para>  5 .   HSE/SEN PTY CMTES PERCENTAGE        (NUM-5 )</para>
+  <para>        ESTIMATED FEDERAL CAN SUPPORT</para>
+  <para>  6 .   HSE/SEN PTY CMTES PERCENTAGE        (NUM-5 )</para>
+  <para>        ESTIMATED NON-FEDERAL CAN SUPPORT</para>
+  <para>  7 .   HSE/SEN PTY CMTES                        (AMT-12)</para>
+  <para>        ACTUAL FEDERAL CAN SUPPORT</para>
+  <para>  8 .   HSE/SEN PTY CMTES                        (AMT-12)</para>
+  <para>        ACTUAL NON-FEDERAL CAN SUPPORT</para>
+  <para>  9 .   HSE/SEN PTY CMTES PERCENTAGE        (NUM-5 )</para>
+  <para>        ACTUAL  FEDERAL</para>
+  <para/>
+  <para>  10 .   SEP. SEG FUNDS &amp; PERCENTAGE        (NUM-5 )</para>
+  <para>        NON-CONNECTED CMTES ESTIMATED</para>
+  <para>        FEDERAL CANDIDATE  SUPPORT </para>
+  <para>  11 .   SEP. SEG FUNDS &amp; PERCENTAGE        (NUM-5 )</para>
+  <para>        NON-CONNECTED CMTES ESTIMATED</para>
+  <para>        NON-FEDERAL CANDIDATE SUPPORT </para>
+  <para>  12 .   SEP. SEG FUNDS &amp;                        (AMT-12)</para>
+  <para>        NON-CONNECTED CMTES ACTUAL</para>
+  <para>        FEDERAL CANDIDATE SUPPORT </para>
+  <para>  13 .   SEP. SEG FUNDS &amp;                        (AMT-12)</para>
+  <para>        NON-CONNECTED CMTES ACTUAL</para>
+  <para>        NON-FEDERAL CANDIDATE  SUPPORT </para>
+  <para>  14 .   SEP. SEG FUNDS &amp; PERCENTAGE        (NUM-5 )</para>
+  <para>        NON-CONNECTED CMTES ACTUAL</para>
+  <para>        FEDERAL CANDIDATE  SUPPORT </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        STATE AND LOCAL PARTY COMMITTEES</para>
+  <para>  15 .   1. BALLOT COMP PRES BLANK OR 1                (NUM-1)</para>
+  <para>  16 .   2. BALLOT COMP SEN  BLANK OR 1                (NUM-1)</para>
+  <para>  17 .   3. BALLOT COMP HSE   BLANK OR 1                (NUM-1)</para>
+  <para>  18 .   4. SUBTOTAL-FED         BLANK OR 1 - 3          (NUM-1)</para>
+  <para/>
+  <para>  19 .   5. BALLOT COMP GOV  BLANK OR 1                (NUM-1)</para>
+  <para>  20 .   6. OTHER STATEWIDE         BLANK, 1 OR 2                (NUM-1)</para>
+  <para>  21 .   7. STATE SENATE         BLANK OR 1                (NUM-1)</para>
+  <para>  22 .   8. STATE REP.                 BLANK OR 1                (NUM-1)</para>
+  <para>  23 .   9. LOCAL CANDIDATES  BLANK, 1 OR 2        (NUM-1)</para>
+  <para>  24 .  10. EXTRA NON-FED POINT  BLANK OR 1        (NUM-1)</para>
+  <para/>
+  <para>  25 .  11. SUBTOTAL                                        (NUM-2)</para>
+  <para>                19+20+21+22+23+24      (5+6+7+8+9+10)</para>
+  <para>  26 .  12. TOTAL POINTS                                (NUM-2)</para>
+  <para>                18+25      (4+11)</para>
+  <para/>
+  <para>  27 .  FEDERAL ALLOCATION PERCENTAGE                (NUM-5 )</para>
+  <para>                FIELD 18  / FIELD 26    (4 / 12)</para>
+  <para>  28.  AMENDED                                        (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>                </para>
+  <para/>
+  <para/>
+  <para>        </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        If field 4  contains a value all other fields must be empty.</para>
+  <para>        If field 5  contains a value all other fields must be empty.</para>
+  <para>        If field 6  contains a value field 7  must contain a value and </para>
+  <para>        all other fields below field 4  must be empty.</para>
+  <para>        If field 8  contains a value fields 9  and 10  must contain values</para>
+  <para>        and all other fields below field 4  must be empty.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Schedule H-1</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE H2 - ALLOCATION RATIOS</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                REQUIRED    value = H2</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para/>
+  <para>                  </para>
+  <para/>
+  <para>   3 .   IND/NAME     (ACTIVITY/EVENT)        (A/N-38)</para>
+  <para>   4 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>   5 .  YESNO  (ACTIVITY IS FUNDRAISING)        (A/N-1)</para>
+  <para>   6 .  YESNO  (ACTIVITY IS EXEMPT)        (A/N-1)</para>
+  <para>   7 .  YESNO  (ACT. DIRECT CAN SUPPORT)        (A/N-1)</para>
+  <para>   8 .  RATIO CODE (N,R,S)                        (A/N-1)</para>
+  <para>   9 .  FEDERAL PERCENTAGE                        (NUM-5 )        (up to 4-decimal places w/wo                                                                         explicit decimal point (eg. .60 or                                                                         6500 interpreted as 60% or 65%) </para>
+  <para>  10 .  NON-FEDERAL PERCENTAGE                (NUM-5 )</para>
+  <para>  11.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>  4 .   ACTIVITY/EVENT NUMBER:</para>
+  <para>        Field 4  allows the filer to identify activity and events by</para>
+  <para>        a self-assigned UNIQUE code number.  This would meet all </para>
+  <para>        requirements for identification as described on page 46 in </para>
+  <para>        the Campaign Guide.</para>
+  <para/>
+  <para>  8 .   RATIO:    Codes:        N        RATIO IS NEW</para>
+  <para>                        R        RATIO IS REVISED</para>
+  <para>                        S        RATIO IS SAME AS PREVIOUSLY REPORTED</para>
+  <para/>
+  <para/>
+  <para>End of Schedule H-2</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE H3 - TRANSFERS FROM NON-FEDERAL ACCOUNTS</para>
+  <para/>
+  <para/>
+  <para>Note:  At least one record is created for each date on which transfers are made for joint activity.</para>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    values:  H3</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para/>
+  <para>                  </para>
+  <para>   3 .     IND/NAME   (OF ACCOUNT)                (A/N-38)</para>
+  <para>   4 .   DATE   (OF RECEIPT)                        (NUM-8)</para>
+  <para>   5 .   TOTAL AMOUNT TRANSFERED                (AMT-12)</para>
+  <para/>
+  <para>   6 .   I) ADMIN/VOTER DRIVE                        (AMT-12)</para>
+  <para/>
+  <para>II) DIRECT FUNDRAISING</para>
+  <para>  7 .    II) a. IND/NAME (EVENT)                        (A/N-38)</para>
+  <para>  8 .    ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  9 .    AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para>  </para>
+  <para>  10 .  II) b.  IND/NAME (EVENT)                (A/N-38)</para>
+  <para>  11 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  12 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  13 .  II) c.  IND/NAME (EVENT)                        (A/N-38)</para>
+  <para>  14 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  15 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  16 .  II) d.  IND/NAME (EVENT)                (A/N-38)</para>
+  <para>  17 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  18 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para>  19 .  TOT DIRECT FUNDRAISING AMOUNT        (AMT-12)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>III) EXEMPT ACTIVITY/DIRECT CANDIDATE SUPP.</para>
+  <para>  20 .  III) a.  IND/NAME  (EVENT)                (A/N-38)</para>
+  <para>  21 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  22 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  23 .  III) b.  IND/NAME  (EVENT)                (A/N-38)</para>
+  <para>  24 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  25 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  26 .  III) c.  IND/NAME  (EVENT)                (A/N-38)</para>
+  <para>  27 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  28 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  29 .  III) d.  IND/NAME   (EVENT)                (A/N-38)</para>
+  <para>  30 .  ACTIVITY/EVENT NUMBER                (A/N-10)</para>
+  <para>  31 .  AMOUNT TRANSFERRED                        (AMT-12)</para>
+  <para>        FOR THIS ACTIVITY</para>
+  <para/>
+  <para>  32 .  TOT EXEMPT ACTIVITY                        (AMT-12)</para>
+  <para>        DIRECT CANDIDATE SUPPORT</para>
+  <para>  33.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        ACTIVITY/EVENT NUMBER FILER CHOSEN ID NUMBER (A/N-10)</para>
+  <para>        FIELDS  8, 11, 14, 17, 21, 24, 27, 30    relate</para>
+  <para>        directly to defined activity/events described on Schedule H2.  This number</para>
+  <para>        should be unique for each event/activity described on the Schedule H2.</para>
+  <para>        This allows the filer to identify activity and events by a self-assigned code</para>
+  <para>        number.  This would meet all requirements for identification as described</para>
+  <para>        on page 46 in the Campaign Guide.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Schedule H-3</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE H4   JOINT FEDERAL/NON-FED ACTIVITY</para>
+  <para/>
+  <para/>
+  <para>        A record is created for each disbursement for joint activity.</para>
+  <para/>
+  <para>   1.   FORM TYPE                                 (A/N-8)                 REQUIRED    value = H4</para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para/>
+  <para>                  </para>
+  <para>   3 .   IND/NAME  (PAYEE)                        (A/N-38 )</para>
+  <para>   4 .  STREET 1                                        (A/N-34)</para>
+  <para>   5 .  STREET 2                                        (A/N-34)</para>
+  <para>   6 .  CITY                                        (A/N-18)</para>
+  <para>   7 .  STATE                                        (A/N-2)</para>
+  <para>   8 .  ZIP                                        (A/N-9)</para>
+  <para>   9 .  PURPOSE/EVENT         (A/N-40 )</para>
+  <para>  10 . EVENT NUMBER                                (A/N-10)</para>
+  <para>  11 . DATE                                        (NUM-8)</para>
+  <para>  12 . TOTAL AMOUNT                                (AMT-12)</para>
+  <para>  13 . FEDERAL SHARE                                (AMT-12)</para>
+  <para>  14 . NON-FEDERAL SHARE                        (AMT-12)</para>
+  <para>  15 . YESNO  (ACTIVITY IS ADMIN.                (A/N-1)</para>
+  <para>                /VOTER DRIVE)</para>
+  <para>  16 . YESNO  (ACTIVITY IS FUNDRAISING)        (A/N-1)</para>
+  <para>  17 . YESNO  (ACTIVITY IS EXEMPT)                (A/N-1)</para>
+  <para>  18 . YESNO  (ACT. DIRECT CAN SUPPORT)        (A/N-1)</para>
+  <para>  19 . EVENT YEAR-TO-DATE                        (AMT-12)</para>
+  <para>  20 .   ADDITIONAL DESCRIPTION                (A/N-100)</para>
+  <para>  21.  AMENDED                                (A/N-1)                Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para/>
+  <para>        RULES:</para>
+  <para/>
+  <para>        EVENT NUMBER</para>
+  <para>        Field 10  relates directly to defined activity/events described </para>
+  <para>        on Schedule H2.  This number should be unique for each </para>
+  <para>        event/activity described on the Schedule H2. This allows the </para>
+  <para>        filer to identify activity and events by a self-assigned code </para>
+  <para>        number.  This would meet all requirements for identification as </para>
+  <para>        described on page 46 in the Campaign Guide.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>End of Schedule H-4</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>SCHEDULE I</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>   1.   FORM TYPE         (SI)                        (A/N-3)                REQUIRED value = SI </para>
+  <para>                                                                        </para>
+  <para>   2.   FEC COMMITTEE ID NUMBER                (A/N-9)                 REQUIRED</para>
+  <para/>
+  <para>                  </para>
+  <para>   </para>
+  <para/>
+  <para>   3   Bank Account ID Number                        (A/N 16)        (This is the Bank’s Acct #)</para>
+  <para/>
+  <para>   4 .  NAME of  (ACCOUNT)                        (A/N-90)        (Must have non-federal in text)</para>
+  <para>   5 .  DATE  (COVERAGE FROM)                (NUM-8)</para>
+  <para>   6 .  DATE  (COVERAGE TO)                        (NUM-8)</para>
+  <para/>
+  <para/>
+  <para>        COLUMN A  TOTAL THIS PERIOD</para>
+  <para/>
+  <para>   7 .   1.  Total Receipts                                (AMT-12)</para>
+  <para>   8 .   2.  Transfers to FED or allocation</para>
+  <para>        account for allocable exp.                        (AMT-12)</para>
+  <para>   9 .   3.  Transfers to state/local Party</para>
+  <para>                organizations                        (AMT-12)</para>
+  <para>  10 .   4.  Direct state/local candidate</para>
+  <para>                support                                (AMT-12)</para>
+  <para>  11 .   5.  Other Disbursements                        (AMT-12)</para>
+  <para>  12 .   6.  Total Disbursements                        (AMT-12)</para>
+  <para>                8+9+10+11     (2+3+4+5)</para>
+  <para/>
+  <para>        SUMMARY</para>
+  <para>  13 .   7.  Beginning COH                                (AMT-12)</para>
+  <para>  14 .   8.  Receipts                                (AMT-12)</para>
+  <para>                FIELD 14  (LINE 8) = FIELD 7  (LINE 1) </para>
+  <para>  15 .   9.  Subtotal                                (AMT-12)</para>
+  <para>  16 .   10. Disbursements                                (AMT-12)</para>
+  <para>                FIELD 16  (LINE 10) = FIELD 12  (LINE 6) </para>
+  <para>  17 .   11. Ending COH                                (AMT-12)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        COLUMN B YEAR-TO-DATE</para>
+  <para/>
+  <para>  18 .   1.  Total receipts                                (AMT-12)</para>
+  <para>  19 .   2.  Transfers to FED or allocation</para>
+  <para>        account for allocable exp.                        (AMT-12)</para>
+  <para>  20 .   3.  Transfers to state/local Party</para>
+  <para>                organizations                        (AMT-12)</para>
+  <para>  21 .   4.  Direct state/local candidate</para>
+  <para>                support                                (AMT-12)</para>
+  <para>  22 .   5.  Other Disbursements                        (AMT-12)</para>
+  <para>  23 .   6.  Total Disbursements                        (AMT-12)</para>
+  <para>                19+20+21+22     (2+3+4+5)</para>
+  <para/>
+  <para>        SUMMARY</para>
+  <para>  24 .   7.  Beginning COH (as of Jan 1)                (AMT-12)</para>
+  <para>  25 .   8.  Receipts                                (AMT-12)</para>
+  <para>                FIELD 25  (LINE 8) = FIELD 18  (LINE 1 ) </para>
+  <para>  26 .   9.  Subtotal                                (AMT-12)</para>
+  <para>  27 .   10. Disbursements                                (AMT-12)</para>
+  <para>                FIELD 27  (LINE 10) = FIELD 23  (LINE 6) </para>
+  <para>  28 .   11. Ending COH                                (AMT-12)</para>
+  <para>  29.  AMENDED                                (A/N-1) Value=‘A’,’C’, or ’D’</para>
+  <para/>
+  <para>        </para>
+  <para>        RULES:</para>
+  <para/>
+  <para>        FIELD 2  ID NUMBER is the ID number of the filing entity.</para>
+  <para>        FIELD 3   ID NUMBER is the ID number of the ACCOUNT.</para>
+  <para>        FIELD 4  is the name of the account and must contain the word "NON-FEDERAL".</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>        CHECKS:</para>
+  <para/>
+  <para>        FIELD 12  (LINE 6)        = FIELDS 8+9+10+11     (2+3+4+5)</para>
+  <para>        FIELD 14  (LINE 8)        = FIELD 7  (LINE 1) </para>
+  <para>        FIELD 16  (LINE 10)        = FIELD 12  (LINE 6) </para>
+  <para>        FIELD 23  (LINE 6)        = FIELDS 19+20+21+22     (2+3+4+5)</para>
+  <para>        FIELD 25  (LINE 8)        = FIELD 18  (LINE 1 ) </para>
+  <para>        FIELD 27  (LINE 10)        = FIELD 23  (LINE 6) </para>
+  <para/>
+  <para/>
+  <para>End of Schedule I</para>
+  <para/>
+  <para>*** END OF DOCUMENT ****</para>
+  <para>Page 2</para>
+</article>
