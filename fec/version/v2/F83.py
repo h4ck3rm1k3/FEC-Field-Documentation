@@ -1,0 +1,27 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FILER FEC CMTE ID', '2', '', ''],
+            ['CREDITOR CODE', '3', '', ''],
+            ['NAME(Contributor/Lender)', '4', '', ''],
+            ['STREET 1', '5', '', ''],
+            ['STREET 2', '6', '', ''],
+            ['CITY', '7', '', ''],
+            ['STATE', '8', '', ''],
+            ['ZIP', '9', '', ''],
+            ['IS THIS A DISPUTED DEBT', '10-', '', ''],
+            ['INCURRED', '11-', '', ''],
+            ['AMOUNT OWED TO CREDITOR', '12', '', ''],
+            ['AMOUNT EXPECTED TO PAY/OFFER SETTLEMENT', '13', '', ''],
+            ['FEC-COMMITTEE-ID-NUMBER', '14', '', ''],
+            ['FEC-CANDIDATE-ID-NUMBER', '15', '', ''],
+            ['CANDIDATE-NAME', '16', '', ''],
+            ['CAND-OFFICE', '17', '', ''],
+            ['CAND-STATE (OF ELECTION)', '18', '', ''],
+            ['CAND-DISTRICT', '19', '', ''],
+            ['AMENDED CD', '20', '', ''],
+            ['TRAN_ID', '21', '', ''],
+            ['ORIG_TRAN_ID', '22', '', ''],
+            ['SUPR_TRAN_ID', '23', '', ''],
+    ]

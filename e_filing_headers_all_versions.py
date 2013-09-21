@@ -1,17 +1,19 @@
 import csv
 import re
+import os
+import posixpath as path
 fec_fields = csv.reader(open('e-filing headers all versions.csv'), delimiter=',')
 
-seen={}
+seen = {}
 
 def save(version,key,field,number,number2,number3, name):
-    if name not in seen[version][key]:
-        seen[version][key][name]=[[number,number2,number3]]
+    if len(seen[version][key]) ==0 :
+        seen[version][key]=[[name,number,number2,number3]]
     else:
-        seen[version][key][name].append([number,number2,number3])
+        seen[version][key].append([name,number,number2,number3])
 
 def emit(version,key,field,number,number2,number3, name):
-    #print ("\t\tOUTPUT:input'%s'\tnumber'%s'\tnumber2'%s'\tnumber3'%s'\tname '%s'" % (field,number,number2,number3, name))
+    #print ("        OUTPUT:input'%s'    number'%s'    number2'%s'    number3'%s'    name '%s'" % (field,number,number2,number3, name))
    
     if name == 'LLINOIS':
         print "bad match  field:'%s' name '%s'"  %(field,name)
@@ -384,22 +386,103 @@ for fieldlist in fec_fields:
 #    print fieldlist
     version = fieldlist.pop(0)
     key     = fieldlist.pop(0)
-    #print ("\n\nLine\t%s\t%s\n" % (version , key))
+    #print ("\n\nLine    %s    %s\n" % (version , key))
     if version not in seen:
-        seen[version]={}
+        seen[version] = {}
 
     if key not in seen[version]:
-        seen[version][key]={}
+        seen[version][key] = {}
 
     for field in fieldlist :
         field = field.strip()
         proc(version,key, field)
 print "REPORT"
 
+def emit_versions(seen):
+    outf = open ("versions.py","w")
+    for version in sorted(seen.keys()):
+        versiond =         version.replace(".","_")
+        outf.write( 'import fec.version.' +versiond + "\n")
 
-for version in sorted(seen.keys()):
-    print version
-    for key in sorted(seen[version].keys()):
-        print "\t"+key
-        for name in sorted(seen[version][key].keys()):
-            print "\t\t"+name
+    outf.write( "class Versions:\n    def __init__(self):\n    self.versions = {\n")
+    for version in sorted(seen.keys()):    
+        versiond =         version.replace(".","_")
+        outf.write(
+            "            '"+ 
+            version +  
+            "' : "  + 
+            'fec.version.' + 
+            versiond + 
+            ".Version," + 
+            "\n" 
+        )
+    outf.write( "    }\n")
+
+
+def emit_versions_records(seen):
+
+    for version in sorted(seen.keys()):
+        versiond =         version.replace(".","_")
+        outf = open ("fec/version/"+versiond + ".py","w")
+
+        for field in sorted(seen[version].keys()):   
+            versiond =         version.replace(".","_")
+            outf.write( 'import ' + 
+                        'fec.version.' + 
+                        versiond + "." +
+                        field + "\n")
+
+        outf.write( "class Version:\n    def __init__(self):\n    self.records = {\n")
+        versiond =         version.replace(".","_")
+        for field in sorted(seen[version].keys()):   
+            outf.write(
+                "            '"+ 
+                field +  
+                "' : "  + 
+                'fec.version.' + 
+                versiond + "." +
+                field +  ".Record"
+                "," + 
+                "\n" 
+            )
+        outf.write( "    }\n")
+
+
+def emit_versions_records_fields(seen):
+
+    for version in sorted(seen.keys()):
+        versiond =         version.replace(".","_")
+        for record in sorted(seen[version].keys()):   
+            if not path.exists("fec/version/"+versiond): 
+                os.makedirs("fec/version/"+versiond)
+
+            outf = open ("fec/version/"+versiond + "/__init__.py","w")
+            outf.write ("#\n") 
+                
+            outf = open ("fec/version/"+versiond + "/" + record + ".py","w")
+
+            outf.write( "class Records:\n")
+            outf.write("    def __init__(self):\n")
+            outf.write("        self.fields = [\n")
+            for field in seen[version][record]:   
+                outf.write(
+                    "            "+ 
+                    str(field) +  
+                    ",\n" 
+                )
+            outf.write( "    ]\n")
+
+if not path.exists("fec"): 
+    os.makedirs("fec")
+
+if not path.exists("fec/version"): 
+    os.makedirs("fec/version")
+
+outf = open ("fec/__init__.py","w")
+outf.write ("#\n") 
+outf = open ("fec/version/__init__.py","w")
+outf.write ("#\n") 
+
+emit_versions(seen)
+emit_versions_records(seen)
+emit_versions_records_fields(seen)

@@ -1,0 +1,25 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FILER FEC COMMITTEE ID', '2', '', ''],
+            ['CANDIDATE NAME', '3', '1', ''],
+            ['CANDIDATE ID', '4', '2', ''],
+            ['CAN/OFFICE', '5', '3', ''],
+            ['CANDIDATE STATE', '6', '4', ''],
+            ['CANDIDATE DISTRICT', '7', '5', ''],
+            ['COMMITTEE NAME', '8', '6', ''],
+            ['STREET 1', '9', '8', ''],
+            ['STREET 2', '10', '8', ''],
+            ['CITY', '11', '9', ''],
+            ['STATE', '12', '9', ''],
+            ['ZIP', '13', '9', ''],
+            ['DATE REACHED 100%', '14', '12', ''],
+            ['PERSE FUNDS AMT', '15', '12', ''],
+            ['PREV FORM 11 DATE', '16', '12', ''],
+            ['DATE REACHED 110%', '17', '12B', ''],
+            ['PERSE FUNDS AMT', '18', '12', ''],
+            ['PREV FORM 11 DATE', '19', '12', ''],
+            ['NAME/CANDIDATE/TREAS (as signed)', '20', '', ''],
+            ['Signed', '21-', '', ''],
+    ]

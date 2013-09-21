@@ -1,0 +1,27 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
+            ['SEQUENCE NUMBER', '3', '', ''],
+            ['CONTRIB/LENDER', '4-', '', ''],
+            ['STREET 1', '5', '', ''],
+            ['STREET 2', '6', '', ''],
+            ['CITY', '7', '', ''],
+            ['STATE', '8', '', ''],
+            ['ZIP', '9', '', ''],
+            ['TYPE OF CREDITOR CODE', '10', '', ''],
+            ['INCURRED', '11-', '', ''],
+            ['AMOUNT OWED TO CREDITOR', '12', '', ''],
+            ['AMOUNT OFFERED IN SETTLEMENT', '13', '', ''],
+            ['INITIAL TERMS AND NATURE OF DEBT', '14-A ', '', ''],
+            ['EFFORTS MADE BY CMTE TO PAY DEBT', '15-B ', '', ''],
+            ['STEPS TAKEN BY CREDITOR TO COLLECT', '16-C ', '', ''],
+            ['WAS THE effort made BY creditor to collect similar to other debt collection efforts', '17-D ', '', ''],
+            ['N IF NO EXPLAIN', '18-D ', '', ''],
+            ['Are the terms of the debt settlement comparable to other settlements', '19-E ', '', ''],
+            ['N IF NO EXPLAIN', '20-E ', '', ''],
+            ['NAME of creditor or representative', '21', '', ''],
+            ['SIGNED', '22-', '', ''],
+            ['AMENDED', '23', '', ''],
+    ]

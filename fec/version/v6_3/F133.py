@@ -1,0 +1,25 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
+            ['TRANSACTION ID NUMBER', '3', '', ''],
+            ['BACK REFERENCE TRAN ID NUMBER', '4', '', ''],
+            ['BACK REFERENCE SCHED NAME', '5', '', ''],
+            ['ENTITY TYPE', '6', '', ''],
+            ['CONTRIBUTOR ORGANIZATION NAME', '7', '', ''],
+            ['CONTRIBUTOR LAST NAME', '8', '', ''],
+            ['CONTRIBUTOR FIRST NAME', '9', '', ''],
+            ['CONTRIBUTOR MIDDLE NAME', '10', '', ''],
+            ['CONTRIBUTOR PREFIX', '11', '', ''],
+            ['CONTRIBUTOR SUFFIX', '12', '', ''],
+            ['CONTRIBUTOR STREET 1', '13', '', ''],
+            ['CONTRIBUTOR STREET 2', '14', '', ''],
+            ['CONTRIBUTOR CITY', '15', '', ''],
+            ['CONTRIBUTOR STATE', '16', '', ''],
+            ['CONTRIBUTOR ZIP', '17', '', ''],
+            ['REFUND DATE', '18', '', ''],
+            ['REFUND AMOUNT', '19', '', ''],
+            ['MEMO CODE', '20', '', ''],
+            ['MEMO TEXT/DESCRIPTION', '21', '', ''],
+    ]

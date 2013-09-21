@@ -1,0 +1,26 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
+            ['ORGANIZATION NAME', '3', '', ''],
+            ['ORGANIZATION STREET 1', '4', '', ''],
+            ['ORGANIZATION STREET 2', '5', '', ''],
+            ['ORGANIZATION CITY', '6', '', ''],
+            ['ORGANIZATION STATE', '7', '', ''],
+            ['ORGANIZATION ZIP', '8', '', ''],
+            ['ORGANIZATION TYPE', '9', '', ''],
+            ['REPORT CODE', '10', '', ''],
+            ['DATE OF ELECTION', '11', '', ''],
+            ['STATE OF ELECTION', '12', '', ''],
+            ['COVERAGE FROM DATE', '13', '', ''],
+            ['COVERAGE THROUGH DATE', '14', '', ''],
+            ['TOTAL COSTS', '15', '', ''],
+            ['PERSON DESIGNATED TO SIGN LAST NAME', '16', '', ''],
+            ['PERSON DESIGNATED TO SIGN FIRST NAME', '17', '', ''],
+            ['PERSON DESIGNATED TO SIGN MIDDLE NAME', '18', '', ''],
+            ['PERSON DESIGNATED TO SIGN PREFIX', '19', '', ''],
+            ['PERSON DESIGNATED TO SIGN SUFFIX', '20', '', ''],
+            ['PERSON DESIGNATED TO SIGN TITLE', '21', '', ''],
+            ['DATE SIGNED', '22', '', ''],
+    ]

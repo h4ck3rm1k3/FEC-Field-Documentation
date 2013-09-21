@@ -1,0 +1,27 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
+            ['PAYEE', '3-', '', ''],
+            ['STREET 1', '4', '', ''],
+            ['STREET 2', '5', '', ''],
+            ['CITY', '6', '', ''],
+            ['STATE', '7', '', ''],
+            ['ZIP', '8', '', ''],
+            ['TRANSDESC', '9', '', ''],
+            ['DATE', '10', '', ''],
+            ['AMOUNT EXPENDED', '11', '', ''],
+            ['FEC CANDIDATE ID NUMBER', '12', '', ''],
+            ['CANDIDATE NAME', '13', '', ''],
+            ['CAN/OFF', '14', '', ''],
+            ['STATE (OF ELECTION)', '15', '', ''],
+            ['CAN/DIST', '16', '', ''],
+            ['SUPPORT/OPPOSE', '17', '', ''],
+            ['PERSON COMPLETING FORM', '18-', '', ''],
+            ['SIGNED', '19-', '', ''],
+            ['NOTARIZED', '20-', '', ''],
+            ['NOTARY COMMISSION EXPIRES', '21-', '', ''],
+            ['NOTARY', '22-', '', ''],
+            ['AMENDED', '23', '', ''],
+    ]

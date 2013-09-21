@@ -1,0 +1,25 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
+            ['PAYEE', '3-', '', ''],
+            ['STREET 1', '4', '', ''],
+            ['STREET 2', '5', '', ''],
+            ['CITY', '6', '', ''],
+            ['STATE', '7', '', ''],
+            ['ZIP', '8', '', ''],
+            ['PURPOSE/EVENT', '9', '', ''],
+            ['EVENT NUMBER', '10', '', ''],
+            ['DATE', '11', '', ''],
+            ['TOTAL AMOUNT', '12', '', ''],
+            ['FEDERAL SHARE', '13', '', ''],
+            ['NON-FEDERAL SHARE', '14', '', ''],
+            ['ACTIVITY IS ADMIN/VOTER DRIVE', '15-', '', ''],
+            ['ACTIVITY IS FUNDRAISING', '16-', '', ''],
+            ['ACTIVITY IS EXEMPT', '17-', '', ''],
+            ['ACT DIRECT CAN SUPPORT', '18-', '', ''],
+            ['EVENT YEAR-TO-DATE', '19', '', ''],
+            ['ADDITIONAL DESCRIPTION', '20', '', ''],
+            ['AMENDED', '21', '', ''],
+    ]

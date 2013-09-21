@@ -1,0 +1,26 @@
+class Records:
+    def __init__(self):
+        self.fields = [
+            ['FORM TYPE', '1', '', ''],
+            ['FILER FEC CMTE ID', '2', '', ''],
+            ['COMMITTEE NAME', '3', '', ''],
+            ['STREET 1', '4', '', ''],
+            ['STREET 2', '5', '', ''],
+            ['CITY', '6', '', ''],
+            ['STATE', '7', '', ''],
+            ['ZIP', '8', '', ''],
+            ['CHG OF ADDRESS', '9', '', ''],
+            ['RPTCODE', '10', '', ''],
+            ['Of Amendment', '11-', '', ''],
+            ['Coverage From', '12-', '', ''],
+            ['Coverage To', '13-', '', ''],
+            ['Total Donations Accepted', '14', '5', ''],
+            ['Total Donations Refund', '15', '6', ''],
+            ['Net Donations', '16', '7', ''],
+            ['DESIGNATED OFFICER --LAST NAME (as signed)', '17', '', ''],
+            ['DESIGNATED OFFICER -- FIRST NAME (as signed)', '18', '', ''],
+            ['DESIGNATED OFFICER --MIDDLE NAME (as signed)', '19', '', ''],
+            ['DESIGNATED OFFICER -- PREFIX (as signed)', '20', '', ''],
+            ['DESIGNATED OFFICER -- SUFFIX (as signed)', '21', '', ''],
+            ['Signed', '22-', '', ''],
+    ]
