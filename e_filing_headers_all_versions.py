@@ -465,15 +465,15 @@ def emit_versions_records(seen):
 
     for version in sorted(seen.keys()):
         versiond =         version.replace(".","_")
-        outf = open ("fec/version/"+versiond + ".py","w")
-
+        if not path.exists("fec/version/"+versiond): 
+            os.makedirs("fec/version/"+versiond)
+        outf = open ("fec/version/"+versiond + "/__init__.py","w")
         for field in sorted(seen[version].keys()):   
             versiond =         version.replace(".","_")
             outf.write( 'import ' + 
                         'fec.version.' + 
                         versiond + "." +
                         field + "\n")
-
         outf.write("from fec.version.version_base import VersionBase\n")
         outf.write("class Version(VersionBase):\n")
         outf.write("    def __init__(self):\n")
@@ -485,12 +485,11 @@ def emit_versions_records(seen):
                 "' : "  + 
                 'fec.version.' + 
                 versiond + "." +
-                field +  ".Record"
+                field +  ".Records"
                 "," + 
                 "\n" 
             )
         outf.write( "        }\n")
-
 
 def emit_versions_records_fields(seen):
 
@@ -499,12 +498,7 @@ def emit_versions_records_fields(seen):
         for record in sorted(seen[version].keys()):   
             if not path.exists("fec/version/"+versiond): 
                 os.makedirs("fec/version/"+versiond)
-
-            outf = open ("fec/version/"+versiond + "/__init__.py","w")
-            outf.write ("#\n") 
-                
             outf = open ("fec/version/"+versiond + "/" + record + ".py","w")
-
             outf.write("from fec.version.records_base import RecordsBase\n")
             outf.write( "class Records(RecordsBase):\n")
             outf.write("    def __init__(self):\n")
@@ -523,10 +517,8 @@ if not path.exists("fec"):
 if not path.exists("fec/version"): 
     os.makedirs("fec/version")
 
-outf = open ("fec/__init__.py","w")
-outf.write ("#\n") 
-outf = open ("fec/version/__init__.py","w")
-outf.write ("#\n") 
+#outf = open ("fec/__init__.py","w")
+#outf.write ("#\n") 
 
 emit_versions(seen)
 emit_versions_records(seen)

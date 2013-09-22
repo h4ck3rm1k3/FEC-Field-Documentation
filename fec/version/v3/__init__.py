@@ -1,1 +1,83 @@
-#
+import fec.version.v3.F1
+import fec.version.v3.F1M
+import fec.version.v3.F1S
+import fec.version.v3.F2
+import fec.version.v3.F24
+import fec.version.v3.F3
+import fec.version.v3.F3P
+import fec.version.v3.F3P31
+import fec.version.v3.F3PS
+import fec.version.v3.F3S
+import fec.version.v3.F3X
+import fec.version.v3.F3Z
+import fec.version.v3.F4
+import fec.version.v3.F5
+import fec.version.v3.F56
+import fec.version.v3.F57
+import fec.version.v3.F6
+import fec.version.v3.F65
+import fec.version.v3.F7
+import fec.version.v3.F76
+import fec.version.v3.F8
+import fec.version.v3.F82
+import fec.version.v3.F83
+import fec.version.v3.F99
+import fec.version.v3.HRD
+import fec.version.v3.SA
+import fec.version.v3.SB
+import fec.version.v3.SC
+import fec.version.v3.SC1
+import fec.version.v3.SC2
+import fec.version.v3.SD
+import fec.version.v3.SE
+import fec.version.v3.SF
+import fec.version.v3.SH1
+import fec.version.v3.SH2
+import fec.version.v3.SH3
+import fec.version.v3.SH4
+import fec.version.v3.SI
+import fec.version.v3.TEXT
+from fec.version.version_base import VersionBase
+class Version(VersionBase):
+    def __init__(self):
+        self.records = {
+            'F1' : fec.version.v3.F1.Records,
+            'F1M' : fec.version.v3.F1M.Records,
+            'F1S' : fec.version.v3.F1S.Records,
+            'F2' : fec.version.v3.F2.Records,
+            'F24' : fec.version.v3.F24.Records,
+            'F3' : fec.version.v3.F3.Records,
+            'F3P' : fec.version.v3.F3P.Records,
+            'F3P31' : fec.version.v3.F3P31.Records,
+            'F3PS' : fec.version.v3.F3PS.Records,
+            'F3S' : fec.version.v3.F3S.Records,
+            'F3X' : fec.version.v3.F3X.Records,
+            'F3Z' : fec.version.v3.F3Z.Records,
+            'F4' : fec.version.v3.F4.Records,
+            'F5' : fec.version.v3.F5.Records,
+            'F56' : fec.version.v3.F56.Records,
+            'F57' : fec.version.v3.F57.Records,
+            'F6' : fec.version.v3.F6.Records,
+            'F65' : fec.version.v3.F65.Records,
+            'F7' : fec.version.v3.F7.Records,
+            'F76' : fec.version.v3.F76.Records,
+            'F8' : fec.version.v3.F8.Records,
+            'F82' : fec.version.v3.F82.Records,
+            'F83' : fec.version.v3.F83.Records,
+            'F99' : fec.version.v3.F99.Records,
+            'HRD' : fec.version.v3.HRD.Records,
+            'SA' : fec.version.v3.SA.Records,
+            'SB' : fec.version.v3.SB.Records,
+            'SC' : fec.version.v3.SC.Records,
+            'SC1' : fec.version.v3.SC1.Records,
+            'SC2' : fec.version.v3.SC2.Records,
+            'SD' : fec.version.v3.SD.Records,
+            'SE' : fec.version.v3.SE.Records,
+            'SF' : fec.version.v3.SF.Records,
+            'SH1' : fec.version.v3.SH1.Records,
+            'SH2' : fec.version.v3.SH2.Records,
+            'SH3' : fec.version.v3.SH3.Records,
+            'SH4' : fec.version.v3.SH4.Records,
+            'SI' : fec.version.v3.SI.Records,
+            'TEXT' : fec.version.v3.TEXT.Records,
+        }
