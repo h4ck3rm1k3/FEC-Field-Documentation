@@ -491,6 +491,13 @@ def emit_versions_records(seen):
             )
         outf.write( "        }\n")
 
+
+        outf.write("        self.field_order = [\n")
+        versiond =         version.replace(".","_")
+        for field in sorted(seen[version].keys()):   
+            outf.write("            '%s',\n" % field)            
+        outf.write( "        ]\n")
+
 def emit_versions_records_fields(seen):
 
     for version in sorted(seen.keys()):

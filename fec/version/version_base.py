@@ -1,3 +1,4 @@
 class VersionBase:
-      pass
+      def parse(self,x):
+            raise Exception(x)
       
