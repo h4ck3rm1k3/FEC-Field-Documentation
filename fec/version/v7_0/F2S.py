@@ -1,13 +1,14 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER CANDIDATE ID NUMBER', '2', '', ''],
-            ['AUTH COMMITTEE ID NUMBER', '3', '', ''],
-            ['AUTH COMMITTEE NAME', '4', '', ''],
-            ['AUTH STREET 1', '5', '', ''],
-            ['AUTH STREET 2', '6', '', ''],
-            ['AUTH CITY', '7', '', ''],
-            ['AUTH STATE', '8', '', ''],
-            ['AUTH ZIP', '9', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER CANDIDATE ID NUMBER', 'number': '2'},
+            {'name': 'AUTH COMMITTEE ID NUMBER', 'number': '3'},
+            {'name': 'AUTH COMMITTEE NAME', 'number': '4'},
+            {'name': 'AUTH STREET 1', 'number': '5'},
+            {'name': 'AUTH STREET 2', 'number': '6'},
+            {'name': 'AUTH CITY', 'number': '7'},
+            {'name': 'AUTH STATE', 'number': '8'},
+            {'name': 'AUTH ZIP', 'number': '9'},
     ]

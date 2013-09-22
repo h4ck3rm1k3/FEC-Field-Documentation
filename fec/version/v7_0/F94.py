@@ -1,20 +1,21 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['BACK REFERENCE TRAN ID', '4', '', ''],
-            ['BACK REFERENCE SCHED NAME', '5', '', ''],
-            ['CANDIDATE ID NUMBER', '6', '', ''],
-            ['CANDIDATE LAST NAME', '7', '', ''],
-            ['CANDIDATE FIRST NAME', '8', '', ''],
-            ['CANDIDATE MIDDLE NAME', '9', '', ''],
-            ['CANDIDATE PREFIX', '10', '', ''],
-            ['CANDIDATE SUFFIX', '11', '', ''],
-            ['CANDIDATE OFFICE', '12', '', ''],
-            ['CANDIDATE STATE', '13', '', ''],
-            ['CANDIDATE DIST', '14', '', ''],
-            ['ELECTION CODE', '15', '', ''],
-            ['ELECTION OTHER DESCRIPTION', '16', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'BACK REFERENCE TRAN ID', 'number': '4'},
+            {'name': 'BACK REFERENCE SCHED NAME', 'number': '5'},
+            {'name': 'CANDIDATE ID NUMBER', 'number': '6'},
+            {'name': 'CANDIDATE LAST NAME', 'number': '7'},
+            {'name': 'CANDIDATE FIRST NAME', 'number': '8'},
+            {'name': 'CANDIDATE MIDDLE NAME', 'number': '9'},
+            {'name': 'CANDIDATE PREFIX', 'number': '10'},
+            {'name': 'CANDIDATE SUFFIX', 'number': '11'},
+            {'name': 'CANDIDATE OFFICE', 'number': '12'},
+            {'name': 'CANDIDATE STATE', 'number': '13'},
+            {'name': 'CANDIDATE DIST', 'number': '14'},
+            {'name': 'ELECTION CODE', 'number': '15'},
+            {'name': 'ELECTION OTHER DESCRIPTION', 'number': '16'},
     ]

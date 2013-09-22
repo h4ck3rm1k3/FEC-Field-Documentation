@@ -1,20 +1,21 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['COMMUNICATION TYPE', '3', '', ''],
-            ['Comm. Descrip', '4-TRANS', '', ''],
-            ['COMMUNICATION CLASS', '5', '', ''],
-            ['Of Communication', '6-', '', ''],
-            ['SUPPORT/OPPOSE', '7', '', ''],
-            ['FEC CANDIDATE ID NUMBER', '8', '', ''],
-            ['CANDIDATE NAME', '9', '', ''],
-            ['CAN/OFFICE', '10', '', ''],
-            ['CAN/STATE', '11', '', ''],
-            ['CAN/DIST', '12', '', ''],
-            ['RPTPGI', '13', '', ''],
-            ['COST OF COMMUNICATION', '14', '', ''],
-            ['AMENDED CD', '15', '', ''],
-            ['TRAN ID', '16', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'COMMUNICATION TYPE', 'number': '3'},
+            {'name': 'Comm. Descrip', 'number': '4-TRANS'},
+            {'name': 'COMMUNICATION CLASS', 'number': '5'},
+            {'name': 'Of Communication', 'number': '6-'},
+            {'name': 'SUPPORT/OPPOSE', 'number': '7'},
+            {'name': 'FEC CANDIDATE ID NUMBER', 'number': '8'},
+            {'name': 'CANDIDATE NAME', 'number': '9'},
+            {'name': 'CAN/OFFICE', 'number': '10'},
+            {'name': 'CAN/STATE', 'number': '11'},
+            {'name': 'CAN/DIST', 'number': '12'},
+            {'name': 'RPTPGI', 'number': '13'},
+            {'name': 'COST OF COMMUNICATION', 'number': '14'},
+            {'name': 'AMENDED CD', 'number': '15'},
+            {'name': 'TRAN ID', 'number': '16'},
     ]

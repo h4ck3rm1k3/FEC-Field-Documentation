@@ -46,9 +46,10 @@ import fec.version.v8_0.SH5
 import fec.version.v8_0.SH6
 import fec.version.v8_0.SL
 import fec.version.v8_0.TEXT
-class Version:
+from fec.version.version_base import VersionBase
+class Version(VersionBase):
     def __init__(self):
-    self.records = {
+        self.records = {
             'F1' : fec.version.v8_0.F1.Record,
             'F13' : fec.version.v8_0.F13.Record,
             'F132' : fec.version.v8_0.F132.Record,
@@ -97,4 +98,4 @@ class Version:
             'SH6' : fec.version.v8_0.SH6.Record,
             'SL' : fec.version.v8_0.SL.Record,
             'TEXT' : fec.version.v8_0.TEXT.Record,
-    }
+        }

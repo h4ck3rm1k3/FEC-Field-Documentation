@@ -1,14 +1,15 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['ACCOUNT NAME', '4', '', ''],
-            ['RECEIPT DATE', '5', '', ''],
-            ['TOTAL AMOUNT TRANSFERRED', '6', '', ''],
-            ['VOTER REGISTRATION AMOUNT', '7', '', ''],
-            ['VOTER ID AMOUNT', '8', '', ''],
-            ['GOTV AMOUNT', '9', '', ''],
-            ['GENERIC CAMPAIGN AMOUNT', '10', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'ACCOUNT NAME', 'number': '4'},
+            {'name': 'RECEIPT DATE', 'number': '5'},
+            {'name': 'TOTAL AMOUNT TRANSFERRED', 'number': '6'},
+            {'name': 'VOTER REGISTRATION AMOUNT', 'number': '7'},
+            {'name': 'VOTER ID AMOUNT', 'number': '8'},
+            {'name': 'GOTV AMOUNT', 'number': '9'},
+            {'name': 'GENERIC CAMPAIGN AMOUNT', 'number': '10'},
     ]

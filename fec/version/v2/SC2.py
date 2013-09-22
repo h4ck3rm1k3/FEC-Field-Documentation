@@ -1,16 +1,17 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['BACK REFERENCE TRAN ID', '3', '', ''],
-            ['Endorser/Guarantor', '4-', '', ''],
-            ['STREET 1', '5', '', ''],
-            ['STREET 2', '6', '', ''],
-            ['CITY', '7', '', ''],
-            ['STATE', '8', '', ''],
-            ['ZIP', '9', '', ''],
-            ['INDEMP', '10', '', ''],
-            ['INDOCC', '11', '', ''],
-            ['AMOUNT GUARANTEED BALANCE', '12', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'BACK REFERENCE TRAN ID', 'number': '3'},
+            {'name': 'Endorser/Guarantor', 'number': '4-'},
+            {'name': 'STREET 1', 'number': '5'},
+            {'name': 'STREET 2', 'number': '6'},
+            {'name': 'CITY', 'number': '7'},
+            {'name': 'STATE', 'number': '8'},
+            {'name': 'ZIP', 'number': '9'},
+            {'name': 'INDEMP', 'number': '10'},
+            {'name': 'INDOCC', 'number': '11'},
+            {'name': 'AMOUNT GUARANTEED BALANCE', 'number': '12'},
     ]

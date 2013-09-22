@@ -1,0 +1,2 @@
+class RecordsBase:
+    pass

@@ -1,12 +1,13 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['ELECTION CODE', '4', '', ''],
-            ['ELECTION OTHER DESCRIPTION', '5', '', ''],
-            ['EXPENDITURE DATE', '6', '', ''],
-            ['EXPENDITURE AMOUNT', '7', '', ''],
-            ['LOAN CHECK', '8', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'ELECTION CODE', 'number': '4'},
+            {'name': 'ELECTION OTHER DESCRIPTION', 'number': '5'},
+            {'name': 'EXPENDITURE DATE', 'number': '6'},
+            {'name': 'EXPENDITURE AMOUNT', 'number': '7'},
+            {'name': 'LOAN CHECK', 'number': '8'},
     ]

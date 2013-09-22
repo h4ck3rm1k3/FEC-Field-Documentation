@@ -1,18 +1,19 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
-            ['DEBTOR/CREDITOR', '3-', '', ''],
-            ['STREET 1', '4', '', ''],
-            ['STREET 2', '5', '', ''],
-            ['CITY', '6', '', ''],
-            ['STATE', '7', '', ''],
-            ['ZIP', '8', '', ''],
-            ['NATURE/PURPOSE DEBT DESCRIPTION', '9', '', ''],
-            ['BEGINNING BALANCE', '10', '', ''],
-            ['INCURRED THIS PERIOD', '11', '', ''],
-            ['PAYMENT THIS PERIOD', '12', '', ''],
-            ['BALANCE AT CLOSE', '13', '', ''],
-            ['AMENDED', '14', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FEC COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'DEBTOR/CREDITOR', 'number': '3-'},
+            {'name': 'STREET 1', 'number': '4'},
+            {'name': 'STREET 2', 'number': '5'},
+            {'name': 'CITY', 'number': '6'},
+            {'name': 'STATE', 'number': '7'},
+            {'name': 'ZIP', 'number': '8'},
+            {'name': 'NATURE/PURPOSE DEBT DESCRIPTION', 'number': '9'},
+            {'name': 'BEGINNING BALANCE', 'number': '10'},
+            {'name': 'INCURRED THIS PERIOD', 'number': '11'},
+            {'name': 'PAYMENT THIS PERIOD', 'number': '12'},
+            {'name': 'BALANCE AT CLOSE', 'number': '13'},
+            {'name': 'AMENDED', 'number': '14'},
     ]

@@ -1,19 +1,20 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['REPORT TYPE (24/48 Hour)', '3', '', ''],
-            ['COMMITTEE NAME', '4', '', ''],
-            ['STREET 1', '5', '', ''],
-            ['STREET 2', '6', '', ''],
-            ['CITY', '7', '', ''],
-            ['STATE', '8', '', ''],
-            ['ZIP', '9', '', ''],
-            ['TREASURER LAST NAME', '10', '', ''],
-            ['TREASURER FIRST NAME', '11', '', ''],
-            ['TREASURER MIDDLE NAME', '12', '', ''],
-            ['TREASURER PREFIX', '13', '', ''],
-            ['TREASURER SUFFIX', '14', '', ''],
-            ['DATE SIGNED', '15', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'REPORT TYPE (24/48 Hour)', 'number': '3'},
+            {'name': 'COMMITTEE NAME', 'number': '4'},
+            {'name': 'STREET 1', 'number': '5'},
+            {'name': 'STREET 2', 'number': '6'},
+            {'name': 'CITY', 'number': '7'},
+            {'name': 'STATE', 'number': '8'},
+            {'name': 'ZIP', 'number': '9'},
+            {'name': 'TREASURER LAST NAME', 'number': '10'},
+            {'name': 'TREASURER FIRST NAME', 'number': '11'},
+            {'name': 'TREASURER MIDDLE NAME', 'number': '12'},
+            {'name': 'TREASURER PREFIX', 'number': '13'},
+            {'name': 'TREASURER SUFFIX', 'number': '14'},
+            {'name': 'DATE SIGNED', 'number': '15'},
     ]

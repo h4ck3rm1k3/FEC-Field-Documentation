@@ -1,14 +1,15 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['BACK REFERENCE TRAN ID', '4', '', ''],
-            ['ACCOUNT NAME', '5', '', ''],
-            ['EVENT TYPE', '6', '', ''],
-            ['EVENT/ACTIVITY ID/NAME', '7', '', ''],
-            ['RECEIPT DATE', '8', '', ''],
-            ['TOTAL AMOUNT TRANSFERRED', '9', '', ''],
-            ['TRANSFERRED AMOUNT', '10', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'BACK REFERENCE TRAN ID', 'number': '4'},
+            {'name': 'ACCOUNT NAME', 'number': '5'},
+            {'name': 'EVENT TYPE', 'number': '6'},
+            {'name': 'EVENT/ACTIVITY ID/NAME', 'number': '7'},
+            {'name': 'RECEIPT DATE', 'number': '8'},
+            {'name': 'TOTAL AMOUNT TRANSFERRED', 'number': '9'},
+            {'name': 'TRANSFERRED AMOUNT', 'number': '10'},
     ]

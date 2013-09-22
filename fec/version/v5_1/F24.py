@@ -1,15 +1,16 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['COMMITTEE NAME', '3', '', ''],
-            ['STREET 1', '4', '', ''],
-            ['STREET 2', '5', '', ''],
-            ['CITY', '6', '', ''],
-            ['STATE', '7', '', ''],
-            ['ZIP', '8', '', ''],
-            ['NAME/TREASURER (as signed)', '9', '', ''],
-            ['Signed', '10-', '', ''],
-            ['REPORT TYPE', '11', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'COMMITTEE NAME', 'number': '3'},
+            {'name': 'STREET 1', 'number': '4'},
+            {'name': 'STREET 2', 'number': '5'},
+            {'name': 'CITY', 'number': '6'},
+            {'name': 'STATE', 'number': '7'},
+            {'name': 'ZIP', 'number': '8'},
+            {'name': 'NAME/TREASURER (as signed)', 'number': '9'},
+            {'name': 'Signed', 'number': '10-'},
+            {'name': 'REPORT TYPE', 'number': '11'},
     ]

@@ -1,17 +1,18 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['FEC CANDIDATE ID NUMBER', '3', '', ''],
-            ['CANDIDATE NAME', '4', '', ''],
-            ['CAN/OFFICE', '5', '', ''],
-            ['CAN/STATE', '6', '', ''],
-            ['CAN/DIST', '7', '', ''],
-            ['ITEM ELECT CD', '8', '', ''],
-            ['ITEM ELECT OTHER', '9', '', ''],
-            ['AMENDED CD', '10', '', ''],
-            ['TRAN ID', '11', '', ''],
-            ['BACK REF TRAN ID', '12', '', ''],
-            ['BACK REF SCHED NAME', '13', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'FEC CANDIDATE ID NUMBER', 'number': '3'},
+            {'name': 'CANDIDATE NAME', 'number': '4'},
+            {'name': 'CAN/OFFICE', 'number': '5'},
+            {'name': 'CAN/STATE', 'number': '6'},
+            {'name': 'CAN/DIST', 'number': '7'},
+            {'name': 'ITEM ELECT CD', 'number': '8'},
+            {'name': 'ITEM ELECT OTHER', 'number': '9'},
+            {'name': 'AMENDED CD', 'number': '10'},
+            {'name': 'TRAN ID', 'number': '11'},
+            {'name': 'BACK REF TRAN ID', 'number': '12'},
+            {'name': 'BACK REF SCHED NAME', 'number': '13'},
     ]

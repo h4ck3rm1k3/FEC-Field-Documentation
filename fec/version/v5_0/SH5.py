@@ -1,15 +1,16 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['ACCOUNT NAME', '3', '', ''],
-            ['Of Receipt/Transfer In', '4-', '', ''],
-            ['Amount Voter Registration', '5', '', ''],
-            ['Amount Voter ID', '6', '', ''],
-            ['Amount GOTV', '7', '', ''],
-            ['Amount Generic Campaing Activity', '8', '', ''],
-            ['TOTAL AMOUNT TRANSFERRED', '9', '', ''],
-            ['AMENDED CD', '10', '', ''],
-            ['TRAN ID', '11', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'ACCOUNT NAME', 'number': '3'},
+            {'name': 'Of Receipt/Transfer In', 'number': '4-'},
+            {'name': 'Amount Voter Registration', 'number': '5'},
+            {'name': 'Amount Voter ID', 'number': '6'},
+            {'name': 'Amount GOTV', 'number': '7'},
+            {'name': 'Amount Generic Campaing Activity', 'number': '8'},
+            {'name': 'TOTAL AMOUNT TRANSFERRED', 'number': '9'},
+            {'name': 'AMENDED CD', 'number': '10'},
+            {'name': 'TRAN ID', 'number': '11'},
     ]

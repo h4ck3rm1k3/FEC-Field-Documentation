@@ -1,17 +1,18 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['State and Local Party Committee Presidential-Only Election Year (28% Federal)', '4', '', ''],
-            ['State and Local Party Committee Presidential and Senate Election Year (36% Federal)', '5', '', ''],
-            ['State and Local Party Committee Senate-Only Election Year (21% Federal)', '6', '', ''],
-            ['State and Local Party Committee Non-Presidential and Non-Senate Election Year (15% Federal)', '7', '', ''],
-            ['FLAT MINIMUM FEDERAL PERCENTAGE', '8', '', ''],
-            ['FEDERAL PERCENT', '9', '', ''],
-            ['NONFEDERAL PERCENT', '10', '', ''],
-            ['ADMINISTRATIVE RATIO APPLIES', '11', '', ''],
-            ['GENERIC VOTER DRIVE RATIO APPLIES', '12', '', ''],
-            ['PUBLIC COMMUNICATIONS REFERENCING PARTY ONLY RATIO APPLIES', '13', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'State and Local Party Committee Presidential-Only Election Year (28% Federal)', 'number': '4'},
+            {'name': 'State and Local Party Committee Presidential and Senate Election Year (36% Federal)', 'number': '5'},
+            {'name': 'State and Local Party Committee Senate-Only Election Year (21% Federal)', 'number': '6'},
+            {'name': 'State and Local Party Committee Non-Presidential and Non-Senate Election Year (15% Federal)', 'number': '7'},
+            {'name': 'FLAT MINIMUM FEDERAL PERCENTAGE', 'number': '8'},
+            {'name': 'FEDERAL PERCENT', 'number': '9'},
+            {'name': 'NONFEDERAL PERCENT', 'number': '10'},
+            {'name': 'ADMINISTRATIVE RATIO APPLIES', 'number': '11'},
+            {'name': 'GENERIC VOTER DRIVE RATIO APPLIES', 'number': '12'},
+            {'name': 'PUBLIC COMMUNICATIONS REFERENCING PARTY ONLY RATIO APPLIES', 'number': '13'},
     ]

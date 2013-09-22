@@ -11,9 +11,10 @@ import fec.version.v6_3
 import fec.version.v6_4
 import fec.version.v7_0
 import fec.version.v8_0
-class Versions:
+from fec.version.versions_base import VersionsBase
+class Versions(VersionsBase):
     def __init__(self):
-    self.versions = {
+        self.versions = {
             'v1' : fec.version.v1.Version,
             'v2' : fec.version.v2.Version,
             'v3' : fec.version.v3.Version,
@@ -27,4 +28,4 @@ class Versions:
             'v6.4' : fec.version.v6_4.Version,
             'v7.0' : fec.version.v7_0.Version,
             'v8.0' : fec.version.v8_0.Version,
-    }
+        }

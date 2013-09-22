@@ -1,19 +1,20 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['CONTROLLER LAST NAME (Share/Exer Control)', '4', '', ''],
-            ['CONTROLLER FIRST NAME', '5', '', ''],
-            ['CONTROLLER MIDDLE NAME', '6', '', ''],
-            ['CONTROLLER PREFIX', '7', '', ''],
-            ['CONTROLLER SUFFIX', '8', '', ''],
-            ['CONTROLLER STREET 1', '9', '', ''],
-            ['CONTROLLER STREET 2', '10', '', ''],
-            ['CONTROLLER CITY', '11', '', ''],
-            ['CONTROLLER STATE', '12', '', ''],
-            ['CONTROLLER ZIP', '13', '', ''],
-            ['CONTROLLER EMPLOYER', '14', '', ''],
-            ['CONTROLLER OCCUPATION', '15', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'CONTROLLER LAST NAME (Share/Exer Control)', 'number': '4'},
+            {'name': 'CONTROLLER FIRST NAME', 'number': '5'},
+            {'name': 'CONTROLLER MIDDLE NAME', 'number': '6'},
+            {'name': 'CONTROLLER PREFIX', 'number': '7'},
+            {'name': 'CONTROLLER SUFFIX', 'number': '8'},
+            {'name': 'CONTROLLER STREET 1', 'number': '9'},
+            {'name': 'CONTROLLER STREET 2', 'number': '10'},
+            {'name': 'CONTROLLER CITY', 'number': '11'},
+            {'name': 'CONTROLLER STATE', 'number': '12'},
+            {'name': 'CONTROLLER ZIP', 'number': '13'},
+            {'name': 'CONTROLLER EMPLOYER', 'number': '14'},
+            {'name': 'CONTROLLER OCCUPATION', 'number': '15'},
     ]

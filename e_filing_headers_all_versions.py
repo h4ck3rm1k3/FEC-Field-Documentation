@@ -1,19 +1,24 @@
 import csv
 import re
 import os
+import traceback
 import posixpath as path
 fec_fields = csv.reader(open('e-filing headers all versions.csv'), delimiter=',')
 
 seen = {}
 
-def save(version,key,field,number,number2,number3, name):
-    if len(seen[version][key]) ==0 :
-        seen[version][key]=[[name,number,number2,number3]]
-    else:
-        seen[version][key].append([name,number,number2,number3])
+def save(version,key,field,number,name):
 
-def emit(version,key,field,number,number2,number3, name):
-    #print ("        OUTPUT:input'%s'    number'%s'    number2'%s'    number3'%s'    name '%s'" % (field,number,number2,number3, name))
+    item = {'name':name, 'number' : number}
+
+    if len(seen[version][key]) ==0 :
+        
+        seen[version][key]=[item]
+    else:
+        seen[version][key].append(item)
+
+def emit(version,key,field,number,name):
+    #print ("        OUTPUT:input'%s'    number'%s'    number2'%s'    number3'%s'    name '%s'" % (field,number,name))
    
     if name == 'LLINOIS':
         print "bad match  field:'%s' name '%s'"  %(field,name)
@@ -28,7 +33,7 @@ def emit(version,key,field,number,number2,number3, name):
         raise Exception()
   
     if re.match(r'[YN] (if|IF|If)',name):
-        return save (version,key,field,number,number2,number3, name)
+        return save (version,key,field,number,name)
 
 
     if re.match(r'[acb]\)\s',name):
@@ -63,7 +68,7 @@ def emit(version,key,field,number,number2,number3, name):
         print "bad match  field:'%s' name '%s'"  %(field,name)
         raise Exception()
 
-    return save (version,key,field,number,number2,number3, name)
+    return save (version,key,field,number,name)
     
 
 def proc(version,key,field):
@@ -86,7 +91,7 @@ def proc(version,key,field):
         items = match.groups()
         (number,ftype,name) = items
         field=field.replace(ftype,"TYPENAME")
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
 
     # 23-D 3 YESNO (PERFECTED INTEREST?)
@@ -94,7 +99,7 @@ def proc(version,key,field):
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
 
     #21-D.1 DESC (Collateral)
@@ -102,236 +107,257 @@ def proc(version,key,field):
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     #15-A1.YES/NO (Loan Restructured)
     match = re.match(r'(\d+\-[A-F\d]+)\.?\s*(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
     
     # 1-A 
     match = re.match(r'(\d+\-[A-F])\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     #16-D. YESNO (effort made by creditor to collect...
     match = re.match(r'(\d+\-[A-F])\.\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     match = re.match(r'(\d+\-[A-F])\.\s(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     #21-11. Y DATE (PLANNED FOR TERMINATION RPT)
     match = re.match(r'(\d+\-\d+)\.?\s(TYPENAME)\s\(([A-Za-z].+)\)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     # 20-11 YESNO (Is the cmte terminating activities)
     match = re.match(r'(\d+\-\d+)\.?\s(TYPENAME)\s\(([A-Za-z].+)\)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     match = re.match(r'(\d+)\-(TYPENAME)\s\(([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,ftype,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     #20-6.(b) fdsf
     #                  111111-11111.(
-    match = re.match(r'(\d+)\-(\d+)\.\([a-z]\)\s([A-Za-z].+)$', field)
+    match = re.match(r'(\d+\-\d+\.\([a-z]\))\s([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     # '61-6.(a) 19 -- (YEAR)
     #                  11    - 11  . (a )  11     -   (YEAR)   
-    match = re.match(r'(\d+)\-(\d+\.\(a\)\s\d+)\s\-\-\s*\((YEAR)\)', field)
+    match = re.match(r'(\d+\-\d+\.\(a\)\s\d+)\s\-\-\s*\((YEAR)\)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
 
     # 56-6(a) 19 --year
     #                  11    - 11  (a )  11     -   (YEAR)   
-    match = re.match(r'(\d+)\-(\d+\(a\)\s\d+)\s\-\-\s*(year)', field)
-    if (match):
-        items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
-
-    #                  222222-_    3933
-    match = re.match(r'(\d+)\-_\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\d+\(a\)\s\d+)\s\-\-\s*(year)', field)
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        return emit(version,key,field,number,name)
+
+    #                  222222-_    3933
+    #27-_ RELATIONSHIP (w/ Above Cmte)
+    match = re.match(r'(\d+\-_)\s([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                  111111111111    2222222222222   AAAAA
-    match = re.match(r'(\d+\-\(a\))\s+(\d+\(a\)iii)\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\(a\)\s+\d+\(a\)iii)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         #print(items)
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
+    
+    # 30-11(a)i Itemized
+    match = re.match(r'(\d+\-\d+\(a\)(?:i|ii|iii))\s([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        #print(items)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #'9-(b) 11(b) 
-    match = re.match(r'(\d+\-\([a-z][a-z]?\))\s+(\d+\([a-z]\))\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\([a-z][a-z]?\)\s+\d+\([a-z]\))\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         #print(items)
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
         #'88-9. a) BANK NAME
-    match = re.match(r'\s*(\d+)\-([\dA-B]+\. [ab])\)\s+([A-Za-z].+)$', field)
+    match = re.match(r'(\d+\-[\dA-B]+\. [ab]\))\s+([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                     103112-122331   blahs
-    match = re.match(r'\s*(\d+)\-([\dA-B]+)\.\s+([A-Za-z].+)$', field)
+    match = re.match(r'(\d+\-[\dA-B]+\.)\s+([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
         #'14-12a. DATE REACHED 100%
         #9-1b. Unitemized Receipts From Persons
-    match = re.match(r'(\d+)\-(\d+)[abc]\. ([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\d+[abc]\.) ([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
+    # 29-8CASH ON HAND AT CLOSE OF REPORTING PD:
     #              111111-1111BALDDSSS
-    match = re.match(r'(\d+)\-(\d+)([A-Za-z].+)$', field)
+    match = re.match(r'(\d+\-\d+)([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
-    #              111111-11111 AAAAAAAAA
-    match = re.match(r'(\d+)\-(\d+)\s([A-Za-z].+)$', field)
+    # 111111-11111 AAAAAAAAA
+    # 14-5 TOTAL DONATIONS ACCEPTED
+    match = re.match(r'(\d+\-\d+)\s([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                     103112-122331.   233333)   blahs
     match = re.match(r'\s*(\d+)\-(\d+)\.\s*([\d\w]+)\)\s*([A-Za-z].+)$', field)
     if (match):
         items = match.groups()
-        (number,number2,number3,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                  11111-111111.   BLAHS
-    match = re.match(r'\s*(\d+)\-([\da-bA-B]+)\.\s*([A-Za-z].+)', field) # could have a newline so no $
+    match = re.match(r'(\d+\-[\da-bA-B]+\.)\s*([A-Za-z].+)', field) # could have a newline so no $
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                  11111-. 111111.   BLAHS
-    match = re.match(r'\s*(\d+)\-\.\s(\d+)\.\s*([A-Za-z].+)', field) # could have a newline so no $
+    match = re.match(r'(\d+\-\.\s\d+\.)\s*([A-Za-z].+)', field) # could have a newline so no $
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #7-II) a. IND/NAME (EVENT)
-    match = re.match(r'\s*(\d+)\-([IVX]+\)\s[ab]\.)\s+([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[IVX]+\)\s[ab]\.)\s+([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
-                      #13-II) c. IND/NAME (EVENT)
-    match = re.match(r'(\d+)\-([IVX]+\))\sc\.\s(IND\/NAME)\s\(([A-Za-z].+)\)', field)
+        #13-II) c. IND/NAME (EVENT)
+    match = re.match(r'(\d+\-[IVX]+\)\sc\.)\s(TYPENAME)\s\(([A-Za-z].+)\)', field)
     if (match):
         items = match.groups()
-        (number,number2,typename,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,typename,name) = items
+        return emit(version,key,field,number,name)
 
     #7-II) TOT DIRECT FUNDRAISING AMOUNT
-    match = re.match(r'\s*(\d+)\-([IVX]+\))\s+([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[IVX]+\))\s+([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     #                     222222-III             3933
-    match = re.match(r'\s*(\d+)\-([IVX]+)\s([A-Za-z].+)', field)
+    # 13-I CANDIDATE ID NUMBER
+    match = re.match(r'(\d+\-[IVX]+)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,"", name)
+        (number,name) = items
+        return emit(version,key,field,number, name)
 
     # 30-11(a)i Itemized
-    match = re.match(r'\s*(\d+)\-(\d+)(\([\d\w\s\.]+\)(?:i|ii|iii))\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\d+\([\d\w\s\.]+\)?:i|ii|iii)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,number3,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
 
     #                     122222-1111     (233d222.223).       NNNNN
-    match = re.match(r'\s*(\d+)\-(\d+)\s*\(([\d\w\s\.]+)\)\.?\s*([A-Za-z].+)', field)
+    # 34-5 (e). ORGANIZATION TYPE
+    # 30-11(a)i Itemized
+    match = re.match(r'(\d+\-\d+\s*\([\d\w\s\.]+\)[\.i])\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,number3,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
-    #                  11111-(111ss333333).      BBBB
-    match = re.match(r'\s*(\d+)\-\(([\d\w]+)\)\.?\s*([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\d+\s*\([\d\w\s\.]+\))\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
+
+    # 11111-(111ss333333).      BBBB
+    # 24-(6a) Total Contributions (NO Loans)
+    match = re.match(r'(\d+\-\([\d\w]+\)\.?)\s*([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
 
     #                  11111-(111ss333333) 12.      BBBB
-    match = re.match(r'\s*(\d+)\-(\([a-z]+\)\s\d+)\.?\s*([A-Za-z].+)', field)
+    match = re.match(r'\s*(\d+\-\([a-z]+\)\s\d+\.?)\s*([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     match = re.match(r'\s*(\d+\-[A-F]\.)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     match = re.match(r'\s*(\d+\-[A-F]\d?)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
     # 21-D 1 DESC (COLLATERAL
     match = re.match(r'\s*(\d+\-[A-F]\s\d+)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
 
     # '17-B.1. CREDIT AMOUNT THIS DRAW' name 'B.1. CREDIT AMOUNT THIS DRAW'
@@ -339,30 +365,30 @@ def proc(version,key,field):
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
 
     #                 
-    match = re.match(r'(\d+)\-(\w\.\d+)\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-\w\.\d+)\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
         # 120-G. B
-    match = re.match(r'(\d+)\-([A-Z])\.\s*([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-[A-Z]\.)\s*([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
         # 120-G B
 
-    match = re.match(r'(\d+)\-([A-Z]|EF)\s([A-Za-z].+)', field)
+    match = re.match(r'(\d+\-(?:[A-Z]|EF))\s([A-Za-z].+)', field)
     if (match):
         items = match.groups()
-        (number,number2,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        (number,name) = items
+        return emit(version,key,field,number,name)
         
 
     #'6-I) ADMIN/VOTER DRIVE
@@ -370,14 +396,22 @@ def proc(version,key,field):
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
 
    #                 111111-BLHA
     match = re.match(r'\s*(\d+)\-([A-Za-z].+)', field)
     if (match):
         items = match.groups()
         (number,name) = items
-        return emit(version,key,field,number,number2,number3, name)
+        return emit(version,key,field,number,name)
+
+
+    #55-6(a)Cash on Hand
+    match = re.match(r'(\d+\-\d\(a\))([A-Za-z].+)', field)
+    if (match):
+        items = match.groups()
+        (number,name) = items
+        return emit(version,key,field,number,name)
 
     print "unmatched '%s'" % field
 
@@ -395,7 +429,12 @@ for fieldlist in fec_fields:
 
     for field in fieldlist :
         field = field.strip()
-        proc(version,key, field)
+        try :
+            proc(version,key, field)
+        except Exception as e:
+            print field 
+            print traceback.format_exc()
+            raise e
 print "REPORT"
 
 def emit_versions(seen):
@@ -404,19 +443,22 @@ def emit_versions(seen):
         versiond =         version.replace(".","_")
         outf.write( 'import fec.version.' +versiond + "\n")
 
-    outf.write( "class Versions:\n    def __init__(self):\n    self.versions = {\n")
+    outf.write( "from fec.version.versions_base import VersionsBase\n")
+
+    outf.write( "class Versions(VersionsBase):\n")
+    outf.write( "    def __init__(self):\n")
+    outf.write( "        self.versions = {\n")
     for version in sorted(seen.keys()):    
         versiond =         version.replace(".","_")
-        outf.write(
-            "            '"+ 
-            version +  
-            "' : "  + 
-            'fec.version.' + 
-            versiond + 
-            ".Version," + 
-            "\n" 
-        )
-    outf.write( "    }\n")
+        outf.write("            '"+ 
+                   version +  
+                   "' : "  + 
+                   'fec.version.' + 
+                   versiond + 
+                   ".Version," + 
+                "\n" 
+               )
+    outf.write( "        }\n")
 
 
 def emit_versions_records(seen):
@@ -432,11 +474,13 @@ def emit_versions_records(seen):
                         versiond + "." +
                         field + "\n")
 
-        outf.write( "class Version:\n    def __init__(self):\n    self.records = {\n")
+        outf.write("from fec.version.version_base import VersionBase\n")
+        outf.write("class Version(VersionBase):\n")
+        outf.write("    def __init__(self):\n")
+        outf.write("        self.records = {\n")
         versiond =         version.replace(".","_")
         for field in sorted(seen[version].keys()):   
-            outf.write(
-                "            '"+ 
+            outf.write("            '"+ 
                 field +  
                 "' : "  + 
                 'fec.version.' + 
@@ -445,7 +489,7 @@ def emit_versions_records(seen):
                 "," + 
                 "\n" 
             )
-        outf.write( "    }\n")
+        outf.write( "        }\n")
 
 
 def emit_versions_records_fields(seen):
@@ -461,7 +505,8 @@ def emit_versions_records_fields(seen):
                 
             outf = open ("fec/version/"+versiond + "/" + record + ".py","w")
 
-            outf.write( "class Records:\n")
+            outf.write("from fec.version.records_base import RecordsBase\n")
+            outf.write( "class Records(RecordsBase):\n")
             outf.write("    def __init__(self):\n")
             outf.write("        self.fields = [\n")
             for field in seen[version][record]:   

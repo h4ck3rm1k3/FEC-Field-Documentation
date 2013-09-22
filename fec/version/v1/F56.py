@@ -1,18 +1,19 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
-            ['SEQUENCE NUMBER', '3', '', ''],
-            ['CONTRIBUTOR', '4-', '', ''],
-            ['STREET 1', '5', '', ''],
-            ['STREET 2', '6', '', ''],
-            ['CITY', '7', '', ''],
-            ['STATE', '8', '', ''],
-            ['ZIP', '9', '', ''],
-            ['INDEMP', '10', '', ''],
-            ['INDOCC', '11', '', ''],
-            ['OF CONTRIBUTION', '12-', '', ''],
-            ['AMOUNT CONTRIBUTION AMOUNT', '13', '', ''],
-            ['AMENDED', '14', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FEC COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'SEQUENCE NUMBER', 'number': '3'},
+            {'name': 'CONTRIBUTOR', 'number': '4-'},
+            {'name': 'STREET 1', 'number': '5'},
+            {'name': 'STREET 2', 'number': '6'},
+            {'name': 'CITY', 'number': '7'},
+            {'name': 'STATE', 'number': '8'},
+            {'name': 'ZIP', 'number': '9'},
+            {'name': 'INDEMP', 'number': '10'},
+            {'name': 'INDOCC', 'number': '11'},
+            {'name': 'OF CONTRIBUTION', 'number': '12-'},
+            {'name': 'AMOUNT CONTRIBUTION AMOUNT', 'number': '13'},
+            {'name': 'AMENDED', 'number': '14'},
     ]

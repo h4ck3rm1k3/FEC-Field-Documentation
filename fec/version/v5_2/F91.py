@@ -1,16 +1,17 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER FEC CMTE ID', '2', '', ''],
-            ['Share/Exer Control', '3-', '', ''],
-            ['STREET 1', '4', '', ''],
-            ['STREET 2', '5', '', ''],
-            ['CITY', '6', '', ''],
-            ['STATE', '7', '', ''],
-            ['ZIP', '8', '', ''],
-            ['EMPLOYER', '9', '', ''],
-            ['OCCUPATION', '10', '', ''],
-            ['AMENDED CD', '11', '', ''],
-            ['TRAN ID', '12', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER FEC CMTE ID', 'number': '2'},
+            {'name': 'Share/Exer Control', 'number': '3-'},
+            {'name': 'STREET 1', 'number': '4'},
+            {'name': 'STREET 2', 'number': '5'},
+            {'name': 'CITY', 'number': '6'},
+            {'name': 'STATE', 'number': '7'},
+            {'name': 'ZIP', 'number': '8'},
+            {'name': 'EMPLOYER', 'number': '9'},
+            {'name': 'OCCUPATION', 'number': '10'},
+            {'name': 'AMENDED CD', 'number': '11'},
+            {'name': 'TRAN ID', 'number': '12'},
     ]

@@ -1,15 +1,16 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
-            ['ACTIVITY/EVENT', '3-', '', ''],
-            ['ACTIVITY/EVENT NUMBER', '4', '', ''],
-            ['ACTIVITY IS FUNDRAISING', '5-', '', ''],
-            ['ACTIVITY IS EXEMPT', '6-', '', ''],
-            ['ACT DIRECT CAN SUPPORT', '7-', '', ''],
-            ['RATIO CODE (N,R,S)', '8', '', ''],
-            ['FEDERAL PERCENTAGE', '9', '', ''],
-            ['NON-FEDERAL PERCENTAGE', '10', '', ''],
-            ['AMENDED', '11', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FEC COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'ACTIVITY/EVENT', 'number': '3-'},
+            {'name': 'ACTIVITY/EVENT NUMBER', 'number': '4'},
+            {'name': 'ACTIVITY IS FUNDRAISING', 'number': '5-'},
+            {'name': 'ACTIVITY IS EXEMPT', 'number': '6-'},
+            {'name': 'ACT DIRECT CAN SUPPORT', 'number': '7-'},
+            {'name': 'RATIO CODE (N,R,S)', 'number': '8'},
+            {'name': 'FEDERAL PERCENTAGE', 'number': '9'},
+            {'name': 'NON-FEDERAL PERCENTAGE', 'number': '10'},
+            {'name': 'AMENDED', 'number': '11'},
     ]

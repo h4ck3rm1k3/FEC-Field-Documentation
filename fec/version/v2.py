@@ -30,9 +30,10 @@ import fec.version.v2.SH2
 import fec.version.v2.SH3
 import fec.version.v2.SH4
 import fec.version.v2.SI
-class Version:
+from fec.version.version_base import VersionBase
+class Version(VersionBase):
     def __init__(self):
-    self.records = {
+        self.records = {
             'F1' : fec.version.v2.F1.Record,
             'F1M' : fec.version.v2.F1M.Record,
             'F2' : fec.version.v2.F2.Record,
@@ -65,4 +66,4 @@ class Version:
             'SH3' : fec.version.v2.SH3.Record,
             'SH4' : fec.version.v2.SH4.Record,
             'SI' : fec.version.v2.SI.Record,
-    }
+        }

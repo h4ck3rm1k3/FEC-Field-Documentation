@@ -1,20 +1,21 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FEC COMMITTEE ID NUMBER', '2', '', ''],
-            ['SEQUENCE NUMBER', '3', '', ''],
-            ['COMMUNICATION TYPE', '4', '', ''],
-            ['COMMUN SPECIFICATION', '5-TRANS', '', ''],
-            ['COMMUNICATION CLASS OR CATEGORY', '6', '', ''],
-            ['OF COMMUNICATION', '7-', '', ''],
-            ['SUPPORT/OPPOSE', '8', '', ''],
-            ['FEC CANDIDATE ID NUMBER', '9', '', ''],
-            ['CANDIDATE NAME', '10', '', ''],
-            ['CAN/OFF', '11', '', ''],
-            ['STATE (OF ELECTION)', '12', '', ''],
-            ['CAN/DIST', '13', '', ''],
-            ['RPTPGI', '14', '', ''],
-            ['Cost of communication', '15', '', ''],
-            ['AMENDED', '16', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FEC COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'SEQUENCE NUMBER', 'number': '3'},
+            {'name': 'COMMUNICATION TYPE', 'number': '4'},
+            {'name': 'COMMUN SPECIFICATION', 'number': '5-TRANS'},
+            {'name': 'COMMUNICATION CLASS OR CATEGORY', 'number': '6'},
+            {'name': 'OF COMMUNICATION', 'number': '7-'},
+            {'name': 'SUPPORT/OPPOSE', 'number': '8'},
+            {'name': 'FEC CANDIDATE ID NUMBER', 'number': '9'},
+            {'name': 'CANDIDATE NAME', 'number': '10'},
+            {'name': 'CAN/OFF', 'number': '11'},
+            {'name': 'STATE (OF ELECTION)', 'number': '12'},
+            {'name': 'CAN/DIST', 'number': '13'},
+            {'name': 'RPTPGI', 'number': '14'},
+            {'name': 'Cost of communication', 'number': '15'},
+            {'name': 'AMENDED', 'number': '16'},
     ]

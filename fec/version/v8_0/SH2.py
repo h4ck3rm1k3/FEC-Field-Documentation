@@ -1,13 +1,14 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['FORM TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['ACTIVITY/EVENT NAME', '4', '', ''],
-            ['Direct Fundraising?', '5-', '', ''],
-            ['Direct Candidate Support?', '6-', '', ''],
-            ['RATIO CODE', '7', '', ''],
-            ['FEDERAL PERCENTAGE', '8', '', ''],
-            ['NON-FEDERAL PERCENTAGE', '9', '', ''],
+            {'name': 'FORM TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'ACTIVITY/EVENT NAME', 'number': '4'},
+            {'name': 'Direct Fundraising?', 'number': '5-'},
+            {'name': 'Direct Candidate Support?', 'number': '6-'},
+            {'name': 'RATIO CODE', 'number': '7'},
+            {'name': 'FEDERAL PERCENTAGE', 'number': '8'},
+            {'name': 'NON-FEDERAL PERCENTAGE', 'number': '9'},
     ]

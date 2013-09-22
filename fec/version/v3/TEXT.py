@@ -1,8 +1,9 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['REC TYPE', '1', '', ''],
-            ['FORM TYPE', '2', '', ''],
-            ['BACK REF TRAN ID', '3', '', ''],
-            ['TEXT4000', '4', '', ''],
+            {'name': 'REC TYPE', 'number': '1'},
+            {'name': 'FORM TYPE', 'number': '2'},
+            {'name': 'BACK REF TRAN ID', 'number': '3'},
+            {'name': 'TEXT4000', 'number': '4'},
     ]

@@ -1,10 +1,11 @@
-class Records:
+from fec.version.records_base import RecordsBase
+class Records(RecordsBase):
     def __init__(self):
         self.fields = [
-            ['REC TYPE', '1', '', ''],
-            ['FILER COMMITTEE ID NUMBER', '2', '', ''],
-            ['TRANSACTION ID NUMBER', '3', '', ''],
-            ['BACK REFERENCE TRAN ID NUMBER', '4', '', ''],
-            ['BACK REFERENCE SCHED / FORM NAME', '5', '', ''],
-            ['TEXT4000', '6', '', ''],
+            {'name': 'REC TYPE', 'number': '1'},
+            {'name': 'FILER COMMITTEE ID NUMBER', 'number': '2'},
+            {'name': 'TRANSACTION ID NUMBER', 'number': '3'},
+            {'name': 'BACK REFERENCE TRAN ID NUMBER', 'number': '4'},
+            {'name': 'BACK REFERENCE SCHED / FORM NAME', 'number': '5'},
+            {'name': 'TEXT4000', 'number': '6'},
     ]
