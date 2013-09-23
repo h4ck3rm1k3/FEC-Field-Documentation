@@ -518,6 +518,9 @@ def emit_versions_records_fields(seen):
                 )
             outf.write( "    ]\n")
 
+            # hash the fields with a base function
+            outf.write("        self.fields_names = self.hash_names(self.fields)\n" 
+
 if not path.exists("fec"): 
     os.makedirs("fec")
 
