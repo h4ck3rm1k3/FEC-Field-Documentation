@@ -11,7 +11,8 @@ class VersionBase:
                   self.hdr=HDR(x)
                   self.hdr.emit()
             else:
-                  print "Version Base, parse," + str(x)
+                  #print "Version Base, parse," + str(x)
+                  pass
             
             #raise Exception(x)
 
@@ -27,9 +28,19 @@ class VersionBase:
                   f=f.replace('\"',"")
                   fields.append(f)
             record_type=fields[0]
+            original_record_type=record_type
 
             if record_type == "": 
-                  return 
+                  #return 
+                  return None 
+
+            if record_type == "[BEGINTEXT]": 
+                  #raise Exception("skip mail file")
+                  return None 
+
+            if record_type == "[BEGIN TEXT]": 
+                  #raise Exception("skip mail file")
+                  return None 
 
             #hack
             if record_type == "H4":
@@ -45,18 +56,19 @@ class VersionBase:
                   record_type = "SH3"
 
             if record_type in self.records:                  
-                  self.parse_record(fields,record_type)
+                  return self.parse_record(fields,record_type)
             else:
                   record_type=record_type[:2]
                   if record_type in self.records:                  
-                        self.parse_record(fields,record_type)
+                        return self.parse_record(fields,record_type)
                   else:
-                        raise Exception("recordtype '%s' not known %s record %s" % (record_type, sorted(self.records.keys()), str(fields) ))
+                        raise Exception("recordtype '%s' original_record_type %s not known %s record %s" % (record_type, original_record_type, sorted(self.records.keys()), str(fields) ))
                         #'F3' : fec.version.v1.F3.Records,
+            return None 
 
       def set_attr_hash(self, attrdict):
             self.record_list=[]
-            pass
+            
             #print attrdict
       
             # example
