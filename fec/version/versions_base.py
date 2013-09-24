@@ -3,7 +3,15 @@ class VersionsBase:
     def lookup(self,version):
         orginal_version=version
 
-        if version == "v3.0":
+        if version == "5.00":
+            return self.versions["v5.0"]()
+        elif version == "5.10":
+            return self.versions["v5.1"]()
+        elif version == "5.20":
+            return self.versions["v5.2"]()
+        elif version == "5.30":
+            return self.versions["v5.3"]()
+        elif version == "v3.0":
             return self.versions["v3"]()
         elif version == "3.0":
             return self.versions["v3"]()

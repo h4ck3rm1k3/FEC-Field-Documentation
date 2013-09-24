@@ -5,6 +5,9 @@ class VersionBase:
       def __init__(self):
             self.record_list=[]
 
+      def do_init(self):
+            self.record_list=[]
+
       def parse(self,x):
             fieldtype=x[0]
             if fieldtype == "HDR":
