@@ -3,10 +3,15 @@ from fec.version.HDR import HDR
 class VersionBase:
 
       def __init__(self):
-            self.record_list=[]
+            self.do_init()
+
+
+      def set_sep(self, sep):
+            self.sep=sep
 
       def do_init(self):
             self.record_list=[]
+            self.sep=","
 
       def parse(self,x):
             fieldtype=x[0]
@@ -25,7 +30,7 @@ class VersionBase:
             self.record_list.append(result)            
 
       def parse_body(self,fields):
-            fields_temp=fields.split(",")
+            fields_temp=fields.split(self.sep)
             fields=[]
             for f in fields_temp:
                   f=f.replace('\"',"")

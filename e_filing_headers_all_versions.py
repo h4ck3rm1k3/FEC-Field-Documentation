@@ -447,6 +447,7 @@ def emit_versions(seen):
 
     outf.write( "class Versions(VersionsBase):\n")
     outf.write( "    def __init__(self):\n")
+    outf.write( "        VersionsBase.__init__(self)\n")
     outf.write( "        self.versions = {\n")
     for version in sorted(seen.keys()):    
         versiond =         version.replace(".","_")
@@ -476,7 +477,9 @@ def emit_versions_records(seen):
                         field + "\n")
         outf.write("from fec.version.version_base import VersionBase\n")
         outf.write("class Version(VersionBase):\n")
+
         outf.write("    def __init__(self):\n")
+        outf.write("        VersionBase.__init__(self)\n")
         outf.write("        self.records = {\n")
         versiond =         version.replace(".","_")
         for field in sorted(seen[version].keys()):   
@@ -507,8 +510,9 @@ def emit_versions_records_fields(seen):
                 os.makedirs("fec/version/"+versiond)
             outf = open ("fec/version/"+versiond + "/" + record + ".py","w")
             outf.write("from fec.version.records_base import RecordsBase\n")
-            outf.write( "class Records(RecordsBase):\n")
+            outf.write("class Records(RecordsBase):\n")
             outf.write("    def __init__(self):\n")
+            outf.write("        RecordsBase.__init__(self)\n")
             outf.write("        self.fields = [\n")
             for field in seen[version][record]:   
                 outf.write(
@@ -519,7 +523,7 @@ def emit_versions_records_fields(seen):
             outf.write( "    ]\n")
 
             # hash the fields with a base function
-            outf.write("        self.fields_names = self.hash_names(self.fields)\n" 
+            outf.write("        self.fields_names = self.hash_names(self.fields)\n" )
 
 if not path.exists("fec"): 
     os.makedirs("fec")

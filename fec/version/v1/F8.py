@@ -1,6 +1,7 @@
 from fec.version.records_base import RecordsBase
 class Records(RecordsBase):
     def __init__(self):
+        RecordsBase.__init__(self)
         self.fields = [
             {'name': 'FORM TYPE', 'number': '1'},
             {'name': 'FEC COMMITTEE ID NUMBER', 'number': '2'},
@@ -35,3 +36,4 @@ class Records(RecordsBase):
             {'name': 'Treasurer\xe2\x80\x99s NAME', 'number': '31'},
             {'name': 'SIGNED', 'number': '32-'},
     ]
+        self.fields_names = self.hash_names(self.fields)

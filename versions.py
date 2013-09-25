@@ -14,6 +14,7 @@ import fec.version.v8_0
 from fec.version.versions_base import VersionsBase
 class Versions(VersionsBase):
     def __init__(self):
+        VersionsBase.__init__(self)
         self.versions = {
             'v1' : fec.version.v1.Version,
             'v2' : fec.version.v2.Version,

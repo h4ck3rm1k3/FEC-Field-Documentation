@@ -33,6 +33,7 @@ import fec.version.v2.SI
 from fec.version.version_base import VersionBase
 class Version(VersionBase):
     def __init__(self):
+        VersionBase.__init__(self)
         self.records = {
             'F1' : fec.version.v2.F1.Records,
             'F1M' : fec.version.v2.F1M.Records,

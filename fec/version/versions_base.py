@@ -1,5 +1,6 @@
 class VersionsBase:
-
+    def __init__(self):
+        pass 
     def lookup(self,version):
         orginal_version=version
 
