@@ -24,13 +24,14 @@ class VersionBase:
             
             #raise Exception(x)
 
-      def parse_record(self,fields, record_type):
+      def parse_record(self,fields, record_type,line):
             self.current_record=self.records[record_type]()
-            result = self.current_record.parse(fields)
+            result = self.current_record.parse(fields,line)
             self.record_list.append(result)            
+            return result
 
-      def parse_body(self,fields):
-            fields_temp=fields.split(self.sep)
+      def parse_body(self,line):
+            fields_temp=line.split(self.sep)
             fields=[]
             for f in fields_temp:
                   f=f.replace('\"',"")
@@ -39,16 +40,16 @@ class VersionBase:
             original_record_type=record_type
 
             if record_type == "": 
-                  #return 
-                  return None 
+                  raise Exception("record type none")
+                  #return None 
 
             if record_type == "[BEGINTEXT]": 
-                  #raise Exception("skip mail file")
-                  return None 
+                  raise Exception("skip mail file")
+                  #return None 
 
             if record_type == "[BEGIN TEXT]": 
-                  #raise Exception("skip mail file")
-                  return None 
+                  raise Exception("skip mail file")
+                  #return None 
 
             #hack
             if record_type == "H4":
@@ -64,15 +65,16 @@ class VersionBase:
                   record_type = "SH3"
 
             if record_type in self.records:                  
-                  return self.parse_record(fields,record_type)
+                  return self.parse_record(fields,record_type,line)
             else:
                   record_type=record_type[:2]
                   if record_type in self.records:                  
-                        return self.parse_record(fields,record_type)
+                        return self.parse_record(fields,record_type,line)
                   else:
                         raise Exception("recordtype '%s' original_record_type %s not known %s record %s" % (record_type, original_record_type, sorted(self.records.keys()), str(fields) ))
                         #'F3' : fec.version.v1.F3.Records,
-            return None 
+            raise Exception()
+            #return  
 
       def set_attr_hash(self, attrdict):
             self.record_list=[]
