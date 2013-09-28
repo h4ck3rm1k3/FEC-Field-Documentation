@@ -1,0 +1,16 @@
+#*#
+.#*
+*.pyc
+Fech/
+cache
+data/
+dump.yaml
+mediawiki-parser/
+mwlib/
+mwparserfromhell/
+pijnu/
+pywikipediabot/
+sunlight/
+*~
+secret.py
+##*##

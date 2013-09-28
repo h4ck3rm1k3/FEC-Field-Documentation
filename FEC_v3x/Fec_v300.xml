@@ -1,0 +1,1584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article lang="">
+  <para>FEC ELECTRONIC FILE FORMAT </para>
+  <para>VERSION 3.00     9/23/13     DocID:  FEC_v300.rtf</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>FEC ELECTRONIC FILING USER GUIDE</para>
+  <para/>
+  <para>VERSION 3.00</para>
+  <para/>
+  <para/>
+  <para> </para>
+  <para/>
+  <para/>
+  <para>Contents</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>OVERVIEW</para>
+  <para/>
+  <para>GENERAL REQUIREMENTS</para>
+  <para/>
+  <para>HEADER RECORDS</para>
+  <para/>
+  <para>TEXT RECORDS</para>
+  <para/>
+  <para>FILE LAYOUTS</para>
+  <para>(Electronic File Layouts are contained in a separate MS-Excel 5.0 spreadsheet named FEC_v300.xls)</para>
+  <para/>
+  <para/>
+  <para>APPENDIX A  -  Federal Election Commission Codes and their definitions</para>
+  <para/>
+  <para>APPENDIX B  -  Validation Messages</para>
+  <para/>
+  <para>APPENDIX C  -  Valid Schedules and Summary Page Line Numbers for various FEC Forms</para>
+  <para/>
+  <para>APPENDIX D  -  Modifications to FEC Version 2.02 Format for FEC Version 3.00</para>
+  <para/>
+  <para>APPENDIX E  -  Technical specifications for use of FEC supplied vendor utilities</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>OVERVIEW</para>
+  <para/>
+  <para>This document describes the filing format used for electronically submitting disclosure and registration documents to the Federal Election Commission.  (A related MS Excel spreadsheet named "FEC_v300.xls" describes the specific layouts for the records that are used in electronic document files.)</para>
+  <para/>
+  <para>The format consists of various record layouts whose fields are separated (delimited) by commas.  CSV (comma-separated-value) files are made up of records which are delimited with terminating CRLF (carridge-return and line-feed characters - represented in hexidecimal as '0D0A'.)  Each comma within a CSV record represents the end of one field and the beginning of the next.  Any text which might contain a comma (used as punctuation) must be surrounded with double-quote marks (eg. "text, and more text").</para>
+  <para/>
+  <para>Fields may not begin with leading blanks (for example, "  ABC" is incorrectly coded and should be coded "ABC").  Generally speaking, only keyboard characters are acceptable within CSV files.  Technically, any coded characters that fall outside the range of ASCII characters 32 (space) through 126 (tilde "~") will be rejected.  Care should be taken if</para>
+  <para>text is cut and pasted from word processing programs, since some characters such as appostrophe and "smart quotes" may not translate into the appropriate ASCII characters.</para>
+  <para/>
+  <para>The first record of every electronic file that is submitted to the FEC must be an HDR record that precedes the main body of the ASCII CSV (comma separated values) data.</para>
+  <para>The second record will be a "cover" record for the particular filing, (for example, a F3 or and F3X record for a FEC-3 or FEC-3X electronic report).  An unlimited number of Schedule records (examples: SA, SB, SC/, ...) can follow the first two records of an FEC electronic report file.  (Electronic files are usually assigned the file suffix ".fec".)</para>
+  <para/>
+  <para>A validating utility named FECheck4 is available for downloading from the FEC website.</para>
+  <para>It can, and should, be used by everyone who creates electronic files for the FEC, especially by those who are testing new software to create electronic filings.  The same validatating utility is used by the FEC to check every electronic filing that it receives, either by diskette or over the internet.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>    GENERAL REQUIREMENTS</para>
+  <para/>
+  <para/>
+  <para>FORM TYPE</para>
+  <para>FORM TYPE refers to the combination of the FEC form and other important identifying indicators.  For the general forms (cover sheets, not schedules), the format is form type followed by the amendment indicator (e.g. F3A, F3PA).  If a filing is not an amendment and not a termination report, it is a "New Report" and the 'N' indicator is included in the Form Type (e.g. F3XN).  If the Report Type is indicated as a “Termination Report”, a ‘T’ indicator will be included in the Form Type (for quick identification purposes) UNLESS the ‘A’ amendment indicator supersedes the ‘T’ indicator.</para>
+  <para/>
+  <para>Form types for schedules are a little more complicated - they indicate both the schedule and the line from the Summary Page of the cover form that the record relates to (e.g.  SA15A).</para>
+  <para/>
+  <para/>
+  <para>FEC ID NUMBER - (FEC COMMITTEE ID NUMBER, FEC CANDIDATE ID NUMBER)</para>
+  <para>All references to “FEC ID NUMBER” indicate that the field contains a FEC assigned identification number.  All committee ID numbers begin with a ‘C’ and all candidate ID numbers begin with: S (senate), H (house), P (presidential).  All FEC id numbers are 9 characters long with no spaces.</para>
+  <para/>
+  <para>House &amp; Senate Candidate FEC ID codes have the following formats:  H9ST99999, S9ST99999, and P99999999...  (where the 1st Character is H=House, S=Senate, P=Presidential, and the 3rd &amp; 4th characters of House &amp; Senate codes are the 2-letter State Code, and the remaining parts of all codes are numeric).</para>
+  <para/>
+  <para>Committee FEC ID codes consist of the letter  C=Committee in the first position, followed by 7 digits, followed by a 'check-digit' in the 9th position.</para>
+  <para/>
+  <para>This document has been changed to include more detail and to insure consistency.</para>
+  <para>For example, in Form 1, the line:</para>
+  <para>        2.   FILER FEC CMTE ID                        (A/N-9)</para>
+  <para>         (reflects that only committees will file the document.)</para>
+  <para/>
+  <para>Please note, certain lines will have identifying words included; these exist only to aid in identifying the type of committee included in the field.  For example:</para>
+  <para>        FEC COMMITTEE ID NUMBER  (PCC)                (A/N-9)</para>
+  <para>        FEC COMMITTEE ID NUMBER  (AUTH)                (A/N-9)</para>
+  <para/>
+  <para/>
+  <para>COMMITTEE NAME - COMMITTEE NAME</para>
+  <para>All committee names are a maximum of 90 characters long.</para>
+  <para/>
+  <para/>
+  <para>ORGANIZATION TYPE - ORGANIZATION TYPE</para>
+  <para>The FEC interest group codes match the boxes on the form exactly.</para>
+  <para>Options are: ‘C’, ‘T’, ‘L’, ‘M’, ‘V’, ‘W’.   (also see Appendix)</para>
+  <para/>
+  <para/>
+  <para>CANDIDATE NAME - CANDIDATE NAME</para>
+  <para>All candidate names are a maximum of 38 characters long.</para>
+  <para/>
+  <para/>
+  <para>STREET ADDRESS 1/2 - STREET 1, STREET 2</para>
+  <para>All street addresses are a maximum of 34 characters long.</para>
+  <para>If only one line of street address is given, it should be coded in Street 1, and Street 2 should be blank.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>CITY - CITY</para>
+  <para>All city indicators are a maximum of 18 characters long.</para>
+  <para/>
+  <para/>
+  <para>STATE CODE - STATE / ELECTION STATE</para>
+  <para>All state indicators are 2 character codes.  The Appendix includes a listing of  special state codes.  State codes referring to addresses are indicated by STATE, references to the state in which a candidate is running are referred to as ELECTION STATE. </para>
+  <para/>
+  <para/>
+  <para>ZIP CODE - ZIP</para>
+  <para>All zip codes are 9 characters long, four trailing spaces are acceptable.</para>
+  <para/>
+  <para/>
+  <para>DATES - DATE</para>
+  <para>All dates are eight numeric characters.  The dates are in the format CCYYMMDD.  In this document, many dates are followed by identifiers such as:  DATE (OF CONTRIBUTION).</para>
+  <para/>
+  <para/>
+  <para>AMOUNTS</para>
+  <para>Amount fields are 12 characters maximum.  They must be numeric (with two exceptions).  A leading minus (-) sign is used to indicate negative amount values.  An explicit decimal point (.) must be imbedded with 2 numeric decimal positions following the point.  However, implementation of the “Header Record”  allows for the specification of amounts with either explicit decimal point (e.g. 999.99, 0.05, -100.00) representation,  or “implicit” decimal representation (e.g. 99999, 005, -10000).  With implicit decimal  point representation, the last two (2) digits are interpreted to be cents.</para>
+  <para/>
+  <para/>
+  <para>RATES</para>
+  <para>Interest rates are generally coded as numeric amounts, however up to 15 characters of text is acceptable on Schedule C, where rates can be expressed in terms such as “Prime + 1%” for example.  If the rate is expressed as a percentage then it must be coded as a 4-digit percent (i.e. 4 decimal places with an explicit, leading decimal point).  For example: .0500 or .0865 are interpreted as 5% or 8.65%.  A value of 100% must be expressed as a rate with a coded value of 1.000.</para>
+  <para>The maximum field length for “text” rates is 15 bytes.</para>
+  <para>The minimum/maximum field length for numeric rates is exactly 5 bytes.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>INDIVIDUAL’S NAMES - IND/NAME</para>
+  <para>All individual names are a maximum of 38 characters.  </para>
+  <para>To accommodate the variety of situations, the following has been implemented for the name field. Each name field may contain the following elements:</para>
+  <para>        Lastname (or Business name)</para>
+  <para>        Firstname (plus all middle initials and/or middle names)</para>
+  <para>        Prefix (such as Dr., Ms. or Mr.)</para>
+  <para>        Suffix (such as Jr., Sr.)</para>
+  <para/>
+  <para>Accordingly, the name field is sub-delimited with a caret (^) so that a name field record would appear as follows:</para>
+  <para>        “Lastname^Firstname^Prefix^Suffix”</para>
+  <para/>
+  <para>Some examples follow:</para>
+  <para>Dr. John W. Smith, Jr. would be shown as: “Smith^John W.^Dr.^Jr.”</para>
+  <para>John W. Smith, Jr. would be shown as: “Smith^John W.^^Jr.”</para>
+  <para>Smith Medical Corporation would be: “Smith Medical Corporation”</para>
+  <para>Ms. Jennifer T. Smith-Reilly would be “Smith-Reilly^Jennifer T.^Ms.”</para>
+  <para/>
+  <para>Note:  An alternate character to the caret(^) name delimiter may be defined by including the alternate delimiter in the Header Record.</para>
+  <para/>
+  <para/>
+  <para>INDIVIDUAL’S EMPLOYER - INDEMP</para>
+  <para>All individual employers fields are now a maximum of 38 characters. </para>
+  <para/>
+  <para/>
+  <para>INDIVIDUAL’S OCCUPATION - INDOCC</para>
+  <para>Previously in this document the individual occupation field was listed at 34 characters.  It has been changed  so that all individual occupation fields are now a maximum of 38 characters.  The original logic was that the disclosure database contains 35 character names.</para>
+  <para/>
+  <para/>
+  <para>CANDIDATE OFFICE - CAN/OFF</para>
+  <para>The candidate office field is a one character alpha code;  ‘H’ represents house, ‘S’ represents senate, and ‘P’ represents presidential. </para>
+  <para/>
+  <para/>
+  <para>CANDIDATE DISTRICT - CAN/DIST</para>
+  <para>Candidate districts consist of two numeric characters.  The only acceptable responses are</para>
+  <para>blank, and 00 through 99.</para>
+  <para/>
+  <para/>
+  <para>PARTY DESIGNATIONS - PTY/CODE</para>
+  <para>Candidates and some committees declare their party affiliations.  This should be a three character code and is optional in all cases.  A full list of these party codes is included in the Appendix.</para>
+  <para/>
+  <para/>
+  <para>TELEPHONE NUMBER - TELEPHONE</para>
+  <para>Telephone numbers, when reported contain 10 numeric characters.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>REPORT CODE - RPTCODE</para>
+  <para>Report code consists of  three alpha-numeric characters.  The acceptable report codes are included in the Appendix. </para>
+  <para/>
+  <para/>
+  <para>ELECTION TYPE (COVER FORMS / REPORTS) - RPTPGI</para>
+  <para>Election types, when referring to the basic reports, can only indicate elections within the election cycle that is being reported.  Therefore the only acceptable responses are: ‘C’, ‘G’, ‘P’, ‘R’, ‘S’.  A full list of these codes is listed in the Appendix. </para>
+  <para/>
+  <para/>
+  <para>ELECTION TYPE (ITEMIZED / SCHEDULES) - ITEM-ELECT-CD</para>
+  <para>In reference to the individual transactions reported on the various schedules, election types indicate elections within the election cycle that is being reported and past and future elections.   See Appendix.</para>
+  <para>If Other is coded, the ITEM-ELECT-OTHER description must also be coded.</para>
+  <para/>
+  <para/>
+  <para>CONVENTION COMMITTEE TYPE -CONVENTION TYPE</para>
+  <para>Form 4 gives a selection for type of convention committee.  The choices are: Arrangements, Host and Other.  Included is a 40 character area for a description of the “Other”.</para>
+  <para/>
+  <para/>
+  <para>COMMUNICATION COSTS SUPPORT/OPPOSE - 24F/24N</para>
+  <para>Communication costs may be reported on Form 7.   The support/oppose value is identified as 24F and 24N on the FEC's database.  Data may be represented by either the 24F/24N values or with S/O coding.  Data translation is done by equating ‘S’ with ‘24F’ and  ‘O’ with ‘24N’.</para>
+  <para/>
+  <para/>
+  <para>INDEPENDENT EXPENDITURES SUPPORT/OPPOSE - 24A/24E</para>
+  <para>Communication costs may be reported on Schedule E and Form 5.   The support/oppose value is identified as 24A and 24E on the FEC's database.  Data may be represented by either the 24A/24E values or with S/O coding.  Data translation is done by equating ‘S’ with ‘24E’ and ‘O’ with ‘24A’.</para>
+  <para/>
+  <para/>
+  <para>MEMO ENTRY- MEMO</para>
+  <para>Many  itemized transactions have a Memo entry to allow the filers to provide a more complete description of the activity.  Maximum 100 characters.  Memo Text is available on itemized amounts on Schedules A and B - amounts which are totaled and carried back to the Summary Page of the filing.  In addition a Memo Code indicates that the amount is NOT to be included in the itemization total.</para>
+  <para/>
+  <para/>
+  <para>YES/NO BOXES - YESNO</para>
+  <para>Several Forms and Schedules contain yes/no boxes, the questions are generally different for each form and can determine the need for further response in another field.  Unless otherwise noted, Check Boxes are evaluated to be “checked” or “empty” based on the data content of the related field in the Comma-Separated-Value (CSV) file.</para>
+  <para>Box = “Checked” when CSV value is ‘X’, ‘Y’, ‘1’ or ‘T’ (value ‘X’ is preferred)</para>
+  <para>Box = “Empty” when CSV value is blank, ‘N’, ‘0’ or ‘F’    (space or null is preferred)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>TRANSACTION IDENTIFIERS (TRAN_ID)</para>
+  <para>Transaction Identifiers {TRAN_ID} are required on every schedule itemization record.  </para>
+  <para/>
+  <para>For all new items, the TRAN_ID must contain a unique value that will be used by the Agency's database to point to that particular item.  It must be a value that is unique among all items within a group of reports comprised of an original and all associated amendments. </para>
+  <para/>
+  <para>Tran ID: A unique identifier permanently associated with each itemization or transaction appearing in an FEC electronic file. If a given itemization appears in more than one schedule (e.g.  an in-kind contribution is reported on both Schedule A and Schedule B) then the Tran ID associated with that itemization must have different values for that single item among the various schedules. However, all Tran Ids of itemizations appearing in any amending report must match the Tran Ids first used for those same itemizations in the original report. </para>
+  <para/>
+  <para>The Tran ID assigned and maintained by the filer's software is used by the FEC's database to uniquely identify each itemization from every filer. It is critically important that when a filer amends a previously filed electronic report, the Tran Ids of the subsequent amendment match those already reported. It is acceptable for a Tran ID of one original report to be assigned a value that was used on a previous original report and all of its amendments.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>HEADER  RECORDS</para>
+  <para/>
+  <para/>
+  <para>The first record of every electronic file that is submitted to the FEC must be an HDR record that precedes the main body of the ASCII CSV (comma separated values) data.  An example of Version 3.00 header records for an FEC filing is shown below. </para>
+  <para/>
+  <para>Example of a Header Record:</para>
+  <para/>
+  <para>                                        </para>
+  <para>Seq.  Field Desc        Type          Rule Reference</para>
+  <para/>
+  <para>01          Record Type        A/N-3         Record Type. Value: HDR</para>
+  <para>02         EF Type        A/N-3         Electronic Filing Type   Value: FEC</para>
+  <para>03         FEC Ver        A/N-4         FEC Version #. Value: 3.00</para>
+  <para>04         Soft Name        A/N-90 Filer software name</para>
+  <para>05         Soft Ver        A/N-16 Filer Software Version #</para>
+  <para>06        Name Delim        A-1         Internal delimiter used in Name fields. </para>
+  <para> Default is “^”</para>
+  <para>07          Rpt ID        A/N-16 If Amendment, FEC Report ID assigned to orig.</para>
+  <para>08         Rpt Number        N-03         If Amendment, the number (1-999) of the </para>
+  <para> amending Report starting with Amendment #1 </para>
+  <para> through #999</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>MEMOS NOTES &amp; EXPLANATORY TEXT</para>
+  <para/>
+  <para/>
+  <para>Large bodies of text can be associated with forms, schedules and also with individual itemizations within schedules.  A special TEXT record can be used in an FEC file to carry descriptive text as a string of characters not exceeding 4000 characters.  </para>
+  <para/>
+  <para>TEXT records can be associated with a filing's "cover" page, with a schedule/line number combination, and to one or more individual itemizations within a schedule. When the text record is related to an itemized transaction, it does not replace the “Description/Purpose of Disbursement” field. The text record is  for reporting extra information beyond the required short description.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>The layout of the TEXT record is described below:</para>
+  <para/>
+  <informaltable frame="all">
+    <tgroup cols="4"><tbody><row><entry><para>SEQ</para></entry><entry><para>Field Desc</para></entry><entry><para>Type</para></entry><entry><para/><para>Rule Reference</para></entry></row><row><entry><para>---</para></entry><entry><para>------------</para></entry><entry><para>-----</para></entry><entry><para>-------------------------------------</para></entry></row><row><entry><para>01  </para></entry><entry><para>Rec Type</para></entry><entry><para>A/N-4</para></entry><entry><para>Record Type Value: TEXT</para></entry></row><row><entry><para>02</para></entry><entry><para>Form Type</para></entry><entry><para>A/N-8</para></entry><entry><para>Contains 'Form_Type' of a "cover" Form (F3N, F3XA) or a Schedule (e.g. SA11A1,SB17,SC/10,SE24, ...) to which this text/memo/note is related. Values:  (F3N, F3PA, any schedule name) Only one text  record may be related to the “Form_Type”. Only one text record may be related to a Schedule/Line number combination (i.e. SA11C) and only one text record may be related to a single itemized transaction.</para><para/></entry></row><row><entry><para>03</para></entry><entry><para>Tran ID Reference</para><para/></entry><entry><para>A/N-20</para></entry><entry><para>Used only when the text is related to an individual item within a schedule. The value contained in this field is the itemization's Tran ID value.</para><para/></entry></row><row><entry><para>04</para></entry><entry><para>Text4000</para></entry><entry><para>A/N-4000</para></entry><entry><para>A string of unformatted text up to 4000 characters. (note:  no tab, carriage return, line feed any other non-printable characters may be embedded within the string of text.) </para></entry></row></tbody></tgroup>
+  </informaltable>
+  <para/>
+  <para/>
+  <para>Examples:</para>
+  <para/>
+  <para>TEXT,F3N,,"Some general notes about this F3 filing are given here."</para>
+  <para>TEXT,SA11A,,"Some general notes about Schedule A for line 11 in this F3 filing."</para>
+  <para>TEXT,SB17,123,"A long memo for an item in Schedule B that references Memo 123."</para>
+  <para/>
+  <para>FILE LAYOUTS</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>(Electronic File Layouts are contained in a separate MS-Excel 5.0 spreadsheet named FEC_v202.xls)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>APPENDIX  A</para>
+  <para/>
+  <para/>
+  <para>FEDERAL ELECTION COMMISSION CODES AND THEIR DEFINITIONS</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Entity Type Codes         (Edit: Entity)</para>
+  <para/>
+  <para>        CAN        Candidate</para>
+  <para>        CCM        Candidate Committee</para>
+  <para>        COM        Committee</para>
+  <para>        IND        Individual (a person)</para>
+  <para>        ORG        Organization (not a committee and not a person)</para>
+  <para>        PAC        Political Action Committee</para>
+  <para>        PTY        Party Organization</para>
+  <para>________________________________________________________________________</para>
+  <para/>
+  <para>Committee Types         (Edit: CMTE)</para>
+  <para/>
+  <para>Form F1, Field #12, COMMITTEE TYPE</para>
+  <para/>
+  <para>        A        Principal Campaign Committee</para>
+  <para>        B        Authorized Committee</para>
+  <para>        C        Support/Oppose One Candidate (Not Authorized Committee)</para>
+  <para>        D        National, State, or Subordinate Party Committee</para>
+  <para>        E        Separate Segregated Fund</para>
+  <para>        F        Support/Oppose more than One Fed Cand &amp; Not Segregated</para>
+  <para>            Fund/Party</para>
+  <para/>
+  <para>Form F1M, Field #9, COMMITTEE TYPE</para>
+  <para/>
+  <para>        X        State Party (Party, Non-Qualified)</para>
+  <para>        N        Other (Non-Party, Non-Qualified)</para>
+  <para/>
+  <para>Form F4, Field #9, COMMITTEE TYPE</para>
+  <para/>
+  <para>        A        Arrangements Committee</para>
+  <para>        H        Host Committee</para>
+  <para>        O        Other</para>
+  <para/>
+  <para>Form F1, Field #28, and Form F7, Field #9, ORGANIZATION TYPE</para>
+  <para/>
+  <para>        C        Corporation</para>
+  <para>        T        Trade Association</para>
+  <para>        L        Labor Organization</para>
+  <para>        M        Membership Organization</para>
+  <para>        V        Cooperative</para>
+  <para>        W        Corporation w/o capital stock</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Candidate Office Types         (Edit: OFFICE)</para>
+  <para/>
+  <para>        H        HOUSE</para>
+  <para>        P        PRESIDENTIAL</para>
+  <para>        S        SENATE</para>
+  <para>_______________________________________________________________________</para>
+  <para/>
+  <para>Yes/No Check-boxes         (Edit: YN)</para>
+  <para/>
+  <para>        Y        YES        (also: 1; T; X)</para>
+  <para>        N        NO        (also: 0; F)</para>
+  <para>_______________________________________________________________________</para>
+  <para/>
+  <para>Single Check-box         (Edit: X)</para>
+  <para/>
+  <para>        X        "Checked"        (also: 1; T; Y)</para>
+  <para>_______________________________________________________________________</para>
+  <para/>
+  <para>Primary/General Indicators         (Edit: PGI)</para>
+  <para/>
+  <para>        Cccyy        Convention</para>
+  <para>        Gccyy        General</para>
+  <para>        Pccyy        Primary</para>
+  <para>        Occyy        Other        (Requires additional Description)</para>
+  <para>        Rccyy        Runoff</para>
+  <para>        Sccyy        Special</para>
+  <para/>
+  <para>The first letter is the "type" of election. The next 4 digits are the century and year (ccyy) in which the election takes place. Ex: P2002 for the 2002 primary.</para>
+  <para>_______________________________________________________________________</para>
+  <para/>
+  <para>Support/Oppose Code         (Edit: SOP)</para>
+  <para/>
+  <para>Form F3X, Schedule E, Field #13, Support/Oppose Code</para>
+  <para/>
+  <para>        S        Support        (also: SUP; 24E)</para>
+  <para>        O        Oppose        (also: OPP; 24A)</para>
+  <para>        UNI        Unitemized        (Schedule E only)</para>
+  <para/>
+  <para>Form F5.7, Field #13, Support/Oppose Code</para>
+  <para/>
+  <para>        S        Support        (also: SUP; 24E)</para>
+  <para>        O        Oppose        (also: OPP; 24A)</para>
+  <para/>
+  <para>Form F7.6, Field #7, Support/Oppose Code</para>
+  <para/>
+  <para>        S        Support        (also: SUP; 24F)</para>
+  <para>        O        Oppose        (also: OPP; 24N)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Communication Type &amp; Category         (Edit: COMM-TYPE)</para>
+  <para/>
+  <para>Form F7.6, Field #3, Communication Type</para>
+  <para/>
+  <para>        DM        Direct Mail</para>
+  <para>        TP        Telephone</para>
+  <para>        TM        Telegram</para>
+  <para>        O        Other</para>
+  <para/>
+  <para>Form F7.6, Field #5, Communication Category</para>
+  <para/>
+  <para>        E        Executive/Administrative Personnel</para>
+  <para>        S        Stockholders</para>
+  <para>        M        Members</para>
+  <para>_______________________________________________________________________</para>
+  <para/>
+  <para>Debt Settlement / Type of Creditor         (Edit: CRED)</para>
+  <para/>
+  <para>Form F8.2 &amp; F8.3, Field #3, Creditor Type</para>
+  <para/>
+  <para>        ICV        Incorporated Commercial Vendor</para>
+  <para>        UCV        Unincorporated Commercial Vendor</para>
+  <para>        CAN        Candidate</para>
+  <para>        EMP        Committee Employee</para>
+  <para>        OTH        Other Individual</para>
+  <para>__________________________________________________________________</para>
+  <para/>
+  <para>Party Type         (Edit: PTY-TYP)</para>
+  <para/>
+  <para>Form F1, Field #19, Party Type</para>
+  <para/>
+  <para>        NAT        National Party</para>
+  <para>        STA        State Party</para>
+  <para>        SUB        Subordinate Party Organization</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>CODES RELATING TO "H" SCHEDULES</para>
+  <para/>
+  <para>Schedule H2 (Check-box Fields: #4; #5; #6)</para>
+  <para>Schedule H4 (Check-box Fields: #15; #16; #17; #18)</para>
+  <para/>
+  <para>        A        Administrative/Voter Drive          (H4.15 when Value X)</para>
+  <para>        F        Fundraising                         (H2.4 &amp; H4.16 when Value X)</para>
+  <para>        E        Exempt                              (H2.5 &amp; H4.17 when Value X)</para>
+  <para>        D        Direct Candidate Support            (H2.6 &amp; H4.18 when Value X)</para>
+  <para/>
+  <para>Note:  Above codes are a series of X check-box fields on H2 &amp; H4</para>
+  <para/>
+  <para/>
+  <para>SCHEDULE H2, Field #7 Allocation Ratios         (Edit: RATIO-CD)</para>
+  <para/>
+  <para>        N        Ratio is {N}ew</para>
+  <para>        R        Ratio is {R}evised</para>
+  <para>        S        Ratio is {S}ame as previously reported</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Party Codes for Candidates and Committees         (Edit: PTY)</para>
+  <para/>
+  <para/>
+  <para>Form F1, Field #18 &amp; Form F2, Field #9 - Party Code</para>
+  <para/>
+  <para>        AIC        American Independent Conservative</para>
+  <para>        AIP        American Independent Party</para>
+  <para>        AMP        American Party</para>
+  <para>        APF        American PEOPLE'S FREEDOM PARTY</para>
+  <para>        CIT        Citizens' Party                         </para>
+  <para>        CMD        Commandments Party                  (Removed)</para>
+  <para>        CMP        Commonwealth Party of the U.S.</para>
+  <para>        COM        Communist Party                     (Old Doc was "M")</para>
+  <para>        CRV        Conservative Party</para>
+  <para>        CST        Constitutional</para>
+  <para>        D/C        Democratic/Conservative</para>
+  <para>        DEM        Democratic Party</para>
+  <para>        DFL        Democratic-Farm-Labor</para>
+  <para>        FLP        Freedom Labor Party</para>
+  <para>        GRE        Green Party                         Added)</para>
+  <para>        GWP        George Wallace Party</para>
+  <para>        HRP        Human Rights Party</para>
+  <para>        IAP        Independent American Party          (Added)</para>
+  <para>        ICD        Independent Conserv. Democratic</para>
+  <para>        IGD        Industrial Government Party</para>
+  <para>        IND        Independent</para>
+  <para>        LAB        U.S. Labor Party</para>
+  <para>        LBL        Liberal Party</para>
+  <para>        LBR        Labor Party</para>
+  <para>        LBU        Liberty Union Party</para>
+  <para>        LFT        Less Federal Taxes</para>
+  <para>        LIB        Libertarian</para>
+  <para>        LRU        La Raza Unida</para>
+  <para>        NAP        Prohibition Party</para>
+  <para>        NDP        National Democratic Party</para>
+  <para>        NLP        Natural Law Party</para>
+  <para>        NNE        None</para>
+  <para>        OTH        Other                               (Added)</para>
+  <para>        PAF        Peace and Freedom</para>
+  <para>        PFD        Peace Freedom Party</para>
+  <para>        POP        People Over Politics</para>
+  <para>        PPD        Protest, Progress, Dignity</para>
+  <para>        PPY        People's Party</para>
+  <para>        REF        Reform Party</para>
+  <para>        REP        Republican Party</para>
+  <para>        RTL        Right to Life</para>
+  <para>        RUP        Raza Unida Party                    (Removed / redundant with LRU)</para>
+  <para>        SLP        Socialist Labor Party</para>
+  <para>        SUS        Socialist Party U.S.A.</para>
+  <para>        SWP        Socialist Workers Party</para>
+  <para>        THD        Theo-Dem</para>
+  <para>        TWR        Taxpayers Without Representation (Removed)</para>
+  <para>        TX        Taxpayers                            (Old Doc was "TXT")</para>
+  <para>        UNK        Unknown</para>
+  <para>        USP        U.S. People's Party</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Report Codes         (Edit: RPT-TYP)</para>
+  <para/>
+  <para>                (10-day codes removed 11/2/1998)        12C        Pre-Convention</para>
+  <para>        12G        Pre-General</para>
+  <para>        12P        Pre-Primary</para>
+  <para>        12R        Pre-Runoff</para>
+  <para>        12S        Pre-Special</para>
+  <para>                (code removed 3/26/1999)</para>
+  <para>        30G        Post-General</para>
+  <para>                        (code removed 3/26/1999)</para>
+  <para>        30R        Post-Runoff</para>
+  <para>        30S        Post-Special</para>
+  <para>        60D        60 Day Post Convention of a Presidential Host Committee</para>
+  <para/>
+  <para>                (code removed 3/26/1999)</para>
+  <para>        M2        February Monthly</para>
+  <para>        M3        March Monthly</para>
+  <para>        M4        April Monthly</para>
+  <para>        M5        May Monthly</para>
+  <para>        M6        June Monthly</para>
+  <para>        M7        July Monthly</para>
+  <para>        M8        August Monthly</para>
+  <para>        M9        September Monthly</para>
+  <para>        M10        October Monthly</para>
+  <para>        M11        November Monthly</para>
+  <para>        M12        December Monthly</para>
+  <para/>
+  <para>        MY        Mid-year Report</para>
+  <para>        Q1        April Quarterly</para>
+  <para>        Q2        July Quarterly</para>
+  <para>        Q3        October Quarterly</para>
+  <para>        YE        Year-end</para>
+  <para>        TER        Termination Report</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Accepted Report Codes by Form Type:</para>
+  <para/>
+  <para>Form  Report Code...</para>
+  <para>F3:   Q1; Q2; Q3; YE; TER; MY; 12G; 12P; 12R; 12S; 12C; 30G; 30R; 30S</para>
+  <para>F3P:  Q1; Q2; Q3; YE; TER; 12G; 12P; 12R; 12S; 12C; 30G; M2-M12</para>
+  <para>F3X:  Q1; Q2; Q3; YE; TER; MY; 12G; 12P; 12R; 12S; 12C; 30G; 30R; 30S;</para>
+  <para>      M2-M12</para>
+  <para>F4:   Q1; Q2; Q3; YE; TER; 60D</para>
+  <para>F5:   Q1; Q2; Q3; YE; MY; 12G; 12P; 12R; 12S; 12C; 30G</para>
+  <para>F7:   Q1; Q2; Q3; YE; 12G</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Itemized Transaction Codes (Schedules A &amp; B)         (Edit: TRAN)</para>
+  <para/>
+  <para>        15        Contribution</para>
+  <para>        15C        Contribution from Candidate</para>
+  <para>        15E        Earmarked Contribution</para>
+  <para>        15F        Loans Forgiven by Candidate</para>
+  <para>        15I        Earmarked Intermediary in</para>
+  <para>        15J        Memo(Filers' % of Contrb Given to Jt FR)</para>
+  <para>        15T        Earmarked Intermediary Treasury In</para>
+  <para>        15Z        In-kind Contr Recvd from Reg. Filer</para>
+  <para>        16C        Loans Received from the Candidate</para>
+  <para>        16F        Loans Received from Banks</para>
+  <para>        16G        Loan from Individual</para>
+  <para>        16H        Loan from Candidate/Committee</para>
+  <para>        16J        Loan Rep from Individual</para>
+  <para>        16K        Loan Rep from Candidate/Committee</para>
+  <para>        16L        Loan Rep Recvd from Unreg. Entity</para>
+  <para>        16R        Loans Received from Reg Filers</para>
+  <para>        16U        Loan Recvd from Unreg. Entity</para>
+  <para>        17R        Contr Ref Rcvd from Reg Filer</para>
+  <para>        17U        Ref/Reb/Ret Recvd from Unreg. Entity</para>
+  <para>        17Y        Ref/Reb/Ret from Individual/Corporation</para>
+  <para>        17Z        Ref/Reb/Ret from Candidate/Committee</para>
+  <para>        18G        Transfer In Affiliated</para>
+  <para>        18H        Honorarium Received</para>
+  <para>        18J        Memo(Filer's % of Contrb Given to Jt FR)</para>
+  <para>        18K        Contribution Recvd From Reg Filer</para>
+  <para>        18S        Receipts from Sec of State</para>
+  <para>        18U        Contribution Recvd from Unreg.</para>
+  <para>        20C        LOAN Repayments Made to Candidate</para>
+  <para>        20F        LOAN Repayments Made to Banks</para>
+  <para>        20G        LOAN Repayments Made to Individual</para>
+  <para>        20R        LOAN Repayments Made to Reg Filer</para>
+  <para>        22G        Loan to Individual</para>
+  <para>        22H        Loan to Candidate/Committee</para>
+  <para>        22J        Loan Rep to Individual</para>
+  <para>        22K        Loan Rep to Candidate/Committee</para>
+  <para>        22L        Loan Rep to Bank</para>
+  <para>        22R        Contrib Refund to Unreg. Entity</para>
+  <para>        22U        Loan Repaid to Unregistered Entity</para>
+  <para>        22X        Loan made to Unregistered Entity</para>
+  <para>        22Y        Contribution Ref to Individual</para>
+  <para>        22Z        Contribution Ref to Candidate/Committee</para>
+  <para>        24A        Independent Expenditure Against</para>
+  <para>        24C        Coordinated Expenditure</para>
+  <para>        24E        Independent Expenditure for</para>
+  <para>        24F        Commun Cost for Candidate (C7)</para>
+  <para>        24G        Transfer Out Affiliated</para>
+  <para>        24H        Honorarium to Candidate</para>
+  <para>        24I        Earmarked Intermediary Out</para>
+  <para>        24K        Contribution made to Non-affiliated</para>
+  <para>        24N        Commun Cost Against Candidate (C7)</para>
+  <para>        24P        Contrib made to Possible Candidate</para>
+  <para>        24R        Election Recount DiSbursement</para>
+  <para>        24T        Earmarked Intermediary Treasury Out</para>
+  <para>        24U        Contribution Made to Unregistered</para>
+  <para>        24Z        In-kind Contrib Made to Reg. Filer</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>New disbursement codes have been created. They are more specific than most of the codes listed above but should still be reported in the Transaction Code field. These codes augment the Purpose of Disbursement information Rather than replacing it.</para>
+  <para/>
+  <para>001          Administrative/Salary/Overhead Expenses (e.g., rent, staff salaries, postage, office supplies, equipment, furniture, ballot access fees, petition drives, party fees and legal and accounting expenses)</para>
+  <para>002          Travel Expenses - including travel reimbursement expenses </para>
+  <para>(e.g., costs of commercial carrier tickets; reimbursements for use of private vehicles, advance payments for use of corporate aircraft; lodging and meal expenses incurred during travel)</para>
+  <para>003          Solicitation and Fundraising Expenses (e.g., costs for direct mail solicitations and fundraising events including printing, mailing lists, consultant fees, call lists, invitations, catering costs and room rental)</para>
+  <para>004          Advertising Expenses -including general public political advertising (e.g., purchases of radio/television broadcast/cable time, print advertisements and related production costs)</para>
+  <para>005          Polling Expenses</para>
+  <para>006          Campaign Materials (e.g., buttons, bumper stickers, brochures, mass mailings, pens, posters, balloons)</para>
+  <para>007          Campaign Event Expenses (e.g., costs associated with candidate appearances, campaign rallies, town meetings, phone banks, including catering costs, door to door get-out-the-vote efforts and driving voters to the polls)</para>
+  <para>008          Transfers  (e.g., to other authorized committees of the same candidate)</para>
+  <para>009          Loan Repayments  (e.g., repayments of loans made or guaranteed by the candidate or any other person)</para>
+  <para>010          Refunds of Contributions (e.g., contribution refunds to individuals/ persons, political party committees or other political committees)</para>
+  <para>011          Political Contributions (e.g., contributions to other federal candidates and committees, donations to nonfederal candidates and committees)</para>
+  <para>012          Donations (e.g., donations to charitable or civic organizations </para>
+  <para/>
+  <para>STATE CODES         (Edit: ST)</para>
+  <para/>
+  <para>        AK        Alaska</para>
+  <para>        AL        Alabama</para>
+  <para>        AR        Arkansas</para>
+  <para>        AS        American Samoa</para>
+  <para>        AZ        Arizona</para>
+  <para>        CA        California</para>
+  <para>        CO        Colorado</para>
+  <para>        CT        Connecticut</para>
+  <para>        DC        District of Columbia</para>
+  <para>        DE        Delaware</para>
+  <para>        FL        Florida</para>
+  <para>        GA        Georgia</para>
+  <para>        GU        Guam</para>
+  <para>        HI        Hawaii</para>
+  <para>        IA        Iowa</para>
+  <para>        ID        Idaho</para>
+  <para>        IL        Illinois</para>
+  <para>        IN        Indiana</para>
+  <para>        KS        Kansas</para>
+  <para>        KY        Kentucky</para>
+  <para>        LA        Louisiana</para>
+  <para>        MA        Massachusetts</para>
+  <para>        MD        Maryland</para>
+  <para>        ME        Maine</para>
+  <para>        MI        Michigan</para>
+  <para>        MN        Minnesota</para>
+  <para>        MO        Missouri</para>
+  <para>        MP        Mariana Islands</para>
+  <para>        MS        Mississippi</para>
+  <para>        MT        Montana</para>
+  <para>        NC        North Carolina</para>
+  <para>        ND        North Dakota</para>
+  <para>        NE        Nebraska</para>
+  <para>        NH        New Hampshire</para>
+  <para>        NJ        New Jersey</para>
+  <para>        NM        New Mexico</para>
+  <para>        NV        Nevada</para>
+  <para>        NY        New York</para>
+  <para>        OH        Ohio</para>
+  <para>        OK        Oklahoma</para>
+  <para>        OR        Oregon</para>
+  <para>        PA        Pennsylvania</para>
+  <para>        PR        Puerto Rico</para>
+  <para>        RI        Rhode Island</para>
+  <para>        SC        South Carolina</para>
+  <para>        SD        South Dakota</para>
+  <para>        TN        Tennessee</para>
+  <para>        TX        Texas</para>
+  <para>        UT        Utah</para>
+  <para>        VA        Virginia</para>
+  <para>        VI        Virgin Islands</para>
+  <para>        VT        Vermont</para>
+  <para>        WA        Washington</para>
+  <para>        WI        Wisconsin</para>
+  <para>        WV        West Virginia</para>
+  <para>        WY        Wyoming</para>
+  <para>        ZZ        Foreign Countries</para>
+  <para/>
+  <para/>
+  <para>Valid RECORD TYPE (field #1) codes for Schedules SA, SB, SC and SD depending on kind of Filing {F3, F3X, F3P or F4}</para>
+  <para/>
+  <para/>
+  <para>F3 filings:</para>
+  <para/>
+  <para>SA{line number}:  {'SA11AI' or 'SA11A1'}, 'SA11B', 'SA11C', 'SA11D', 'SA12' 'SA13A', 'SA13B', 'SA14', 'SA15'</para>
+  <para/>
+  <para>SB{line number}:  'SB17', 'SB18', 'SB19A', 'SB19B', 'SB20A', 'SB20B', 'SB20C', 'SB21'. </para>
+  <para/>
+  <para>SC{line number}:  'SC9', 'SC10'</para>
+  <para>SD{line number}:  'SD9', 'SD10'</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>F3X filings:</para>
+  <para/>
+  <para>SA{line number}:  {'SA11AI' or 'SA11A1'}, 'SA11B', 'SA11C', 'SA12', 'SA13', 'SA14', 'SA15', 'SA16', 'SA17', 'SA18', {&amp; 'SASI1' for Sched I filers).</para>
+  <para/>
+  <para>SB{line number}:  'SB21B', 'SB22', 'SB23', 'SB26', 'SB27', 'SB28A', 'SB28B', 'SB28C', 'SB29' {&amp; 'SBSI2', 'SBSI3', 'SBSI4', 'SBSI5' for Schedule I filers}.</para>
+  <para/>
+  <para>SC{line number}:  'SC9', 'SC10'</para>
+  <para>SD{line number}:  'SD9', 'SD10'</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>F3P filings:</para>
+  <para/>
+  <para>SA{line number}:  'SA16', 'SA17A', 'SA17B', 'SA17C', 'SA17D', 'SA18', 'SA19A', 'SA19B', 'SA20A', 'SA20B', 'SA20C', 'SA21'.</para>
+  <para/>
+  <para>SB{line number}:  'SB23', 'SB24', 'SB25', 'SB26', 'SB27A', 'SB27B', 'SB28A', 'SB28B', 'SB28C', 'SB29'. </para>
+  <para/>
+  <para>SC{line number}:  'SC11', 'SC12'</para>
+  <para>SD{line number}:  'SD11', 'SD12'</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>F4 filings:</para>
+  <para/>
+  <para>SA{line number}:  'SA13', 'SA14A', 'SA15B', 'SA15', 'SA16A', 'SA16B', 'SA17A', 'SA17B' 'SA18A', 'SA18B', 'SA19A', 'SA19B'.</para>
+  <para/>
+  <para>SB{line number}:  'SB21A', 'SB21B', 'SB22', 'SB23A', 'SB23B', 'SB24A', 'SB24B'.</para>
+  <para/>
+  <para>SC{line number}:  'SC9', 'SC10'</para>
+  <para>SD{line number}:  'SD9', 'SD10'</para>
+  <para/>
+  <para/>
+  <para>APPENDIX  B</para>
+  <para/>
+  <para/>
+  <para>VALIDATION MESSAGES</para>
+  <para/>
+  <para/>
+  <para>(Validation messages are assigned levels 4, 8, 12, &amp; 16, depending on severity.  Filings with validation messages at level 8 or above are not accepted by the FEC.  Level-4 "warnings" are considered to be a "heads up" suggesting that information is usually required or assigned a specific value, but you should consult the official FEC user guide, or consult an FEC analyst to assess the exact nature of the problem.)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Error messages generated by FECHECK4</para>
+  <para/>
+  <para/>
+  <para>Error messages are presented in the layout shown below:</para>
+  <para/>
+  <para>Form{Item}:        FormName        {A Name or other identifying info from a Schedule}</para>
+  <para>Field Name:        Field#                Field's descriptive name</para>
+  <para>Error Level        Error Message ...</para>
+  <para/>
+  <para>Where "Error Level"        = Warning        (when numeric error level = 04)</para>
+  <para>= *Error*        (when numeric error level = 08)</para>
+  <para>= **Fail**        (when numeric error level = 12 or 16)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Level 16 Errors</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Level        Error Message                                                           _</para>
+  <para/>
+  <para> 16        HDR record must be First in File</para>
+  <para/>
+  <para> 16        "Cover" (eg. F3A, F3XN, ...) must be 2nd in File</para>
+  <para/>
+  <para> 16        Filing must be an "FEC" Type of filing</para>
+  <para/>
+  <para> 16        Filing must be in "FEC Version 3.00" format</para>
+  <para/>
+  <para> 16        Amended filing must have an ID of the "Original"</para>
+  <para/>
+  <para> 16        Amended filing must have an "Amendment Number"</para>
+  <para/>
+  <para> 16        Header (HDR) inconsistent with Orig/Amend status</para>
+  <para/>
+  <para> 16        Unrecognized Form Type / Record Ignored</para>
+  <para/>
+  <para> 16        ID# _________ NOT Correct FEC ID# Format</para>
+  <para/>
+  <para> 16        ID# _________ NOT SAME AS Cover Page ID# _________</para>
+  <para/>
+  <para> 16        Schedule does not belong with Form ____</para>
+  <para/>
+  <para> 16   Validation Terminated! - Over 32,000 Problems Found!</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Level 12 Errors</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Level        Error Message                                                           _</para>
+  <para/>
+  <para> 12        Report Type is Missing or Invalid</para>
+  <para/>
+  <para> 12        {field} exceeds maximum length of ___</para>
+  <para/>
+  <para> 12        {field) is Required, but field is Empty</para>
+  <para/>
+  <para> 12        Multi-Form Filings are NOT Allowed</para>
+  <para/>
+  <para> 12        Extraneous data follows last field</para>
+  <para/>
+  <para> 12        Schedule H3(s) not Version 2.02 format</para>
+  <para/>
+  <para> 12        Extraneous data coded in a Dummy field</para>
+  <para/>
+  <para> 12   Invalid double-quote surround text field</para>
+  <para/>
+  <para> 12   Illegal character(s) found in text field</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Level 8 Errors</para>
+  <para/>
+  <para/>
+  <para>Level        Error Message                                                           _</para>
+  <para/>
+  <para> 08        Embedded double-quotes (") not allowed</para>
+  <para> 08        Leading Blanks {e.g. " TEXT"} not allowed</para>
+  <para/>
+  <para> 08        Bad Date - ________ not YYYYMMDD format</para>
+  <para> 08        ________ Not a Real Date or Outside 1960-2099</para>
+  <para/>
+  <para> 08        Invalid Amount format: ____________</para>
+  <para> 08        Non-numeric data in Numeric Field</para>
+  <para/>
+  <para> 08        ____ is an Invalid Year (CCYY) Format</para>
+  <para/>
+  <para> 08        Invalid Rate format: _____</para>
+  <para/>
+  <para> 08        Wrong Report Type for this Form</para>
+  <para/>
+  <para> 08        District "__" is not 2-digit Numeric format</para>
+  <para/>
+  <para> 08        Tran ID is NOT UNIQUE - This one is same as other(s)</para>
+  <para> 08        Back/Cross-Reference to Schedule/Tran ID not valid</para>
+  <para> 08        Back-Reference TRAN-ID does not match Sched TRAN-ID</para>
+  <para/>
+  <para> 08        Event MUST be identified as [D]irect or [E]xempt</para>
+  <para> 08        Event MUST be [A]dministrative [D]irect or [E]xempt</para>
+  <para/>
+  <para> 08        Amended Code must be A,C,D,N - not "_"</para>
+  <para> 08        Only Amended Code "A" allowed on New filings</para>
+  <para/>
+  <para> 08   Filing must have [BEGIN TEXT] followed by text</para>
+  <para/>
+  <para> 08   Non-Fed Account# does not link to any Schedule I</para>
+  <para/>
+  <para>Level 4 Errors</para>
+  <para/>
+  <para/>
+  <para>Level        Error Message                                                           _</para>
+  <para> 04        Conditionally Required field is Empty</para>
+  <para/>
+  <para> 04        Subtotal {__________} not supported by other lines </para>
+  <para/>
+  <para> 04        Subtotal {__________} not supported by Schedule ___</para>
+  <para>          FYI --&gt; {__________} accumulated on Schedule ___</para>
+  <para/>
+  <para> 04        Election Code invalid: ___ {description}</para>
+  <para> 04        Election Code missing: ___ {description}</para>
+  <para/>
+  <para> 04        Street Address is Missing</para>
+  <para> 04        Single-line Address NOT in 1st delimited field</para>
+  <para> 04        __ not a valid 2-character USPS State Code</para>
+  <para> 04        Zip Code is Invalid or Missing / Zip = _________</para>
+  <para/>
+  <para> 04        Invalid Area Code/Phone Number: __________</para>
+  <para/>
+  <para> 04        Office Code "_" Invalid (Valid Codes: H, S, P)</para>
+  <para/>
+  <para> 04        Comm Code "__" Invalid. (Valid: DM,TP,TM,G)</para>
+  <para> 04        Comm Target "_" Invalid. (Valid: E, S, M)</para>
+  <para/>
+  <para> 04        Ratio Code "_" Invalid (Valid Codes: N, R, S)</para>
+  <para/>
+  <para> 04        Sup/Opp Code "___" Invalid (Valid Codes: S, O)</para>
+  <para/>
+  <para> 04        Committee Type "_" is Invalid for this form</para>
+  <para/>
+  <para> 04        ___ not a valid 3-character Party Code</para>
+  <para> 04        ___ not a valid Party Type (NAT,STA,SUB)</para>
+  <para/>
+  <para> 04        ___ Invalid Creditor (ICV,UCV,CAN,EMP,OTH)</para>
+  <para/>
+  <para> 04        ___ not a Valid Itemized Transaction</para>
+  <para/>
+  <para> 04        Value "_" is Invalid for this Yes/No field</para>
+  <para> 04        Value "_" is Invalid for "Checkbox=X" field</para>
+  <para/>
+  <para> 04        Point Value Subtotal is INCORRECT</para>
+  <para/>
+  <para> 04        Schedule H1 contains Redundant Sections</para>
+  <para/>
+  <para> 04        Entity Type [___] is not an acceptable value</para>
+  <para> 04        Delimited Name should not exceed 38 letters &amp; spaces</para>
+  <para> 04        Name has Too Many Parts (Over 3 Delimiters Found)</para>
+  <para/>
+  <para> 04   Some H3 Transfer $ Aggregates not equal Dollar Total</para>
+  <para/>
+  <para/>
+  <para>APPENDIX  C</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Valid Schedules and Summary Page Line Numbers for various FEC Forms</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 3</para>
+  <para/>
+  <para>  SA - [11ai or 11a1] 11b  11c  11d  12   13a  13b  14   15</para>
+  <para>  SB - 17   18   19a  19b  20a  20b  20c  21</para>
+  <para>  SC -  9   10</para>
+  <para>  SD -  9   10</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 3X</para>
+  <para/>
+  <para>  SA - [11ai or 11a1] 11b  11c  12   13   14   15   16   17   18</para>
+  <para>  SB - 21b  22   23   26   27   28a  28b  28c  29</para>
+  <para>  SC -  9   10</para>
+  <para>  SD -  9   10</para>
+  <para>  SE - 24</para>
+  <para>  SF - 25</para>
+  <para>  H1 - </para>
+  <para>  H2 - </para>
+  <para>  H3 - </para>
+  <para>  H4 - </para>
+  <para>  SI - </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Form 3P</para>
+  <para/>
+  <para>  SA - 16   17a  17b  17c  17d  18   19a  19b  20a  20b  20c   21</para>
+  <para>  SB - 23   24   25   26   27a  27b  28a  28b  28c  29</para>
+  <para>  SC - 11   12</para>
+  <para>  SD - 11   12</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>FORM 4</para>
+  <para/>
+  <para>  SA - 13   14a  15b  15   16a  16b  17a  17b  18a  18b  19a  19b</para>
+  <para>  SB - 21a  21b  22   23a  23b  24a  24b</para>
+  <para>  SC -  9   10</para>
+  <para>  SD -  9   10</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>APPENDIX  D</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Modifications to .FEC Format</para>
+  <para/>
+  <para/>
+  <para>Summary of Changes From FEC Version 2.02 Format to Version 3.00 Format</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>New Record Types  (Refer to FEC_v300.xls for Detailed Record Layouts)</para>
+  <para/>
+  <informaltable frame="all">
+    <tgroup cols="2"><tbody><row><entry><para>Record </para><para>Type</para></entry><entry><para/><para>Form/Record Description</para></entry></row><row><entry><para>HDR</para></entry><entry><para>New format "Header" (replaces non-CSV, tagged data from FECongen)</para></entry></row><row><entry><para>F24</para></entry><entry><para>24-Hour Expenditures</para></entry></row><row><entry><para>F3S</para></entry><entry><para>"Column C" Summary Page Totals</para></entry></row><row><entry><para>F3PS</para></entry><entry><para>"Column C" Summary Page Totals</para></entry></row><row><entry><para>F99</para></entry><entry><para>"Free-form Filing Document"</para></entry></row><row><entry><para>TEXT</para></entry><entry><para>4000-character Text</para></entry></row></tbody></tgroup>
+  </informaltable>
+  <para/>
+  <para/>
+  <para>New Fields Added to Existing Record Types</para>
+  <para/>
+  <informaltable frame="all">
+    <tgroup cols="4"><tbody><row><entry><para>Record</para><para>Type</para></entry><entry><para>Fld</para><para>#</para></entry><entry><para/><para>Field Description</para></entry><entry><para>Type/</para><para>Size</para></entry></row><row><entry><para>F1</para></entry><entry><para>61</para></entry><entry><para>Committee Email</para></entry><entry><para>A/N-90</para></entry></row><row><entry><para>F1</para></entry><entry><para>62</para></entry><entry><para>Committee Web URL</para></entry><entry><para>A/N-90</para></entry></row><row><entry><para>SA</para></entry><entry><para>35</para></entry><entry><para>Back Reference Tran ID</para></entry><entry><para>A/N-20</para></entry></row><row><entry><para>SA</para></entry><entry><para>36</para></entry><entry><para>Back Reference Sched Name</para></entry><entry><para>A/N-8</para><para/></entry></row><row><entry><para>SB</para></entry><entry><para>32</para></entry><entry><para>Back Reference Tran ID</para></entry><entry><para>A/N-20</para></entry></row><row><entry><para>SB</para></entry><entry><para>33</para></entry><entry><para>Back Reference Sched Name</para></entry><entry><para>A/N-8</para><para/></entry></row><row><entry><para>SE</para></entry><entry><para>40</para></entry><entry><para>Back Reference Tran ID</para></entry><entry><para>A/N-20</para></entry></row><row><entry><para>SE</para></entry><entry><para>41</para></entry><entry><para>Back Reference Sched Name</para></entry><entry><para>A/N-8</para><para/></entry></row><row><entry><para>SF</para></entry><entry><para>40</para></entry><entry><para>Back Reference Tran ID</para></entry><entry><para>A/N-20</para></entry></row><row><entry><para>SF</para></entry><entry><para>41</para></entry><entry><para>Back Reference Sched Name</para></entry><entry><para>A/N-8</para><para/></entry></row><row><entry><para>H4</para></entry><entry><para>37</para></entry><entry><para>Back Reference Tran ID</para></entry><entry><para>A/N-20</para></entry></row><row><entry><para>H4</para></entry><entry><para>38</para></entry><entry><para>Back Reference Sched Name</para></entry><entry><para>A/N-8</para></entry></row></tbody></tgroup>
+  </informaltable>
+  <para/>
+  <para/>
+  <para>  </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Election Type changed from 1-char "P,G,..." to 5-character "P2000,G2000,..."</para>
+  <informaltable frame="all">
+    <tgroup cols="5"><tbody><row><entry><para>Record</para><para>Type</para></entry><entry><para>Fld</para><para>#</para></entry><entry><para/><para>Field Description</para></entry><entry><para>Old</para><para>Size</para></entry><entry><para>New</para><para>Size</para></entry></row><row><entry><para>F3</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>F3P</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>F3P31AL</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>F3X</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>F5</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>F76</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>SA</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>SB</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row><row><entry><para>SC</para></entry><entry><para/></entry><entry><para>Election Type</para></entry><entry><para>1</para></entry><entry><para>5</para></entry></row></tbody></tgroup>
+  </informaltable>
+  <para/>
+  <para/>
+  <para>Amend Code (A/C/D/N)  *Unused Field (it's defined, but ignored)</para>
+  <para/>
+  <para/>
+  <informaltable frame="all">
+    <tgroup cols="4"><tbody><row><entry><para>Record</para><para>Type</para></entry><entry><para>Fld</para><para>#</para></entry><entry><para>Field Description</para></entry><entry><para>Type/</para><para>Size</para></entry></row><row><entry><para>SA</para></entry><entry><para>33</para></entry><entry><para>Sched A Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SB</para></entry><entry><para>30</para></entry><entry><para>Sched B Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SC</para></entry><entry><para>25</para></entry><entry><para>Sched C Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SD</para></entry><entry><para>27</para></entry><entry><para>Sched D Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SE</para></entry><entry><para>36</para></entry><entry><para>Sched E Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SF</para></entry><entry><para>36</para></entry><entry><para>Sched F Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>SI</para></entry><entry><para>29</para></entry><entry><para>Sched I Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>H1</para></entry><entry><para>28</para></entry><entry><para>Sched H1 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>H2</para></entry><entry><para>10</para></entry><entry><para>Sched H2 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>H3</para></entry><entry><para>10</para></entry><entry><para>Sched H3 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>H4</para></entry><entry><para>33</para></entry><entry><para>Sched H4 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F3P31AL</para></entry><entry><para>31</para></entry><entry><para>F3P Line-31 List Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F56</para></entry><entry><para>26</para></entry><entry><para>F5 Part 6 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F57</para></entry><entry><para>31</para></entry><entry><para>F5 Part 7 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F65</para></entry><entry><para>26</para></entry><entry><para>F6 Part 5 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F76</para></entry><entry><para>15</para></entry><entry><para>F7 Part 6 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F82</para></entry><entry><para>28</para></entry><entry><para>F8 Part 2 Amend Code</para></entry><entry><para>1</para></entry></row><row><entry><para>F83</para></entry><entry><para>20</para></entry><entry><para>F8 Part 3 Amend Code</para></entry><entry><para>1</para></entry></row></tbody></tgroup>
+  </informaltable>
+  <para/>
+  <para>* Amend Code is still used in an original report to indicate an amended employer or occupation. This requires an “X” in the Memo Code field as well.</para>
+  <para/>
+  <para>Amendment Processing is easier for Filers to comply with:</para>
+  <para/>
+  <para>Amend Code on all Schedules is no longer required or used in an amended filing.  The need for vendor supplied (and in-house written) filing software to track changes on an item-by-item basis over time has been eliminated.  The"AMENDED CD" fields on Schedules (SA, SB, SC/, SD, SE, SF, H1, H2, H3, H4, I, F56, F57, F65, F76, F82 and F83) has been left in the Version 3.0 layout specification.  However, these "Add/Change/Delete" codes are unnecessary and the field is ignored..</para>
+  <para/>
+  <para>When a report is filed as an "Amendment", the Report is still identified with an "A" appended to the "Form</para>
+  <para>Type".  For example an F3 filed as an amendment is coded as an F3A.  In addition, the FEC database identifier of the "Original" report is supplied in the "Report Ident" field of the new "HDR" record and the sequential number of the Amendment (e.g. 1, 2, 3, ... 999) is supplied in the "Report Number" field in the new "HDR" record.</para>
+  <para/>
+  <para>New reports may include Memo items that carry a “C” in the amend code to indicate amended employer and occupation information.</para>
+  <para/>
+  <para/>
+  <para>New Header format</para>
+  <para/>
+  <para>                        Max </para>
+  <para> #        Field Name        Length        Description</para>
+  <para>01        Record Type            3        Record Type.  Value: HDR</para>
+  <para>02        EF Type                    3        Electronic Filing Type  Value: FEC</para>
+  <para>03        FEC Version            4        FEC Version #.  Value: 3.00</para>
+  <para>04        Software Name          90        Filer Software Name</para>
+  <para>05        Software Vers          16        Filer Software Version #</para>
+  <para>06        Name Delim            1        Internal delimiter used in Name fields. Default is  ' ^ '</para>
+  <para>07        Report Ident          16        If Amendment, FEC's Report ID assigned to Original.</para>
+  <para>08        Report Number            3        If Amendment, the number (1-999) of the Amending</para>
+  <para>Report starting with Amendment #1 through #999.</para>
+  <para/>
+  <para>In previous versions, the header was not part of the comma-delimited section of the .FEC file. For version 3.00, the header is a comma-delimited record that must be the first record in a filing.  It is identified with</para>
+  <para>"HDR" in the first position, followed by "FEC" in the second position in the CSV record.</para>
+  <para/>
+  <para> It serves the same purpose as the previous Version 2.02 Header  (the /* Header section that was created by the FEConGen utility program) but is much easier to construct and no longer contains information that can otherwise be derived or is carried elsewhere within the .FEC electronic reporting file.</para>
+  <para/>
+  <para>Numerous fields are no longer needed in the new "HDR" record.  Schedule counts and the control-number</para>
+  <para>are not needed.  The integrity of a filing is confirmed by the MD5 check-sum processing during the upload</para>
+  <para>process and the cross-checking of Summary Page totals against Schedule totals by the Validation program provides additional confirmation that a received filing is complete. </para>
+  <para/>
+  <para>The Date_Fmat and Dec_NoDec options have been removed from the Header Record.  All Dates must be in a "ccyymmdd" format.  Amounts can be coded with or without an explicit decimal point (however, when a decimal point is included in an amount, it must be followd by no more than two decimal places).</para>
+  <para/>
+  <para>The Committee Name and  Committee's FEC ID# are no longer carried in the "Header" because they are</para>
+  <para>always carried in the "Cover" record which immediately follows the HDR record.</para>
+  <para/>
+  <para>Two new fields have been added to the new "HDR" record layout which were not defined in the previous</para>
+  <para>"Header" section.  A "Report Identifier" representing the FEC database identifier for an "original" report</para>
+  <para>is used when an "amendment to the original" is filed.  Also, Amendment reports are assigned an incremental "Amendment Number" which is coded in the new "Report Number" field (an Original report</para>
+  <para>is Report Number "Zero" - the Report Number can be coded with '0' or it can be left blank on Originals).</para>
+  <para/>
+  <para>Four fields have been retained in the new "HDR" that were also in the Version 2.02 "Header" section.  They are:  FEC format Version #; Filing Software Name; Filing Software Version #; and the Name Delimiter (the character such as ' ^ ' used to separate parts of a person's name in all NAME fields).</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Email and Web URL fields for Form F1</para>
+  <para/>
+  <para>The format for Form F1 now includes a 90-character field for email address and a 90 character field for web URL. Electronic filers that have web sites and email addresses are required to provide them.  These two new fields are added to the end of the F1 layout.  Prior fields in the F1 layout are unchanged.</para>
+  <para/>
+  <para>Multiple Accounts and Related/Associated Committees on Form 1</para>
+  <para/>
+  <para>To report multiple accounts or related committees on Form 1, re[prt the first account and related committee in the F1N (new) or F1A (amended) record. Use F1S records for subsequent accounts and committees until all have been accounted for. Each F1s has the same required information as the F1N or F1A even though it has already been reported.</para>
+  <para/>
+  <para>Election indicator changed to comply with cycle-to-date reporting requirements</para>
+  <para/>
+  <para>The election indicator field has been increased from “A/N-1” to “A/N-5” and should be reported in the format  [single letter report indicator][ccyy]. For example, Primary 2002 should be reported as “P2002”. The forms, schedules and fields affected are:</para>
+  <para/>
+  <para>F3, F3P, F3X, F5, F76         – RPTPGI </para>
+  <para>SA, SB                         – ITEM ELECT CD</para>
+  <para>SC                         – ELECTION</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Text  Records</para>
+  <para/>
+  <para>Text records have been added to the format to allow large amounts of text to be included in a filing. The text may be related to the Filing itself (one occurrence per filing related to the "Cover" page).  It may be related to a Schedule/Summary Page line number (one occurrence per schedule/summary page line number) or to one or more Itemized Transactions (one per any/each itemized transaction).</para>
+  <para/>
+  <para>#        Field Name        Length        Description</para>
+  <para>1        Record Type              4        Record Type.  Value: TEXT</para>
+  <para/>
+  <para>2        Form Type              8        Contains Form Type of a "cover" Form (F3N, F3XA, ...) or of a</para>
+  <para>                                 Schedule ( SA11A1, SA11B, SB17, ...) to which this text is related.</para>
+  <para/>
+  <para>3        Tran ID Ref            20        The value of a "Tran ID" if the text is linked to a specific itemization</para>
+  <para>                                 within a Schedule (otherwise this field is left blank).</para>
+  <para/>
+  <para>4        Text4000        4000        A string of unformatted text up to 4000 characters.</para>
+  <para>                                 (Note:  no tab, carriage return, line feed or any other non-printable</para>
+  <para>characters may be embedded within the string of text.)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>New F99 Filing Type for unstructured, formatted text</para>
+  <para/>
+  <para>A new Form called an F99 has been devised to allow filers to submit letters, memos, and other text documents electronically.  As in other filings (e.g. F3, F3X, ... etc.) there is a "Cover" sheet followed</para>
+  <para>by text.  The HDR and the F99 "cover" records are CSV records (as are all other kinds of electronic filings to the FEC).</para>
+  <para/>
+  <para>#        Field Name                        Length        Description</para>
+  <para>1        FORM TYPE                        A/N-3        Form Type Value: "F99"</para>
+  <para>2        FILER FEC CMTE ID                A/N-9        Filing Committee ID  Example: C98765431</para>
+  <para>3        COMMITTEE NAME               A/N-90  Filing Committee's Name</para>
+  <para>4        STREET 1                        A/N-34  Committee's Street Address 1</para>
+  <para>5        STREET 2                        A/N-34        Committee's Street Address 2</para>
+  <para>6        CITY                                A/N-18  Committee's City/Town</para>
+  <para>7        STATE                                A-2        Committee's State Code</para>
+  <para>8        ZIP                                A/N-9        Committee's Zip Code</para>
+  <para>9        NAME/TREASURER (as signed)        A/N-38        Treasurer Name        </para>
+  <para>10        DATE (Signed)                        NUM-8        Signature Date</para>
+  <para/>
+  <para/>
+  <para>The F99 filing provides a mechanism where the filer can send "formatted" text.  This means that the</para>
+  <para>text can contain Carriage Return &amp; Line-feed characters along with TAB characters.  </para>
+  <para/>
+  <para>The text in a F99 filing is coded between two delimiter records:  a [BeginText] record and an [EndText] record.  The following example shows how an F99 filing is coded:</para>
+  <para/>
+  <para>HDR,FEC,3.00,Super Filer,Ver 1.0</para>
+  <para>F99,C98765431,"Friends of Pat","123 Sycamore St",,"Anytown",FL,33034</para>
+  <para>[BeginText]</para>
+  <para>This is an example of something that a filer might want to send to the FEC.  There</para>
+  <para>are a few lines of text followed by some columns of information.</para>
+  <para/>
+  <para>Line                Description                Amount</para>
+  <para>----                -----------                ------</para>
+  <para>  1                Line One                  1.00</para>
+  <para>  2                Line Two                 20.00</para>
+  <para>  3                Line Three                300.00</para>
+  <para/>
+  <para>The table above means nothing, but serves as an example of how a filer could send something electronically to the FEC and have the document tracked in the same way that any other kind of filing would be tracked.</para>
+  <para>[EndText]</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Back Ref ID and Back Ref Sched Name</para>
+  <para/>
+  <para>In order to clarify relationships between transactions, a Back Reference ID has been created to carry the Tran ID of the related transaction and a Back Reference Schedule Name has been added to indicate the schedule that contains the related transaction.</para>
+  <para/>
+  <para>Affected forms and schedules: SA, SB, SE, SF, SH4</para>
+  <para/>
+  <para>Rules for Applying the Back Reference Fields:</para>
+  <para/>
+  <para>If there is a one-to-many relationship between transactions, the many carry the tran id of the one in the back ref tran ID field and the Schedule of the one in the back Ref Sched Name field.  In cases such as credit card payments,  the one to many model holds even though there may be one child record or many child records  to relate to the parent  record.</para>
+  <para/>
+  <para>        Example: Partnerships (reported on Schedule A for line 11a on form 3)</para>
+  <para>The receipt form the partnership has nothing in the two back reference fields.</para>
+  <para>Each partner’s receipt has the tran ID of the Partnership transaction in the Back Ref Tran ID field and “SA11A” in the back Ref Sched Name field.</para>
+  <para/>
+  <para>If there is a one-to-one relationship between the related transactions, the transactions are ranked chronologically. The first is the parent record and contains nothing in the back Reference Fields and the second is the child record and contains the parent transaction’s tran ID and Schedule name in the Back Reference fields.</para>
+  <para/>
+  <para>Example: In-Kind  receipt.</para>
+  <para>The in-kind receipt is the parent because it occurs prior to the in-kind disbursement that is created to balance the totals. The Receipt has nothing in the back reference fields. The disbursement carries the tran ID and sched name of the receipt in the back reference fields.</para>
+  <para>Special cases</para>
+  <para>Loans (Schedule A) and Loan repayments (Schedule B) are child records of the Schedule C record and carry its Tran ID and Sched name in the back reference fields.</para>
+  <para>Debts  and Debt Payments (Both Schedule B and H4) are Child records of the Schedule D record and carry its Tran ID and Sched Name in the back reference fields.</para>
+  <para/>
+  <para>Other examples are:</para>
+  <para/>
+  <para>Partnership Receipt         linking to         Partner memos</para>
+  <para>Credit card Payment         inking to         Vendor payment memos</para>
+  <para>Earmarked receipts         linking to         earmarked disbursements</para>
+  <para>In-kind receipts                 linking to         in-kind disbursements</para>
+  <para>Joint fundraising receipts         linked to         fundraising committee and to contributing committee</para>
+  <para>H4 disbursement memo         linked to         Schedule E, F or B23 transaction</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Special Summary records for  reports crossing election periods</para>
+  <para/>
+  <para>To support the new regulation requiring Form 3 and Form 3P to report with cycle-to-date aggregation and itemization, a new record has been created for filings that cover date ranges beginning in one cycle and ending in another (30G or YE in an election year). The F3S or F3PS record is used to report the “column B” summary information for the portion of the report that begins after the election day. The transactions that occur on or prior to election-day are reported in the F3 or F3P record as “Column B” amounts.  Essentially, this is a report with three summary columns.  “Column A” contains all information for the current reporting period regardless of whether it occurs before or after the election. “Column B1” includes Cycle-to-date figures from the beginning of the cycle through election day and “Column B2” contains Cycle-to-date figures that begin the day after the election (beginning of the new cycle) and end with the last day of the reporting period. Individual aggregates and itemizations within the report will be based on whether they occur before or after the election.  It is "Column B2" which is coded on the new F3S and F3PS records for F3 and F3P filings respectively. F3S and F3PS should only be included in 30G reports in an election year for campaigns that are involved in the General election, or the Year End report in an election year for Campaigns that are not involved in the general election.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>New F24 Filing Type for 24-hour Expenditure reports</para>
+  <para/>
+  <para>A new Form called an F24 has been devised to allow filers to submit last-minute, 24-hour expenditure reports electronically.  As in other filings (e.g. F3, F3X, ... etc.) there is a "Cover" sheet followed</para>
+  <para>by one or more 'SE24' schedules.</para>
+  <para/>
+  <para>#        Field Name                        Length        Description</para>
+  <para>1        FORM TYPE                        A/N-3        Form Type Value: "F24", </para>
+  <para>2        FILER FEC CMTE ID                A/N-9        Filing Committee ID  Example: C98765431</para>
+  <para>3        COMMITTEE NAME               A/N-90  Filing Committee's Name</para>
+  <para>4        STREET 1                        A/N-34  Committee's Street Address 1</para>
+  <para>5        STREET 2                        A/N-34        Committee's Street Address 2</para>
+  <para>6        CITY                                A/N-18  Committee's City/Town</para>
+  <para>7        STATE                                A-2        Committee's State Code</para>
+  <para>8        ZIP                                A/N-9        Committee's Zip Code</para>
+  <para>9        NAME/TREASURER (as signed)        A/N-38        Treasurer Name        </para>
+  <para>10        DATE (Signed)                        NUM-8        Signature Date</para>
+  <para/>
+  <para/>
+  <para>The F24 filing provides a mechanism where the filer can send last-minute Schedule E disclosure of expenditures.</para>
+  <para/>
+  <para/>
+  <para>Validator changes </para>
+  <para/>
+  <para>Two errors produced by the validator have been upgraded from level 4 to level 8 errors. They must be corrected prior to filing. </para>
+  <para/>
+  <para>08   FormName  Fld# ___  Subtotal {__________} not supported by other lines </para>
+  <para>08   FormName  Fld# ___  Subtotal {__________} not supported by Schedule ___</para>
+  <para>                          FYI --&gt; {__________} accumulated on Schedule ___</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Version 1.02 Format to Version 2.02 Format</para>
+  <para/>
+  <para/>
+  <para>List of Schedules with changes:</para>
+  <para/>
+  <para>Schedules:  SA, SB, SC, SC1, SD, SE, SF, SH1, SH2, SH3, SH4, &amp; SI.</para>
+  <para/>
+  <para>Form "schedule-like" multiple occurrence records:  F3P31AL, F56, F57, F65, F76, F8II, and F8III.</para>
+  <para/>
+  <para>(Note:  Forms such as F3 and F3X have not changed in Ver 2.02 from the definitions in Ver 1.02.)</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>New record type for Schedule SC2.</para>
+  <para/>
+  <para>Schedule C is now coded with record types SC/, SC1/, and SC2/.  SC2/ is new and allows for coding multiple guarantor information with a Schedule C loan description.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>General Description of modifications and enhancements</para>
+  <para/>
+  <para>An Entity Type is used to "classify" contributors, payees, lenders, etc.  Primarily, it is used to indicate if the entity is a person {with first &amp; last names} or an organization.  Sometimes the organization must be further identified as to whether it is a Candidate Committee, PAC, Political Party etc.</para>
+  <para/>
+  <para>Although Entity Type is still an optional field, it will likely become a required field sometime in the future.</para>
+  <para/>
+  <para/>
+  <para>Amendment Codes {AMEND_CD} are used on all schedules.  On original filings, the Amendment Code should be blank {but may contain A = Add}.</para>
+  <para/>
+  <para>If a filing is an amendment to an earlier "original" filing, every schedule itemization must contain one of 4 values:</para>
+  <para>        A = Add {a new item}</para>
+  <para>        C = Change {the original item}</para>
+  <para>        D = Delete {the original item}</para>
+  <para>        N = No Change {to the original item}</para>
+  <para/>
+  <para/>
+  <para>Transaction Identifiers {TRAN_ID} are required on every schedule itemization.</para>
+  <para/>
+  <para>For all new items, the TRAN_ID must contain a unique value that will be used by the FEC database to point to that particular item.  It must be a value that is unique among all items filed by that committee.</para>
+  <para/>
+  <para>For all amending items {Changes, Deletes, Non-changes}, the TRAN_ID must already exist on the FEC database from a prior filing.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Conduit Name &amp; Address has been added to Receipts and Expenditure Schedules {A, B, D, E, F, H4, F3P31AL, F56, F57, and F65.</para>
+  <para/>
+  <para/>
+  <para>Name fields maximums (on schedules such as SA, SB, etc.) have been increased to A/N-90 to allow for Organization/Committee names.  However, if a person's name is given {indicated by Entity Type or the name is delimited into last, first, prefix, suffix}, the name cannot exceed 38 characters {including spaces}.  This enhancement allows for the removal of the redundant Name/Address fields that were used for Committees on Version 1.02 Schedule A and B record layouts.</para>
+  <para/>
+  <para/>
+  <para>APPENDIX  E</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Technical specifications for use of FEC supplied vendor utilities</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Acknowledgement of NIC software copyright does not need to be included within Third Party software, however NIC maintains copyrights to the following programs: FECHECK4.EXE and FECHECK4.DLL.</para>
+  <para/>
+  <para/>
+  <para>If the MD5 check-digit program is used, Developers must also include the following acknowledgment in their programs and documentation:</para>
+  <para/>
+  <para> *---------------------------------------------------------*</para>
+  <para> *  RSA Data Security, Inc., MD5 message-digest algorithm  *</para>
+  <para> *  Copyright (C) 1991-2, RSA Data Security, Inc.          *</para>
+  <para> *  Created 1991. All rights reserved.                     *</para>
+  <para> *---------------------------------------------------------*</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>SPECIAL WORD TO VENDORS</para>
+  <para/>
+  <para>We encourage your comments and suggestions. It is our intention that the any communication </para>
+  <para>regarding such suggestions be accurately conveyed in a manner which will create a spirit of mutual cooperation and thus serve the ultimate interest of filers, vendors, and the public.  </para>
+  <para/>
+  <para>Thank you.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Files contained in the Vendor Developer Pack</para>
+  <para/>
+  <para/>
+  <para>README.TXT     This file which lists the contents of VendPak4.zip.  </para>
+  <para/>
+  <para>FEC_V300.RTF   MS Word document -  Describes FEC specifications for </para>
+  <para>               electronic filing.  </para>
+  <para/>
+  <para>FEC_V300.XLS   MS Excel spreadsheet - Contains detailed formats for each </para>
+  <para>               type of record used in electronic filings.  </para>
+  <para/>
+  <para/>
+  <para>CBLRTSS.DLL    COBOL Runtime required by FECHECK4.EXE &amp; FECHECK4.DLL programs.</para>
+  <para>CBLVIOS.DLL    COBOL Runtime required by FECHECK4.EXE program.</para>
+  <para>MSVCRT.DLL     Runtime used by MS VB &amp; C++ programs that call FECHECK4.DLL.</para>
+  <para/>
+  <para/>
+  <para>FECHECK4.EXE   Command-line version of the FEC Validator.</para>
+  <para/>
+  <para>FECHECK4.DLL   Windows/DLL version of the FEC Validator.</para>
+  <para/>
+  <para>FECHECK4.INI   Initialization file that lets user set upper limits for </para>
+  <para>               the number of messages at levels 4, 8, &amp; 12 to be listed.  </para>
+  <para>               User can also choose to have to have FECHECK4 create two </para>
+  <para>               additional files:  1) a comma-delimited unformatted error </para>
+  <para>               file with the same information as contained in the '.msg' </para>
+  <para>               file; and 2) a file that lists schedules and Tran_IDs of </para>
+  <para>               itemizations that are found to have errors.  </para>
+  <para/>
+  <para>FECNAME4.IDX   Index for FECNAME4.DTA ISAM file.</para>
+  <para/>
+  <para>FECNAME4.DTA   ISAM file used by FECHECK4 to add Field Names to messages </para>
+  <para/>
+  <para/>
+  <para>MD5_32.DLL     Windows/DLL version of RSA's check-digit program.</para>
+  <para>MD5_32.LIB     Import library for MD5_32.DLL.</para>
+  <para>MDUTIL.H       C header file for MD5 program.</para>
+  <para/>
+  <para/>
+  <para>{Samples}.FEC  Samples ".FEC" files are included as examples of electronic </para>
+  <para>               files.  They can be run through FECheck4 to assist developers </para>
+  <para>               in getting familiar with the program.  </para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>The DOS version of FECHECK4 is run from the DOS command line.</para>
+  <para/>
+  <para>Syntax:  FECHECK4 [c:\path\filename[.FEC]]</para>
+  <para/>
+  <para>Notes:   The .FEC need not be coded but will be assumed if not </para>
+  <para>         specified.  FECHECK4 displays the number of warnings and</para>
+  <para>         errors that are encountered.  Messages are written to a</para>
+  <para>         '.MSG' file on the same drive/directory as the '.FEC' file.</para>
+  <para>         FECHECK4 will prompt the user if the file spec is not</para>
+  <para>         included on the command line.</para>
+  <para/>
+  <para>         Normally FECHECK4 will list an unlimited number of error</para>
+  <para>         messages (if there are any) at various levels of severity.</para>
+  <para>         Level 12 errors are the "most severe" while  Level 8's</para>
+  <para>         are "less severe".  Neither will be accepted by the FEC.</para>
+  <para>         Level 4 messages should not occur, however, filings with</para>
+  <para>         messages (non of which exceed Level 4) may be conditionally</para>
+  <para>         accepted by the FEC.  An filer can choose to limit the</para>
+  <para>         number of Level 4, 8 and 12 errors that will be listed by</para>
+  <para>         setting limits in the FECHECK4.INI file.</para>
+  <para/>
+  <para>         The "Unformat_MS2" parameter is used to indicate if a '.MS2'</para>
+  <para>         file is to be created along with the '.MSG' file.  The '.MS2'</para>
+  <para>         file contains the same information that is written to the </para>
+  <para>         formatted '.MSG' file, but as comma-delimited CSV text file.</para>
+  <para/>
+  <para>          The layout of the comma-delimited '.ms2' file is:</para>
+  <para/>
+  <para>1) Form Name (eg. F3N, F3XA, SA111, SB17, ...);</para>
+  <para>2) Tran_ID of an Itemization in a Schedule;</para>
+  <para>3) Identifying Name of an Itemization in a Schedule;</para>
+  <para>4) Column # {refer to .xls spreadsheet} of Field in Error;</para>
+  <para>5) Descriptive name of the Field in Error;</para>
+  <para>6) Error Level (04, 08, 12, or 16);</para>
+  <para>7) Error Message.</para>
+  <para/>
+  <para>         The "TID_Errs_MS3" parameter is used to request that FECHECK4</para>
+  <para>         create a '.MS3' file along with the '.MSG' formatted error file.</para>
+  <para>         This third message file lists the schedules &amp; Tran_IDs of </para>
+  <para>         itemizations that are found to have errors.  It can be used by</para>
+  <para>         vendor software to highlight the transactions that have </para>
+  <para>         something that is causing a validation error.</para>
+  <para/>
+  <para/>
+  <para>         The FECHECK4.INI file can be edited with a text editor.</para>
+  <para/>
+  <para>         Default settings of the FECHECK4.INI file:</para>
+  <para/>
+  <para>         Level_4_Msg_Limit =         {no parameter means unlimited}</para>
+  <para>         Level_8_Msg_Limit =         {no parameter means unlimited}</para>
+  <para>         Level_12_Msg_Limit =        {no parameter means unlimited}</para>
+  <para>         Unformat_MS2 = No</para>
+  <para>         TID_Errs_MS3 = No</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>The Windows version of FECHECK4.DLL can be called from a Windows</para>
+  <para>program.  The following sample code is used to call FECHECK4 in </para>
+  <para>Visual Basic.  Three parameters are passed from the VB program to</para>
+  <para>FECHECK4.DLL, which returns 2-byte binary (Integer) "Error Level".</para>
+  <para>"Error Count" is "passed by reference" so that it be evaluated after</para>
+  <para>the call.</para>
+  <para/>
+  <para>  1) string containing "c:\path\filename.FEC"  (FEC's CSV file)</para>
+  <para>  2) string containing "c:\path\filename.MSG"  (Message file)</para>
+  <para>  3) 2-byte binary "Integer"                   (Error Count)</para>
+  <para>  4) returning a 2-byte binary "Integer"       (Return Code/Err Level)</para>
+  <para/>
+  <para/>
+  <para>Sample Visual Basic code for calling FECHECK4.DLL:</para>
+  <para/>
+  <para>  ' Global declarations</para>
+  <para/>
+  <para>    Declare Function                     - (continued on next line)</para>
+  <para>      FECHECK4 Lib "FECHECK4.DLL"        - (continued on next line)</para>
+  <para>      (ByVal FECfile As String,          - (continued on next line)</para>
+  <para>       ByVal MSGfile As String,          - (continued on next line)</para>
+  <para>       ErrCount As Integer) As Integer</para>
+  <para/>
+  <para>  ' Code in the VB form ...</para>
+  <para/>
+  <para>    Dim InFileFEC As String, OutFileMSG As String</para>
+  <para>    Dim ErrCount As Integer, ErrLevel As Integer</para>
+  <para/>
+  <para>    InFileFEC = "d:\path\filename.FEC"     ' FEC File</para>
+  <para>    OutFileMSG = "d:\path\filename.MSG"    ' Messages File</para>
+  <para> </para>
+  <para>    ErrLevel = FECHECK4(InFileFEC, OutFileMSG, ErrCount)</para>
+  <para/>
+  <para>  ' Note: Possible ErrLevel values are: 0, 4, 8, 12.</para>
+  <para/>
+  <para>    If ErrLevel &gt; 0 Then</para>
+  <para>       If ErrCount = 0 Then</para>
+  <para>  '      (call to FECHECK4 failed: d:\path filename invalid?)</para>
+  <para>  '      (Note: ErrLevel will = 12 in this case.)</para>
+  <para>       Else</para>
+  <para>  '      (processing when ErrCount validation errors are found)</para>
+  <para>  '      (Note: FEC will conditionally accept when ErrLevel = 4)</para>
+  <para>       End If</para>
+  <para>    Else</para>
+  <para>  '   (processing when FEC file passes validation with no errors)</para>
+  <para>  '   (Note: ErrCount will = 0 in this case.)</para>
+  <para>    End If</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Note:  if either a '.MS2' or '.MS3' file is desired, the message file</para>
+  <para>       name passed in parameter #2 must end with the '.MSG' suffix.</para>
+  <para/>
+  <para/>
+  <para>Note:  The FECHECK4.INI file (described above in Running FECheck4.exe in DOS)</para>
+  <para>should reside in the same directory as the FECHECK4.DLL (or the \Windows</para>
+  <para>directory) if any non-defalut settngs are desired in your application.</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>Calling FECHECK4.DLL from Windows C/C++ applications:</para>
+  <para/>
+  <para>FECHECK4 exports a single function:</para>
+  <para/>
+  <para>  short FECHECK4(const char* FECfile, const char* MSGfile, short* p_ErrCount);</para>
+  <para/>
+  <para>There is no import library provided with FECHECK4.DLL, and FECHECK4() </para>
+  <para>is typically called as shown below: </para>
+  <para/>
+  <para>  typedef short (WINAPI * FECHKPROC)(const char*, const char*, short*);</para>
+  <para/>
+  <para>  HINSTANCE hLibFECHK = LoadLibrary("FECHECK4.DLL");</para>
+  <para>  FECHKPROC validate = (FECHKPROC)GetProcAddress(hLibFECHK, "FECHECK4");</para>
+  <para/>
+  <para>  ...</para>
+  <para/>
+  <para>  short ErrCount;</para>
+  <para>  short errorLevel = validate("data.FEC", "msg.txt", &amp;ErrCount);</para>
+  <para/>
+  <para>  /*</para>
+  <para>     At this point :</para>
+  <para>     - 'ErrCount' holds the number of errors in "data.FEC"</para>
+  <para>     - 'errorLevel' holds the level of the most severe error</para>
+  <para>     - the disk file "msg.txt" contains a complete error listing</para>
+  <para>  */</para>
+  <para/>
+  <para>  ...</para>
+  <para/>
+  <para>  FreeLibrary(hLibFECHK);</para>
+  <para/>
+  <para/>
+  <para/>
+  <para>  Note: In 16-bit applications it may be necessary to explicitly </para>
+  <para>        load the run-time support library CBLSSEG.DLL, before </para>
+  <para>        calling FECHECK4.  Obviously CBLSSEG.DLL should be </para>
+  <para>        freed once FECHECK4 processing is complete.  </para>
+  <para/>
+  <para/>
+  <para/>
+  <para>The DOS version of MD5 is run from the DOS command line.</para>
+  <para/>
+  <para>Syntax:  MD5 &lt; [c:\path\filename.FEC]</para>
+  <para/>
+  <para>Notes:   The "&lt;" MUST be included on the command line so that</para>
+  <para>         MD5 uses "translate" mode while reading the file.</para>
+  <para>         Translate mode changes all CR-LF pairs into single LF</para>
+  <para>         characters, matching the way text files are handled</para>
+  <para>         on Unix based systems.  MD5 does not assume that the</para>
+  <para>         suffix is .FEC when it is not explicitly entered.</para>
+  <para/>
+  <para/>
+  <para>The Windows version of MD5_32.DLL can be called from a Windows</para>
+  <para>program.  The following sample code is used to call MD5_32 in </para>
+  <para>Visual Basic.  Two parameters are passed from the VB program to</para>
+  <para>MD5_32.DLL.</para>
+  <para/>
+  <para>  1) string containing "c:\path\filename.FEC"  (FEC's CSV file)</para>
+  <para>  2) string in which a 32-character "Check Sum" is returned.</para>
+  <para/>
+  <para>Sample Visual Basic code for calling MD5_32.DLL:</para>
+  <para/>
+  <para>  ' Global declarations</para>
+  <para/>
+  <para>    Declare Sub                       - (continued on next line)</para>
+  <para>       MD5 Lib "MD5_32.DLL"           - (continued on next line)</para>
+  <para>      (ByVal FECfile As String, ByVal CheckSum As String)</para>
+  <para/>
+  <para>  ' Code in the VB form ...</para>
+  <para/>
+  <para>    Dim FECfile As String,</para>
+  <para>    Dim CheckSum As String * 33    ' CheckSum string MUST be 33 characters)</para>
+  <para/>
+  <para>    FECfile = "d:\path\filename.FEC" &amp; Chr$(0)  ' File with null terminator</para>
+  <para>    CheckSum = Chr$(0)</para>
+  <para/>
+  <para>    Call MD5(FECfile, CheckSum)    ' Call MD5_32.DLL to generate a CheckSum</para>
+  <para/>
+  <para>  ' Note: CheckSum will be 32-characters with a null terminator in Pos 33.</para>
+  <para>  '     [ Reference CheckSum in VB by specifying Left$(CheckSum, 32) ]</para>
+  <para/>
+  <para/>
+  <para/>
+  <para/>
+  <para>Notes for C++ programmers about including RSA's MD5 checksum program within applications:</para>
+  <para/>
+  <para>  MD5_32.DLL is a '32-bit' DLL, suitable for Windows 95 / NT </para>
+  <para>  developers. </para>
+  <para/>
+  <para>  The MD5_... DLLs each export a single function, MD5(), that </para>
+  <para>  computes a 256-bit 'MD5 checksum' for a specified (ASCII) data </para>
+  <para>  file.  </para>
+  <para/>
+  <para>  The prototype for MD5() is in MDUTIL.H, which should be #include'd </para>
+  <para>  in code that calls MD5(). The preprocessor variable WIN32 should </para>
+  <para>  be defined before including MDUTIL.H in 32-bit code. The </para>
+  <para>  preprocessor variable BUILD_MD5_DLL should *always* be undefined.  </para>
+  <para/>
+  <para>  Upon entry to MD5(), 'data_file' should point to a zero-terminated </para>
+  <para>  string that is the name of the file for which the MD5 checksum is </para>
+  <para>  to be computed. 'ascii_digest' should point to a valid memory </para>
+  <para>  block that is at least 33 bytes long.  </para>
+  <para/>
+  <para>  MD5() returns the 256-bit MD5 checksum for 'data_file' in </para>
+  <para>  'ascii_digest', as a zero-terminated string. Each byte of the</para>
+  <para>  'ascii_digest' is the ASCII representation of a single hexadecimal </para>
+  <para>  digit in the checksum.  </para>
+  <para/>
+  <para>  MDUTIL.H is a header file for inclusion in C++ source code that </para>
+  <para>  calls MD5_32.DLL. The preprocessor variable WIN32 should be defined</para>
+  <para>  before including MDUTIL.H in 32-bit code.  The preprocessor variable</para>
+  <para>  DLL_MD5_BUILD should *always* be undefined.  </para>
+  <para/>
+  <para/>
+  <para>  Example :</para>
+  <para>  -------</para>
+  <para/>
+  <para>    char ascii_digest[33];</para>
+  <para/>
+  <para>    if (::MD5("filename.ext", ascii_digest))</para>
+  <para>    {</para>
+  <para>      // 'ascii_digest' contains the checksum for "filename.ext"</para>
+  <para>    }</para>
+  <para>    else</para>
+  <para>    {</para>
+  <para>      // unable to open "filename.ext"</para>
+  <para>    }</para>
+  <para>Page 41</para>
+</article>

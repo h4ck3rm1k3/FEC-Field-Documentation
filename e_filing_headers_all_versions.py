@@ -443,11 +443,11 @@ def emit_versions(seen):
         versiond =         version.replace(".","_")
         outf.write( 'import fec.version.' +versiond + "\n")
 
-    outf.write( "from fec.version.versions_base import VersionsBase\n")
+    outf.write( "import fechbase\n")
 
-    outf.write( "class Versions(VersionsBase):\n")
+    outf.write( "class Versions(fechbase.VersionsBase):\n")
     outf.write( "    def __init__(self):\n")
-    outf.write( "        VersionsBase.__init__(self)\n")
+    outf.write( "        fechbase.VersionsBase.__init__(self)\n")
     outf.write( "        self.versions = {\n")
     for version in sorted(seen.keys()):    
         versiond =         version.replace(".","_")
@@ -475,11 +475,11 @@ def emit_versions_records(seen):
                         'fec.version.' + 
                         versiond + "." +
                         field + "\n")
-        outf.write("from fec.version.version_base import VersionBase\n")
-        outf.write("class Version(VersionBase):\n")
+        outf.write("import fechbase\n")
+        outf.write("class Version(fechbase.VersionBase):\n")
 
         outf.write("    def __init__(self):\n")
-        outf.write("        VersionBase.__init__(self)\n")
+        outf.write("        fechbase.VersionBase.__init__(self)\n")
         outf.write("        self.records = {\n")
         versiond =         version.replace(".","_")
         for field in sorted(seen[version].keys()):   
@@ -509,10 +509,10 @@ def emit_versions_records_fields(seen):
             if not path.exists("fec/version/"+versiond): 
                 os.makedirs("fec/version/"+versiond)
             outf = open ("fec/version/"+versiond + "/" + record + ".py","w")
-            outf.write("from fec.version.records_base import RecordsBase\n")
-            outf.write("class Records(RecordsBase):\n")
+            outf.write("import fechbase\n")
+            outf.write("class Records(fechbase.RecordsBase):\n")
             outf.write("    def __init__(self):\n")
-            outf.write("        RecordsBase.__init__(self)\n")
+            outf.write("        fechbase.RecordsBase.__init__(self)\n")
             outf.write("        self.fields = [\n")
             for field in seen[version][record]:   
                 outf.write(

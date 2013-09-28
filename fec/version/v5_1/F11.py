@@ -1,7 +1,7 @@
-from fec.version.records_base import RecordsBase
-class Records(RecordsBase):
+import fechbase
+class Records(fechbase.RecordsBase):
     def __init__(self):
-        RecordsBase.__init__(self)
+        fechbase.RecordsBase.__init__(self)
         self.fields = [
             {'name': 'FORM TYPE', 'number': '1'},
             {'name': 'FILER FEC COMMITTEE ID', 'number': '2'},

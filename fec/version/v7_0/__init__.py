@@ -47,10 +47,10 @@ import fec.version.v7_0.SH6
 import fec.version.v7_0.SI
 import fec.version.v7_0.SL
 import fec.version.v7_0.TEXT
-from fec.version.version_base import VersionBase
-class Version(VersionBase):
+import fechbase
+class Version(fechbase.VersionBase):
     def __init__(self):
-        VersionBase.__init__(self)
+        fechbase.VersionBase.__init__(self)
         self.records = {
             'F1' : fec.version.v7_0.F1.Records,
             'F13' : fec.version.v7_0.F13.Records,
